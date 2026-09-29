@@ -1,5 +1,5 @@
 import readline from "readline/promises";
-import { Orchestrator } from "./agents/orchestrator.js";
+import { Orchestrator } from "./runtime/orchestrator.js";
 import { listClients } from "./tools/workspace.js";
 
 const [slug, ...rest] = process.argv.slice(2);

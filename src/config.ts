@@ -6,6 +6,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 
 export const ROOT = path.resolve(here, "..");
 export const CLIENTS_DIR = path.join(ROOT, "clients");
+export const AGENTS_DIR = path.join(ROOT, "agents");
 
 export const MODEL = process.env.AGENCY_MODEL ?? "claude-opus-5";
 

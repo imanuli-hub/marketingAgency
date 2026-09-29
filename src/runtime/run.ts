@@ -2,19 +2,23 @@ import Anthropic from "@anthropic-ai/sdk";
 import type { BetaToolRunnerParams } from "@anthropic-ai/sdk/resources/beta/messages";
 import { BASE_PARAMS, SPECIALIST_MAX_ITERATIONS } from "../config.js";
 import { WEB_TOOLS, appendActivity, workspaceTools } from "../tools/workspace.js";
-import { getAgent, type Effort } from "./roster.js";
+import { AGENCY, getSpecialist, type AgentDefinition, type Effort } from "./roster.js";
 
 export const client = new Anthropic();
 
-export const AGENCY_CHARTER = `You work at an AI marketing agency that grows Instagram and YouTube creators.
-The agency is a team of specialist agents coordinated by an orchestrator. Everyone shares one workspace per client (files on disk).
+/** Shared mission + one agent's CLAUDE.md = that agent's system prompt. */
+export function systemPrompt(agent: AgentDefinition, clientSlug: string): string {
+  return `${AGENCY}
 
-Rules for everyone:
-- Start by reading what already exists (list_files, then profile.md, brand-voice.md, and any files relevant to your task).
-- Save your work to the workspace; don't just describe it. Use the folder conventions in your instructions.
-- Never invent facts, metrics, or quotes about the creator. Mark unknowns clearly.
-- Nothing is posted, sent, or paid for by agents. Humans approve and act.
-- Today's date is ${new Date().toISOString().slice(0, 10)}.`;
+Today's date is ${new Date().toISOString().slice(0, 10)}. You are working for the client "${clientSlug}".
+
+---
+
+You are the ${agent.name}.
+Your goal: ${agent.goal}
+
+${agent.instructions}`;
+}
 
 /** Runs the tool loop to completion, resuming turns paused by server tools. */
 export async function runLoop(params: BetaToolRunnerParams & { stream?: false }): Promise<Anthropic.Beta.BetaMessage> {
@@ -40,21 +44,14 @@ export function textOf(message: Anthropic.Beta.BetaMessage): string {
   return text || "(no text response)";
 }
 
-function outputConfig(effort?: Effort) {
+export function outputConfig(effort?: Effort) {
   return effort ? { output_config: { effort } } : {};
 }
 
 /** Runs one specialist agent on one task for one client and returns its report. */
 export async function runSpecialist(agentId: string, clientSlug: string, task: string): Promise<string> {
-  const agent = getAgent(agentId);
-  const system = `${AGENCY_CHARTER}
-
-You are the ${agent.name}.
-Your goal: ${agent.goal}
-
-${agent.instructions}
-
-You are working for the client "${clientSlug}". When you finish, reply with a short report: what you did, the files you saved, and anything another team member or the creator needs to act on.`;
+  const agent = getSpecialist(agentId);
+  const system = systemPrompt(agent, clientSlug);
 
   await appendActivity(clientSlug, agent.name, `started: ${task.slice(0, 200)}`);
 

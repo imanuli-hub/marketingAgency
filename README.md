@@ -47,10 +47,38 @@ Example requests:
 
 ## How it works
 
-- `src/agents/orchestrator.ts`: the Director. Its `delegate` tool runs a specialist and returns that specialist's report. Independent tasks run in parallel.
-- `src/agents/roster.ts`: every specialist's goal and instructions. Edit this file to change how an agent works.
-- `src/agents/run.ts`: runs a specialist with the Anthropic SDK tool runner.
-- `src/tools/workspace.ts`: file tools that can only read and write inside `clients/<slug>/`.
+Each agent lives in its own folder under `agents/`:
+
+```
+agents/
+  AGENCY.md                 shared goal and rules every agent reads first
+  director/CLAUDE.md        the orchestrator
+  copywriter/CLAUDE.md      one folder per specialist
+  trend-scout/CLAUDE.md
+  ...
+```
+
+An agent's system prompt is `AGENCY.md` followed by its own `CLAUDE.md`, so every agent knows its specific job and also the shared goal of creating great content for the creator.
+
+Each `CLAUDE.md` starts with frontmatter:
+
+```
+---
+name: Trend Scout
+goal: One sentence the Director sees when choosing who to delegate to.
+effort: medium          # optional: low | medium | high | xhigh | max
+web_research: true      # optional: gives the agent web search and fetch
+---
+```
+
+**To change an agent**, edit its `CLAUDE.md`. **To add one**, create `agents/<id>/CLAUDE.md` and the Director can delegate to it on the next run. No code changes are needed either way.
+
+Code lives in `src/`:
+
+- `src/runtime/roster.ts` loads the agent folders.
+- `src/runtime/orchestrator.ts` runs the Director. Its `delegate` tool runs a specialist and returns that specialist's report.
+- `src/runtime/run.ts` runs a specialist with the Anthropic SDK tool runner.
+- `src/tools/workspace.ts` provides file tools that can only read and write inside `clients/<slug>/`.
 
 Each client workspace (`clients/<slug>/`, git-ignored) ends up with `profile.md`, `brand-voice.md`, `strategy/`, `calendar/`, `briefs/`, `drafts/`, `publish-queue/`, `community/`, `ads/`, `data/`, `reports/` and an `activity.log` of what each agent did.
 
