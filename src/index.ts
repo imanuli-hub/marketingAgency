@@ -1,5 +1,7 @@
 import readline from "readline/promises";
+import { MODEL } from "./config.js";
 import { Orchestrator } from "./runtime/orchestrator.js";
+import { estimateCost, usage } from "./runtime/run.js";
 import { listClients } from "./tools/workspace.js";
 
 const [slug, ...rest] = process.argv.slice(2);
@@ -17,6 +19,23 @@ Existing clients: ${clients.length ? clients.join(", ") : "(none yet)"}`);
 
 const director = new Orchestrator(slug);
 
+function printUsage() {
+  let total = 0;
+  console.log(`Usage (${MODEL}):`);
+  for (const [name, t] of usage) {
+    const cost = estimateCost(MODEL, t);
+    total += cost ?? 0;
+    const k = (n: number) => `${(n / 1000).toFixed(1)}k`;
+    console.log(
+      `  ${name.padEnd(18)} in ${k(t.input + t.cacheWrite + t.cacheRead)} (cached ${k(t.cacheRead)})  out ${k(t.output)}` +
+        (t.webSearches ? `  searches ${t.webSearches}` : "") +
+        (cost !== undefined ? `  ~$${cost.toFixed(2)}` : ""),
+    );
+  }
+  if (total) console.log(`  ${"Total".padEnd(18)} ~$${total.toFixed(2)}`);
+  usage.clear();
+}
+
 async function handle(request: string): Promise<boolean> {
   console.log("\nAgency Director is working...");
   try {
@@ -26,6 +45,8 @@ async function handle(request: string): Promise<boolean> {
   } catch (err) {
     console.error(`Error: ${(err as Error).message}`);
     return false;
+  } finally {
+    printUsage();
   }
 }
 

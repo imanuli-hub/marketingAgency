@@ -20,10 +20,56 @@ Your goal: ${agent.goal}
 ${agent.instructions}`;
 }
 
-/** Runs the tool loop to completion, resuming turns paused by server tools. */
-export async function runLoop(params: BetaToolRunnerParams & { stream?: false }): Promise<Anthropic.Beta.BetaMessage> {
-  const runner = client.beta.messages.toolRunner(params);
-  for await (const message of runner) {
+// $ per million tokens: [input, output]. Cache writes cost 1.25x input, reads 0.1x.
+const PRICES: Record<string, [number, number]> = {
+  "claude-opus-5": [5, 25],
+  "claude-opus-5-5": [4, 20],
+  "claude-sonnet-5": [2, 10],
+  "claude-haiku-4-5": [1, 5],
+};
+
+export interface UsageTotals {
+  input: number;
+  output: number;
+  cacheWrite: number;
+  cacheRead: number;
+  webSearches: number;
+}
+
+/** Token usage per agent name, accumulated across the current request. */
+export const usage = new Map<string, UsageTotals>();
+
+function record(label: string, u: Anthropic.Beta.BetaUsage) {
+  const t = usage.get(label) ?? { input: 0, output: 0, cacheWrite: 0, cacheRead: 0, webSearches: 0 };
+  t.input += u.input_tokens;
+  t.output += u.output_tokens;
+  t.cacheWrite += u.cache_creation_input_tokens ?? 0;
+  t.cacheRead += u.cache_read_input_tokens ?? 0;
+  t.webSearches += u.server_tool_use?.web_search_requests ?? 0;
+  usage.set(label, t);
+}
+
+/** Estimated dollars for token usage; web searches ($10 per 1,000) included. */
+export function estimateCost(model: string, t: UsageTotals): number | undefined {
+  const price = PRICES[model];
+  if (!price) return undefined;
+  const [inp, out] = price;
+  return (
+    (t.input * inp + t.cacheWrite * inp * 1.25 + t.cacheRead * inp * 0.1 + t.output * out) / 1_000_000 +
+    t.webSearches * 0.01
+  );
+}
+
+/**
+ * Runs the tool loop to completion, resuming turns paused by server tools.
+ * Streams each turn: long turns (web research, big documents) would otherwise
+ * hit the SDK's request timeout.
+ */
+export async function runLoop(label: string, params: BetaToolRunnerParams): Promise<Anthropic.Beta.BetaMessage> {
+  const runner = client.beta.messages.toolRunner({ ...params, stream: true });
+  for await (const stream of runner) {
+    const message = await stream.finalMessage();
+    record(label, message.usage);
     if (message.stop_reason === "pause_turn") {
       runner.pushMessages({ role: "assistant", content: message.content });
     }
@@ -55,7 +101,7 @@ export async function runSpecialist(agentId: string, clientSlug: string, task: s
 
   await appendActivity(clientSlug, agent.name, `started: ${task.slice(0, 200)}`);
 
-  const final = await runLoop({
+  const final = await runLoop(agent.name, {
     ...BASE_PARAMS,
     ...outputConfig(agent.effort),
     system,

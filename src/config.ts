@@ -12,9 +12,11 @@ export const MODEL = process.env.AGENCY_MODEL ?? "claude-opus-5";
 
 // Shared request settings for every agent. Server-side fallbacks re-run a
 // refused request on a fallback model inside the same call.
-export const BASE_PARAMS: Pick<BetaToolRunnerParams, "model" | "max_tokens" | "betas" | "fallbacks"> = {
+export const BASE_PARAMS: Pick<BetaToolRunnerParams, "model" | "max_tokens" | "betas" | "fallbacks" | "cache_control"> = {
   model: MODEL,
-  max_tokens: 16000,
+  // Each tool-loop turn resends the whole conversation; caching makes that cheap.
+  cache_control: { type: "ephemeral" },
+  max_tokens: 64000,
   betas: ["server-side-fallback-2026-07-01"],
   fallbacks: "default",
 };

@@ -48,7 +48,7 @@ export class Orchestrator {
 
   async send(request: string): Promise<string> {
     this.history.push({ role: "user", content: request });
-    const final = await runLoop({
+    const final = await runLoop(DIRECTOR.name, {
       ...BASE_PARAMS,
       ...outputConfig(DIRECTOR.effort),
       system: `${systemPrompt(DIRECTOR, this.clientSlug)}\n\n## Your team\n\n${TEAM}`,
