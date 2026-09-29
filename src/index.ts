@@ -1,5 +1,5 @@
 import readline from "readline/promises";
-import { MODEL } from "./config.js";
+import { MODEL, TEST_MODE } from "./config.js";
 import { Orchestrator } from "./runtime/orchestrator.js";
 import { estimateCost, usage } from "./runtime/run.js";
 import { listClients } from "./tools/workspace.js";
@@ -18,6 +18,7 @@ Existing clients: ${clients.length ? clients.join(", ") : "(none yet)"}`);
 }
 
 const director = new Orchestrator(slug);
+if (TEST_MODE) console.log(`TEST MODE: ${MODEL}, low effort, fewer web searches.`);
 
 function printUsage() {
   let total = 0;

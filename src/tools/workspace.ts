@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
-import { CLIENTS_DIR } from "../config.js";
+import { CLIENTS_DIR, WEB_MAX_USES } from "../config.js";
 
 export function clientDir(slug: string): string {
   return path.join(CLIENTS_DIR, slug);
@@ -101,6 +101,6 @@ export function workspaceTools(slug: string, agentName: string) {
 }
 
 export const WEB_TOOLS: Anthropic.Beta.BetaToolUnion[] = [
-  { type: "web_search_20260209", name: "web_search", max_uses: 8 },
-  { type: "web_fetch_20260209", name: "web_fetch", max_uses: 8 },
+  { type: "web_search_20260209", name: "web_search", max_uses: WEB_MAX_USES },
+  { type: "web_fetch_20260209", name: "web_fetch", max_uses: WEB_MAX_USES },
 ];

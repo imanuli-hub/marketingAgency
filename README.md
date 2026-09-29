@@ -16,6 +16,8 @@ npm start -- jane-fitness                      # interactive session with the Di
 npm start -- jane-fitness "Onboard Jane: ..."  # one request, then exit
 ```
 
+To try things cheaply, add `AGENCY_MODE=test` to `.env`. It switches every agent to Claude Sonnet 5 with low effort and fewer web searches. Remove it for real client work. Each run prints tokens and estimated cost per agent.
+
 Example requests:
 
 - `Onboard this creator: <paste bio, links, goals, audience>`

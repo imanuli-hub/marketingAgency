@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { BetaToolRunnerParams } from "@anthropic-ai/sdk/resources/beta/messages";
-import { BASE_PARAMS, SPECIALIST_MAX_ITERATIONS } from "../config.js";
+import { BASE_PARAMS, SPECIALIST_MAX_ITERATIONS, TEST_MODE } from "../config.js";
 import { WEB_TOOLS, appendActivity, workspaceTools } from "../tools/workspace.js";
 import { AGENCY, getSpecialist, type AgentDefinition, type Effort } from "./roster.js";
 
@@ -91,6 +91,7 @@ export function textOf(message: Anthropic.Beta.BetaMessage): string {
 }
 
 export function outputConfig(effort?: Effort) {
+  if (TEST_MODE) return { output_config: { effort: "low" as const } };
   return effort ? { output_config: { effort } } : {};
 }
 
