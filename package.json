@@ -1,0 +1,27 @@
+{
+  "name": "marketing-agency",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsx --env-file-if-exists=.env src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imanuli-hub/marketingAgency.git"
+  },
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/imanuli-hub/marketingAgency/issues"
+  },
+  "homepage": "https://github.com/imanuli-hub/marketingAgency#readme",
+  "private": "true",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.129.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
