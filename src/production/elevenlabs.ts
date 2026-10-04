@@ -49,3 +49,41 @@ export async function textToSpeech(opts: {
   await fs.writeFile(opts.out, Buffer.from(await res.arrayBuffer()));
   return opts.out;
 }
+
+async function upload(file: string, field: string, extra: Record<string, string>): Promise<FormData> {
+  const form = new FormData();
+  form.append(field, new Blob([await fs.readFile(file)], { type: "audio/mpeg" }), path.basename(file));
+  for (const [k, v] of Object.entries(extra)) form.append(k, v);
+  return form;
+}
+
+/**
+ * Voice Changer: re-voices a performance in another voice, keeping its exact
+ * timing (so lip movement still matches). Background noise is removed.
+ */
+export async function speechToSpeech(opts: { input: string; voiceId: string; out: string }): Promise<string> {
+  const form = await upload(opts.input, "audio", {
+    model_id: "eleven_multilingual_sts_v2",
+    remove_background_noise: "true",
+  });
+  const res = await fetch(`${API}/speech-to-speech/${opts.voiceId}?output_format=mp3_44100_128`, {
+    method: "POST",
+    headers: { "xi-api-key": apiKey() },
+    body: form,
+  });
+  if (!res.ok) throw new Error(`ElevenLabs voice changer ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  await fs.mkdir(path.dirname(opts.out), { recursive: true });
+  await fs.writeFile(opts.out, Buffer.from(await res.arrayBuffer()));
+  return opts.out;
+}
+
+/** Speech to text, used to check that a generated clip says the scripted line. */
+export async function transcribe(file: string): Promise<string> {
+  const res = await fetch(`${API}/speech-to-text`, {
+    method: "POST",
+    headers: { "xi-api-key": apiKey() },
+    body: await upload(file, "file", { model_id: "scribe_v1" }),
+  });
+  if (!res.ok) throw new Error(`ElevenLabs speech-to-text ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  return ((await res.json()) as { text: string }).text;
+}

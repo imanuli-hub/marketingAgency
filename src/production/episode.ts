@@ -6,7 +6,15 @@ import { clientDir } from "../tools/workspace.js";
 export const EXPRESSIONS = ["happy", "laughing", "sleepy", "surprised", "curious", "sad"] as const;
 
 export const SceneSchema = z.object({
-  narration: z.string().describe("What the narrator says during this scene. Short, simple toddler English."),
+  speaker: z
+    .string()
+    .optional()
+    .describe('Who speaks in this scene: "narrator" or a character id. Missing means narrator.'),
+  narration: z.string().describe("The words spoken in this scene, by the speaker. Short, simple toddler English."),
+  characters: z
+    .array(z.string())
+    .optional()
+    .describe("Character ids visible in this scene (the speaker first). Missing means just Emil."),
   visual: z
     .string()
     .describe(
@@ -34,6 +42,17 @@ export const EpisodeSchema = z.object({
 export type Episode = z.infer<typeof EpisodeSchema>;
 export type Scene = z.infer<typeof SceneSchema>;
 
+export const CharacterSchema = z.object({
+  name: z.string(),
+  voiceId: z.string(),
+  image: z.string(),
+  /** One-line canon look, used in image and video prompts. */
+  look: z.string().optional(),
+  /** Personality and role, given to the scriptwriter. */
+  role: z.string().optional(),
+});
+export type Character = z.infer<typeof CharacterSchema>;
+
 /** Per-channel production settings, stored as channel.json in the client workspace. */
 export const ChannelSchema = z.object({
   narratorVoiceId: z.string(),
@@ -43,6 +62,9 @@ export const ChannelSchema = z.object({
   /** OpenArt image-to-video model; omit to make picture-only videos. */
   videoModel: z.string().optional(),
   videoResolution: z.string().optional(),
+  /** OpenArt model for talking shots; it must generate speech with lip-sync. */
+  talkModel: z.string().optional(),
+  characters: z.record(z.string(), CharacterSchema).default({}),
 });
 export type Channel = z.infer<typeof ChannelSchema>;
 

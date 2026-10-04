@@ -143,6 +143,53 @@ export async function renderClipScene(opts: {
   ]);
 }
 
+/** Copies a clip's soundtrack to an MP3. */
+export async function extractAudio(video: string, out: string): Promise<string> {
+  await ffmpeg(["-i", video, "-vn", "-ac", "1", "-ar", "44100", "-b:a", "160k", out]);
+  return out;
+}
+
+/** Places an image on a w x h canvas (blurred fill if shapes differ), e.g. to feed a 9:16 video model. */
+export async function fitImage(image: string, size: { w: number; h: number }, out: string): Promise<string> {
+  const src = await imageSize(image);
+  await ffmpeg(["-i", image, "-filter_complex", `[0:v]${fitOrFill(src, size.w, size.h)}`, "-frames:v", "1", out]);
+  return out;
+}
+
+/**
+ * A talking scene: the lip-synced clip with the re-voiced line at its original
+ * timing (no lead-in, so lips stay in sync), held on the last frame for the pause.
+ */
+export async function renderTalkScene(opts: {
+  clip: string;
+  voice: string;
+  pauseAfter: number;
+  size: { w: number; h: number };
+  out: string;
+}): Promise<void> {
+  const { w, h } = opts.size;
+  const clipLen = await durationOf(opts.clip);
+  const hold = Math.min(1.5, Math.max(0, opts.pauseAfter));
+  const total = clipLen + hold;
+  const src = await imageSize(opts.clip);
+  const filter = [
+    `[0:v]fps=${FPS},tpad=stop_mode=clone:stop_duration=${(hold + 0.1).toFixed(2)},${fitOrFill(src, w, h)},setsar=1,`,
+    `trim=0:${total.toFixed(2)},setpts=PTS-STARTPTS,`,
+    `fade=t=in:st=0:d=0.2,fade=t=out:st=${(total - 0.3).toFixed(2)}:d=0.3,format=yuv420p[v];`,
+    `[1:a]apad,atrim=0:${total.toFixed(2)},afade=t=out:st=${(total - 0.3).toFixed(2)}:d=0.3[a]`,
+  ].join("");
+  await ffmpeg([
+    "-i", opts.clip,
+    "-i", opts.voice,
+    "-filter_complex", filter,
+    "-map", "[v]", "-map", "[a]",
+    "-t", total.toFixed(2),
+    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-r", String(FPS),
+    "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-ac", "2",
+    opts.out,
+  ]);
+}
+
 /** Joins scene clips (all rendered with identical settings) into one video. */
 export async function concatScenes(clips: string[], out: string): Promise<void> {
   const list = path.join(path.dirname(out), "scenes.txt");

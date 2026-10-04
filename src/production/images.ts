@@ -15,8 +15,32 @@ const LIGHTING = {
   bedtime: "Calm evening: warm indoor lamp light and the glow of Emil's lantern, dim and cosy but never dark.",
 };
 
-export function scenePrompt(scene: Scene, episode: Episode): string {
-  return `Using the character in the reference image exactly (same design, colors, proportions, curl, ears, lantern, materials and 3D style), show Emil: ${scene.visual} His expression: ${scene.expression}. ${LIGHTING[episode.lighting]} ${STYLE}`;
+/** Character ids shown in a scene (speaker first); defaults to Emil alone. */
+export function sceneCast(scene: Scene, channel: Channel): string[] {
+  const known = (id: string) => id in channel.characters;
+  const cast = (scene.characters ?? []).filter(known);
+  if (scene.speaker && known(scene.speaker) && !cast.includes(scene.speaker)) cast.unshift(scene.speaker);
+  return cast.length ? cast : ["emil"];
+}
+
+/** True when a cast character (not the narrator) speaks the scene's line. */
+export function isTalkScene(scene: Scene, channel: Channel): boolean {
+  return Boolean(scene.speaker && scene.speaker in channel.characters && channel.talkModel);
+}
+
+export function scenePrompt(scene: Scene, episode: Episode, channel?: Channel): string {
+  const cast = channel ? sceneCast(scene, channel) : ["emil"];
+  if (!channel || Object.keys(channel.characters).length === 0) {
+    return `Using the character in the reference image exactly (same design, colors, proportions, curl, ears, lantern, materials and 3D style), show Emil: ${scene.visual} His expression: ${scene.expression}. ${LIGHTING[episode.lighting]} ${STYLE}`;
+  }
+  const who = cast
+    .map((id, i) => `${channel.characters[id].name} (reference image ${i + 1}: ${channel.characters[id].look ?? ""})`)
+    .join("; ");
+  const framing = isTalkScene(scene, channel)
+    ? `Close-up, head and shoulders, of ${channel.characters[scene.speaker!].name} facing the camera at a slight angle, mouth clearly visible and closed, ready to speak.`
+    : "";
+  const emilMood = cast.includes("emil") ? ` Emil's expression: ${scene.expression}.` : "";
+  return `Show these characters exactly as in their reference images (same design, colors, proportions, materials and 3D style; do not mix their features): ${who}. ${framing} Scene: ${scene.visual}${emilMood} ${LIGHTING[episode.lighting]} ${STYLE}`;
 }
 
 let aspectSupport: boolean | undefined;
@@ -79,9 +103,10 @@ export async function generateSceneImages(opts: {
     const out = path.join(dir, `scene-${String(i + 1).padStart(2, "0")}.png`);
     files.push(out);
     if (await exists(out)) continue;
-    const references = [channel.heroImage];
-    if (scene.expression !== "happy") references.push(channel.expressionsImage);
-    let prompt = scenePrompt(scene, episode);
+    const cast = Object.keys(channel.characters).length ? sceneCast(scene, channel) : ["emil"];
+    const references = cast.map((id) => channel.characters[id]?.image ?? channel.heroImage);
+    if (cast.includes("emil") && scene.expression !== "happy" && cast.length < 3) references.push(channel.expressionsImage);
+    let prompt = scenePrompt(scene, episode, channel);
     if (i > 0) {
       references.push(files[i - 1]);
       prompt += ` ${CONTINUITY}`;
@@ -113,12 +138,14 @@ export async function generateClip(opts: {
   image: string;
   seconds: number;
   resolution?: string;
+  aspectRatio?: string;
   out: string;
 }): Promise<string> {
   const tmp = await fs.mkdtemp(path.join(os.tmpdir(), "openart-"));
   const args = ["generate", "video", opts.prompt, "--model", opts.model, "--image", opts.image];
   args.push("--duration", String(opts.seconds), "-o", tmp, "--quiet", "--no-input");
   if (opts.resolution) args.push("--resolution", opts.resolution);
+  if (opts.aspectRatio) args.push("--aspect-ratio", opts.aspectRatio);
   try {
     await run(OPENART, args, { timeout: 10 * 60_000 });
   } catch (err) {

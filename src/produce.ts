@@ -2,9 +2,10 @@ import fs from "fs/promises";
 import path from "path";
 import { episodeDir, EpisodeSchema, loadChannel, type Episode } from "./production/episode.js";
 import { textToSpeech, VOICE_PRESETS } from "./production/elevenlabs.js";
-import { exists, generateClip, generateSceneImages, motionPrompt } from "./production/images.js";
+import { exists, generateClip, generateSceneImages, isTalkScene, motionPrompt } from "./production/images.js";
+import { makeTalkScene } from "./production/talk.js";
 import { writeScript } from "./production/script.js";
-import { concatScenes, durationOf, renderClipScene, renderScene, sceneLength, SIZES } from "./production/video.js";
+import { concatScenes, durationOf, renderClipScene, renderScene, renderTalkScene, sceneLength, SIZES } from "./production/video.js";
 
 const USAGE = `Usage: npm run episode -- <client> <episode-slug> [short|long] ["idea"] [--only script]
 
@@ -39,7 +40,7 @@ async function loadOrWriteScript(): Promise<Episode> {
   const idea = ideaWords.join(" ");
   if (!idea) throw new Error("No script yet, so an idea is required.");
   log(`script: writing a ${format} episode...`);
-  const episode = await writeScript({ slug, idea, format });
+  const episode = await writeScript({ slug, idea, format, channel: await loadChannel(slug) });
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(scriptFile, JSON.stringify(episode, null, 2));
   return episode;
@@ -54,46 +55,43 @@ try {
     process.exit(0);
   }
 
-  // Voice
+  const talking = episode.scenes.map((scene) => isTalkScene(scene, channel));
+
+  // Narrator voice (character lines are voiced in their talking shots)
   const audio: string[] = [];
   for (const [i, scene] of episode.scenes.entries()) {
     const out = path.join(dir, "audio", `scene-${String(i + 1).padStart(2, "0")}.mp3`);
     audio.push(out);
-    if (await exists(out)) continue;
+    if (talking[i] || (await exists(out))) continue;
     await textToSpeech({ text: scene.narration, voiceId: channel.narratorVoiceId, settings: VOICE_PRESETS[episode.lighting], out });
   }
-  log(`voice: ${audio.length} narration clips ready`);
+  log(`voice: ${talking.filter((t) => !t).length} narrator lines ready`);
 
   // Images
   const images = await generateSceneImages({ episode, channel, dir: path.join(dir, "images"), onProgress: (m) => log(m) });
   log(`images: ${images.length} ready`);
 
-  // Animation: each scene image becomes a clip as long as its narration.
+  // Animation and talking shots. OpenArt's Starter plan allows two at a time.
   const anims: (string | undefined)[] = [];
-  if (channel.videoModel) {
-    const jobs = episode.scenes.map((scene, i) => ({ scene, i }));
-    let done = 0;
-    const worker = async () => {
-      for (let job = jobs.shift(); job; job = jobs.shift()) {
-        const out = path.join(dir, "anim", `scene-${String(job.i + 1).padStart(2, "0")}.mp4`);
-        anims[job.i] = out;
+  const talks: ({ clip: string; voice: string } | undefined)[] = [];
+  const jobs = episode.scenes.map((scene, i) => ({ scene, i }));
+  let done = 0;
+  const worker = async () => {
+    for (let job = jobs.shift(); job; job = jobs.shift()) {
+      const { scene, i } = job;
+      if (talking[i]) {
+        talks[i] = await makeTalkScene({ scene, episode, channel, image: images[i], dir, index: i, log });
+      } else if (channel.videoModel) {
+        const out = path.join(dir, "anim", `scene-${String(i + 1).padStart(2, "0")}.mp4`);
+        anims[i] = out;
         if (await exists(out)) continue;
-        const seconds = Math.min(15, Math.ceil(await sceneLength(audio[job.i], job.scene.pause_after)));
-        await generateClip({
-          prompt: motionPrompt(job.scene),
-          model: channel.videoModel!,
-          image: images[job.i],
-          seconds,
-          resolution: channel.videoResolution,
-          out,
-        });
-        log(`animation ${++done}/${episode.scenes.length}`);
+        const seconds = Math.min(15, Math.ceil(await sceneLength(audio[i], scene.pause_after)));
+        await generateClip({ prompt: motionPrompt(scene), model: channel.videoModel, image: images[i], seconds, resolution: channel.videoResolution, out });
       }
-    };
-    // OpenArt's Starter plan allows two generations at a time.
-    await Promise.all([worker(), worker()]);
-    log(`animation: ${anims.length} clips ready`);
-  }
+      log(`clip ${++done}/${episode.scenes.length}`);
+    }
+  };
+  await Promise.all([worker(), worker()]);
 
   // Video
   const size = SIZES[episode.format];
@@ -103,8 +101,10 @@ try {
     clips.push(out);
     if (await exists(out)) continue;
     await fs.mkdir(path.dirname(out), { recursive: true });
+    const talk = talks[i];
     const anim = anims[i];
-    if (anim) await renderClipScene({ clip: anim, audio: audio[i], pauseAfter: scene.pause_after, size, out });
+    if (talk) await renderTalkScene({ clip: talk.clip, voice: talk.voice, pauseAfter: scene.pause_after, size, out });
+    else if (anim) await renderClipScene({ clip: anim, audio: audio[i], pauseAfter: scene.pause_after, size, out });
     else await renderScene({ image: images[i], audio: audio[i], pauseAfter: scene.pause_after, index: i, size, out });
   }
   const final = path.join(dir, `${episodeSlug}.mp4`);
