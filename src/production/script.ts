@@ -57,5 +57,14 @@ Each scene becomes one illustration shown while the narration plays, so give eve
 
   if (response.stop_reason === "refusal") throw new Error("The script request was declined.");
   if (!response.parsed_output) throw new Error(`Script did not match the schema (stop: ${response.stop_reason}).`);
-  return { ...response.parsed_output, format: opts.format };
+  // Strip stray control characters the model occasionally emits.
+  const clean = (text: string) => text.replace(/[\u0000-\u0008\u000b-\u001f]/g, "");
+  const ep = response.parsed_output;
+  return {
+    ...ep,
+    format: opts.format,
+    title: clean(ep.title),
+    description: clean(ep.description),
+    scenes: ep.scenes.map((s) => ({ ...s, narration: clean(s.narration), visual: clean(s.visual) })),
+  };
 }

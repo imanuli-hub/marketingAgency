@@ -32,6 +32,13 @@ export async function durationOf(file: string): Promise<number> {
   return Number(m[1]) * 3600 + Number(m[2]) * 60 + Number(m[3]);
 }
 
+async function imageSize(file: string): Promise<{ w: number; h: number }> {
+  const { stderr } = await run(FFMPEG, ["-hide_banner", "-i", file]).catch((e: { stderr: string }) => ({ stderr: e.stderr }));
+  const m = stderr.match(/Video:.*?, (\d{2,5})x(\d{2,5})/);
+  if (!m) throw new Error(`Could not read image size of ${file}`);
+  return { w: Number(m[1]), h: Number(m[2]) };
+}
+
 /**
  * One scene: the still image with a slow zoom (alternating in and out),
  * narration after a short lead-in, quiet tail, and soft fades.
@@ -53,8 +60,20 @@ export async function renderScene(opts: {
   const sh = Math.round(h * 1.5);
   const delayMs = Math.round(LEAD_IN * 1000);
 
+  // If the image's shape differs from the video's (e.g. a square image in a
+  // vertical Short), show the whole image over a blurred fill instead of
+  // cropping the subject off.
+  const img = await imageSize(opts.image);
+  const mismatch = Math.abs(img.w / img.h - w / h) > 0.05;
+  const frame = mismatch
+    ? `[0:v]split[bgsrc][fgsrc];` +
+      `[bgsrc]scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh},boxblur=40:2,eq=brightness=-0.05[bg];` +
+      `[fgsrc]scale=${sw}:${sh}:force_original_aspect_ratio=decrease[fg];` +
+      `[bg][fg]overlay=(W-w)/2:(H-h)/2,`
+    : `[0:v]scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh},`;
+
   const filter = [
-    `[0:v]scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh},`,
+    frame,
     `zoompan=z='${zoom}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=${frames}:s=${w}x${h}:fps=${FPS},`,
     `fade=t=in:st=0:d=${FADE},fade=t=out:st=${(total - FADE).toFixed(2)}:d=${FADE},format=yuv420p[v];`,
     `[1:a]adelay=${delayMs}|${delayMs},apad,atrim=0:${total.toFixed(2)},`,

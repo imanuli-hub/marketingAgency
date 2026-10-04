@@ -57,7 +57,14 @@ export async function generateImage(opts: {
   return opts.out;
 }
 
-/** One image per scene, skipping scenes whose image already exists. */
+const CONTINUITY =
+  "The last reference image is the previous scene: keep the same room, furniture, windows, sky and lighting as in it, unless this scene clearly moves to a new place.";
+
+/**
+ * One image per scene, skipping scenes whose image already exists. Scenes are
+ * generated in order, each with the previous scene's image as an extra
+ * reference so locations stay consistent.
+ */
 export async function generateSceneImages(opts: {
   episode: Episode;
   channel: Channel;
@@ -68,21 +75,20 @@ export async function generateSceneImages(opts: {
   const aspectRatio = episode.format === "short" ? "9:16" : "16:9";
   const files: string[] = [];
 
-  // A few at a time keeps OpenArt happy and still saves time.
-  const CONCURRENCY = 3;
-  const queue = episode.scenes.map((scene, i) => ({ scene, i }));
-  async function worker() {
-    for (let job = queue.shift(); job; job = queue.shift()) {
-      const out = path.join(dir, `scene-${String(job.i + 1).padStart(2, "0")}.png`);
-      files[job.i] = out;
-      if (await exists(out)) continue;
-      const references = [channel.heroImage];
-      if (job.scene.expression !== "happy") references.push(channel.expressionsImage);
-      await generateImage({ prompt: scenePrompt(job.scene, episode), model: channel.imageModel, references, aspectRatio, out });
-      opts.onProgress?.(`image ${job.i + 1}/${episode.scenes.length}`);
+  for (const [i, scene] of episode.scenes.entries()) {
+    const out = path.join(dir, `scene-${String(i + 1).padStart(2, "0")}.png`);
+    files.push(out);
+    if (await exists(out)) continue;
+    const references = [channel.heroImage];
+    if (scene.expression !== "happy") references.push(channel.expressionsImage);
+    let prompt = scenePrompt(scene, episode);
+    if (i > 0) {
+      references.push(files[i - 1]);
+      prompt += ` ${CONTINUITY}`;
     }
+    await generateImage({ prompt, model: channel.imageModel, references, aspectRatio, out });
+    opts.onProgress?.(`image ${i + 1}/${episode.scenes.length}`);
   }
-  await Promise.all(Array.from({ length: CONCURRENCY }, worker));
   return files;
 }
 
