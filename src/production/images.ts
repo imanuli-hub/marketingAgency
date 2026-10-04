@@ -98,3 +98,37 @@ export async function exists(file: string): Promise<boolean> {
     () => false,
   );
 }
+
+const MOTION_STYLE =
+  "Gentle, slow animation for toddlers. Static or very slow camera, smooth calm motion, no sudden movements, no scene cuts. Keep the character, colors and setting exactly as in the image.";
+
+export function motionPrompt(scene: Scene): string {
+  return `${scene.motion ?? `Emil moves gently: ${scene.visual}`} ${MOTION_STYLE}`;
+}
+
+/** Animates a start-frame image into a clip with OpenArt image-to-video. */
+export async function generateClip(opts: {
+  prompt: string;
+  model: string;
+  image: string;
+  seconds: number;
+  resolution?: string;
+  out: string;
+}): Promise<string> {
+  const tmp = await fs.mkdtemp(path.join(os.tmpdir(), "openart-"));
+  const args = ["generate", "video", opts.prompt, "--model", opts.model, "--image", opts.image];
+  args.push("--duration", String(opts.seconds), "-o", tmp, "--quiet", "--no-input");
+  if (opts.resolution) args.push("--resolution", opts.resolution);
+  try {
+    await run(OPENART, args, { timeout: 10 * 60_000 });
+  } catch (err) {
+    const e = err as { stderr?: string; message: string };
+    throw new Error(`OpenArt video failed: ${(e.stderr || e.message).trim().slice(0, 300)}`);
+  }
+  const [file] = (await fs.readdir(tmp)).filter((f) => /\.(mp4|mov|webm)$/i.test(f));
+  if (!file) throw new Error("OpenArt returned no video");
+  await fs.mkdir(path.dirname(opts.out), { recursive: true });
+  await fs.copyFile(path.join(tmp, file), opts.out);
+  await fs.rm(tmp, { recursive: true, force: true });
+  return opts.out;
+}

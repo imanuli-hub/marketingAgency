@@ -13,6 +13,12 @@ export const SceneSchema = z.object({
       "What we see: Emil's action, pose and the location, in one or two plain sentences. Do not describe Emil's design; the reference image covers that.",
     ),
   expression: z.enum(EXPRESSIONS).describe("Emil's facial expression in this scene."),
+  motion: z
+    .string()
+    .optional()
+    .describe(
+      "How the picture comes alive in the animated clip: one or two gentle movements (e.g. Emil slowly waves, the lantern flickers, the blanket rises as he breathes). Calm, small, toddler-friendly.",
+    ),
   pause_after: z.number().describe("Seconds of quiet after the narration, 0.5–3. Longer for 'wait for the child' moments."),
 });
 
@@ -34,6 +40,9 @@ export const ChannelSchema = z.object({
   heroImage: z.string(),
   expressionsImage: z.string(),
   imageModel: z.string(),
+  /** OpenArt image-to-video model; omit to make picture-only videos. */
+  videoModel: z.string().optional(),
+  videoResolution: z.string().optional(),
 });
 export type Channel = z.infer<typeof ChannelSchema>;
 

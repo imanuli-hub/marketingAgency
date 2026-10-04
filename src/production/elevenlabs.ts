@@ -19,9 +19,13 @@ export interface VoiceSettings {
   speed: number;
 }
 
+// Eleven v3 is far more natural than v2. Its stability only takes 0 (creative),
+// 0.5 (natural) or 1 (robust); very steady, slow settings sound robotic.
+export const TTS_MODEL = "eleven_v3";
+
 export const VOICE_PRESETS: Record<"day" | "bedtime", VoiceSettings> = {
-  day: { stability: 0.6, similarity_boost: 0.8, style: 0.2, speed: 0.95 },
-  bedtime: { stability: 0.75, similarity_boost: 0.8, style: 0.05, speed: 0.88 },
+  day: { stability: 0.5, similarity_boost: 0.8, style: 0, speed: 1 },
+  bedtime: { stability: 0.5, similarity_boost: 0.8, style: 0, speed: 1 },
 };
 
 /** Text to speech. Writes an MP3 to `out` and returns its path. */
@@ -36,7 +40,7 @@ export async function textToSpeech(opts: {
     headers: { "xi-api-key": apiKey(), "content-type": "application/json", accept: "audio/mpeg" },
     body: JSON.stringify({
       text: opts.text,
-      model_id: "eleven_multilingual_v2",
+      model_id: TTS_MODEL,
       voice_settings: { ...opts.settings, use_speaker_boost: true },
     }),
   });

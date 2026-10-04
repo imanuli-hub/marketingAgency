@@ -2,9 +2,9 @@ import fs from "fs/promises";
 import path from "path";
 import { episodeDir, EpisodeSchema, loadChannel, type Episode } from "./production/episode.js";
 import { textToSpeech, VOICE_PRESETS } from "./production/elevenlabs.js";
-import { exists, generateSceneImages } from "./production/images.js";
+import { exists, generateClip, generateSceneImages, motionPrompt } from "./production/images.js";
 import { writeScript } from "./production/script.js";
-import { concatScenes, durationOf, renderScene, SIZES } from "./production/video.js";
+import { concatScenes, durationOf, renderClipScene, renderScene, sceneLength, SIZES } from "./production/video.js";
 
 const USAGE = `Usage: npm run episode -- <client> <episode-slug> [short|long] ["idea"] [--only script]
 
@@ -68,6 +68,33 @@ try {
   const images = await generateSceneImages({ episode, channel, dir: path.join(dir, "images"), onProgress: (m) => log(m) });
   log(`images: ${images.length} ready`);
 
+  // Animation: each scene image becomes a clip as long as its narration.
+  const anims: (string | undefined)[] = [];
+  if (channel.videoModel) {
+    const jobs = episode.scenes.map((scene, i) => ({ scene, i }));
+    let done = 0;
+    const worker = async () => {
+      for (let job = jobs.shift(); job; job = jobs.shift()) {
+        const out = path.join(dir, "anim", `scene-${String(job.i + 1).padStart(2, "0")}.mp4`);
+        anims[job.i] = out;
+        if (await exists(out)) continue;
+        const seconds = Math.min(15, Math.ceil(await sceneLength(audio[job.i], job.scene.pause_after)));
+        await generateClip({
+          prompt: motionPrompt(job.scene),
+          model: channel.videoModel!,
+          image: images[job.i],
+          seconds,
+          resolution: channel.videoResolution,
+          out,
+        });
+        log(`animation ${++done}/${episode.scenes.length}`);
+      }
+    };
+    // OpenArt's Starter plan allows two generations at a time.
+    await Promise.all([worker(), worker()]);
+    log(`animation: ${anims.length} clips ready`);
+  }
+
   // Video
   const size = SIZES[episode.format];
   const clips: string[] = [];
@@ -76,7 +103,9 @@ try {
     clips.push(out);
     if (await exists(out)) continue;
     await fs.mkdir(path.dirname(out), { recursive: true });
-    await renderScene({ image: images[i], audio: audio[i], pauseAfter: scene.pause_after, index: i, size, out });
+    const anim = anims[i];
+    if (anim) await renderClipScene({ clip: anim, audio: audio[i], pauseAfter: scene.pause_after, size, out });
+    else await renderScene({ image: images[i], audio: audio[i], pauseAfter: scene.pause_after, index: i, size, out });
   }
   const final = path.join(dir, `${episodeSlug}.mp4`);
   await concatScenes(clips, final);

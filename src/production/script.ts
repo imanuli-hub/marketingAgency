@@ -50,7 +50,9 @@ ${await channelContext(opts.slug)}`;
 Idea: ${opts.idea}
 Format: ${opts.format}. ${FORMAT_RULES[opts.format]}
 
-Each scene becomes one illustration shown while the narration plays, so give every scene one clear, simple picture. Keep the narration slow and simple, with the channel's greeting and closing lines.`,
+Each scene becomes one short animated clip played while the narration is spoken, so give every scene one clear, simple picture and one or two gentle movements. Keep the narration simple, with the channel's greeting and closing lines.
+
+The narrator voice understands a few expression tags in square brackets, for example [softly], [whispers], [giggles], [warmly], [excited]. Use them sparingly (at most one per scene) where they add warmth or fun. Never put other bracketed text in the narration.`,
       },
     ],
   });

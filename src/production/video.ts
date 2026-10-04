@@ -32,6 +32,28 @@ export async function durationOf(file: string): Promise<number> {
   return Number(m[1]) * 3600 + Number(m[2]) * 60 + Number(m[3]);
 }
 
+/** Seconds a scene lasts: lead-in, the narration, then a quiet tail. */
+export async function sceneLength(audio: string, pauseAfter: number): Promise<number> {
+  return LEAD_IN + (await durationOf(audio)) + Math.max(0.5, pauseAfter);
+}
+
+/**
+ * Filter that scales a source to exactly w x h. When the shapes differ (e.g. a
+ * square picture in a vertical Short) it shows the whole source over a blurred
+ * fill instead of cropping the subject off.
+ */
+function fitOrFill(src: { w: number; h: number }, w: number, h: number): string {
+  if (Math.abs(src.w / src.h - w / h) <= 0.05) {
+    return `scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h}`;
+  }
+  return (
+    `split[bgsrc][fgsrc];` +
+    `[bgsrc]scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h},boxblur=40:2,eq=brightness=-0.05[bg];` +
+    `[fgsrc]scale=${w}:${h}:force_original_aspect_ratio=decrease[fg];` +
+    `[bg][fg]overlay=(W-w)/2:(H-h)/2`
+  );
+}
+
 async function imageSize(file: string): Promise<{ w: number; h: number }> {
   const { stderr } = await run(FFMPEG, ["-hide_banner", "-i", file]).catch((e: { stderr: string }) => ({ stderr: e.stderr }));
   const m = stderr.match(/Video:.*?, (\d{2,5})x(\d{2,5})/);
@@ -52,7 +74,7 @@ export async function renderScene(opts: {
   out: string;
 }): Promise<void> {
   const { w, h } = opts.size;
-  const total = LEAD_IN + (await durationOf(opts.audio)) + Math.max(0.5, opts.pauseAfter);
+  const total = await sceneLength(opts.audio, opts.pauseAfter);
   const frames = Math.ceil(total * FPS);
   const step = (0.12 / frames).toFixed(6); // zoom 1.00 -> 1.12 over the scene
   const zoom = opts.index % 2 === 0 ? `1+${step}*on` : `1.12-${step}*on`;
@@ -60,17 +82,8 @@ export async function renderScene(opts: {
   const sh = Math.round(h * 1.5);
   const delayMs = Math.round(LEAD_IN * 1000);
 
-  // If the image's shape differs from the video's (e.g. a square image in a
-  // vertical Short), show the whole image over a blurred fill instead of
-  // cropping the subject off.
   const img = await imageSize(opts.image);
-  const mismatch = Math.abs(img.w / img.h - w / h) > 0.05;
-  const frame = mismatch
-    ? `[0:v]split[bgsrc][fgsrc];` +
-      `[bgsrc]scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh},boxblur=40:2,eq=brightness=-0.05[bg];` +
-      `[fgsrc]scale=${sw}:${sh}:force_original_aspect_ratio=decrease[fg];` +
-      `[bg][fg]overlay=(W-w)/2:(H-h)/2,`
-    : `[0:v]scale=${sw}:${sh}:force_original_aspect_ratio=increase,crop=${sw}:${sh},`;
+  const frame = `[0:v]${fitOrFill(img, sw, sh)},`;
 
   const filter = [
     frame,
@@ -82,6 +95,44 @@ export async function renderScene(opts: {
 
   await ffmpeg([
     "-i", opts.image,
+    "-i", opts.audio,
+    "-filter_complex", filter,
+    "-map", "[v]", "-map", "[a]",
+    "-t", total.toFixed(2),
+    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-r", String(FPS),
+    "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-ac", "2",
+    opts.out,
+  ]);
+}
+
+/**
+ * One scene from an animated clip: the clip (its own sound removed) fitted to
+ * the video size, held on its last frame if it is shorter than the narration,
+ * with the narration after a short lead-in and soft fades.
+ */
+export async function renderClipScene(opts: {
+  clip: string;
+  audio: string;
+  pauseAfter: number;
+  size: { w: number; h: number };
+  out: string;
+}): Promise<void> {
+  const { w, h } = opts.size;
+  const total = await sceneLength(opts.audio, opts.pauseAfter);
+  const hold = Math.max(0, total - (await durationOf(opts.clip)) + 0.1);
+  const delayMs = Math.round(LEAD_IN * 1000);
+  const src = await imageSize(opts.clip);
+
+  const filter = [
+    `[0:v]fps=${FPS},tpad=stop_mode=clone:stop_duration=${hold.toFixed(2)},${fitOrFill(src, w, h)},setsar=1,`,
+    `trim=0:${total.toFixed(2)},setpts=PTS-STARTPTS,`,
+    `fade=t=in:st=0:d=${FADE},fade=t=out:st=${(total - FADE).toFixed(2)}:d=${FADE},format=yuv420p[v];`,
+    `[1:a]adelay=${delayMs}|${delayMs},apad,atrim=0:${total.toFixed(2)},`,
+    `afade=t=out:st=${(total - 0.3).toFixed(2)}:d=0.3[a]`,
+  ].join("");
+
+  await ffmpeg([
+    "-i", opts.clip,
     "-i", opts.audio,
     "-filter_complex", filter,
     "-map", "[v]", "-map", "[a]",
