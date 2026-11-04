@@ -61,7 +61,7 @@ function face({ eyes, brows, mouth }) {
 export function Mascot({ x = 240, y = 560, scale = 1, arms = ["downL", "downR"], expr = {}, animate = [] }) {
   const hold = [{ property: "scale", from: scale, to: scale, at: 0, duration: 0.05 }];
   return (
-    <frame x={x} y={y} width={W} height={H} origin="center" layout="none" animate={animate.length ? animate : hold}>
+    <frame x={x} y={y} width={W} height={H} origin="center" layout="none" animate={[...hold, ...animate]}>
       {P(ellipse(300, 925, 220, 22), { fill: "#00000080" })}
       {P("M215,430 C190,560 185,760 195,925 L405,925 C415,760 410,560 385,430 Z", { fill: "#FFFFFF", stroke: { width: 14, color: INK } })}
       {P("M222,440 C204,560 200,760 210,918 L244,918 C236,760 238,560 252,446 Z", { fill: "#E3E7EE" })}
