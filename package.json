@@ -8,7 +8,8 @@
     "channel": "tsx --env-file-if-exists=.env src/channel/cli.ts",
     "yt:publish": "tsx --env-file-if-exists=.env src/youtube/publish.ts",
     "yt:analytics": "tsx --env-file-if-exists=.env src/youtube/analytics.ts",
-    "yt:auth": "tsx --env-file-if-exists=.env src/youtube/authorize.ts"
+    "yt:auth": "tsx --env-file-if-exists=.env src/youtube/authorize.ts",
+    "test": "tsx --test tests/*.test.ts"
   },
   "repository": {
     "type": "git",

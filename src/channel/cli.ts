@@ -8,7 +8,7 @@ import {
   saveManifest,
   type Manifest,
 } from "./manifest.js";
-import { budgetVerdict, nextSlots, spendTotals, type Spend } from "./rules.js";
+import { budgetVerdict, costRows, nextSlots, reportEpisodes, spendTotals, type Spend } from "./rules.js";
 
 const USAGE = `Usage: npm run channel -- <command> [args]   (channel: CHANNEL env, default invisible-explained)
 
@@ -19,7 +19,8 @@ const USAGE = `Usage: npm run channel -- <command> [args]   (channel: CHANNEL en
   approve <id> [notes]           owner approval: allows upload (only qc_passed episodes)
   reject <id> [notes]            owner rejection: never uploaded
   assign-slots [YYYY-MM-DD]      give approved episodes without a publishAt the next free slots
-  report [YYYY-MM-DD]            write reports/<date>.md (compact daily report)`;
+  report [YYYY-MM-DD]            write reports/<date>.md (compact daily report)
+  costs                          production cost log per video (credits, paid calls, by model, status)`;
 
 const CHANNEL = process.env.CHANNEL ?? "invisible-explained";
 const ledgerFile = () => path.join(channelDir(CHANNEL), "ledger", "credits.jsonl");
@@ -111,7 +112,7 @@ async function main() {
       const queue = await loadQueue(CHANNEL);
       const ledger = await readLedger();
       const t = spendTotals(ledger, new Date(`${date}T12:00:00Z`));
-      const today = queue.filter((q) => q.m.id.startsWith(date));
+      const today = reportEpisodes(queue.map((q) => q.m), date).map((m) => ({ m }));
       const body = [
         `# ${cfg.name}: daily report ${date}`,
         "",
@@ -130,6 +131,17 @@ async function main() {
       await fs.mkdir(path.dirname(out), { recursive: true });
       await fs.writeFile(out, body);
       console.log(body);
+      return;
+    }
+    case "costs": {
+      const rows = costRows(await readLedger(), (await loadQueue(CHANNEL)).map((q) => ({ id: q.m.id, status: q.m.status })));
+      console.log("| Video | Status | Credits | Paid calls | By model |\n|---|---|---|---|---|");
+      for (const r of rows) {
+        const models = Object.entries(r.byModel).map(([k, v]) => `${k} ${v.credits} (${v.calls})`).join(", ") || "-";
+        console.log(`| ${r.episode} | ${r.status} | ${r.credits} | ${r.attempts} | ${models} |`);
+      }
+      const total = rows.reduce((a, r) => a + r.credits, 0);
+      console.log(`\nTotal: ${total.toFixed(2)} credits over ${rows.length} video(s)`);
       return;
     }
     default:

@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import os from "os";
 import path from "path";
-import { nextSlots } from "../channel/rules.js";
+import { uploadBlocker as eligible, nextSlots } from "../channel/rules.js";
 import { loadChannelConfig, loadQueue, logLine, saveManifest, type Manifest } from "../channel/manifest.js";
 import { getVideos, hasCredentials, recentUploadIds, uploadVideo } from "./api.js";
 
@@ -20,16 +20,6 @@ import { getVideos, hasCredentials, recentUploadIds, uploadVideo } from "./api.j
 const CHANNEL = process.env.CHANNEL ?? "invisible-explained";
 const DRY = process.argv.includes("--dry-run");
 const markerTag = (m: Manifest) => `tie-${m.id}`;
-
-function eligible(m: Manifest, autoPublish: boolean): string | null {
-  if (m.youtube?.videoId) return "already uploaded";
-  if (m.status !== "qc_passed") return `status ${m.status}`;
-  if (m.approval.state === "rejected") return "rejected";
-  if (m.approval.state !== "approved" && !autoPublish) return "awaiting owner approval";
-  if (!m.render?.url) return "no render url";
-  if (!m.metadata) return "no metadata";
-  return null;
-}
 
 async function download(url: string, out: string): Promise<void> {
   const res = await fetch(url);
