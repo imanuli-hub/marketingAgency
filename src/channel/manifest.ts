@@ -32,6 +32,8 @@ const Scene = z.object({
   narration: z.string(),
   visual: z.string().describe("What we see, as a generation-ready description"),
   label: z.string().describe("Top scene label, e.g. 'CEREBELLUM · ILLUSTRATIVE'"),
+  style: z.enum(["photoreal", "cartoon", "graphic"]).optional().describe("photoreal = AI still/clip; cartoon = mascot drawn in code; graphic = navy/cyan motion graphics in code"),
+  voice: z.string().optional().describe("Narrator name for this scene's line"),
   animate: z.boolean().default(false).describe("true = this still is animated with the video model"),
   motion: z.string().optional(),
   overlay: z.string().optional().describe("Data callout or diagram drawn in code"),
@@ -62,7 +64,11 @@ export const ManifestSchema = z.object({
   }),
   script: z
     .object({
-      voiceText: z.string().describe("Exact ElevenLabs v4 input, delivery tags included"),
+      voiceText: z.string().describe("Exact ElevenLabs v4 input, delivery tags included (all turns joined)"),
+      dialogue: z
+        .array(z.object({ voice: z.string(), voiceId: z.string(), text: z.string() }))
+        .optional()
+        .describe("Multi-narrator take: one ElevenLabs v4 dialogue turn per entry, in order"),
       words: z.number().int(),
       estSeconds: z.number(),
     })

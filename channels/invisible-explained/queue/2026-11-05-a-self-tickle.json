@@ -6,11 +6,55 @@
   "pillar": "mind",
   "createdAt": "2026-11-04T21:00:00Z",
   "status": "fact_checked",
-  "approval": { "state": "pending" },
+  "approval": {
+    "state": "pending"
+  },
   "script": {
-    "voiceText": "[curious, confident documentary narrator, crisp pace] Try tickling yourself. Right now... Nothing, right? [leaning in] Every time you move, your brain makes a copy of the command. And scientists think your cerebellum uses that copy to predict exactly what the touch will feel like. Predicted touch gets turned DOWN. A stranger's fingers? No prediction... full sensation. [building] In one experiment, a robot delayed people's own touch by a fraction of a second... and it started to feel more ticklish. [pause] Your brain isn't just feeling the world. It's constantly PREDICTING it.",
-    "words": 81,
-    "estSeconds": 34
+    "voiceText": "[deep, cinematic documentary narrator, calm authority, crisp pace] Try tickling yourself. Right now... [playful, curious, quick] Nothing, right? Every time you move, your brain sends a copy of the command. And scientists think your cerebellum uses that copy to predict exactly what the touch will feel like. Predicted touch? It gets turned DOWN. But a stranger's fingers? No prediction... full sensation. That's why someone else can tickle you... and you can't. In one experiment, a robot delayed people's own touch by a fraction of a second... and it started to feel more ticklish! Your brain isn't just feeling the world. It's PREDICTING it.",
+    "dialogue": [
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "[deep, cinematic documentary narrator, calm authority, crisp pace] Try tickling yourself. Right now..."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "[playful, curious, quick] Nothing, right? Every time you move, your brain sends a copy of the command."
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "And scientists think your cerebellum uses that copy to predict exactly what the touch will feel like."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "Predicted touch? It gets turned DOWN."
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "But a stranger's fingers? No prediction... full sensation."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "That's why someone else can tickle you... and you can't."
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "In one experiment, a robot delayed people's own touch by a fraction of a second..."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "and it started to feel more ticklish! Your brain isn't just feeling the world. It's PREDICTING it."
+      }
+    ],
+    "words": 85,
+    "estSeconds": 36
   },
   "factCheck": {
     "verdict": "pass",
@@ -29,84 +73,197 @@
         "claim": "A robot that delayed people's own touch by a fraction of a second made it feel more ticklish.",
         "source": "Blakemore, Frith & Wolpert (1999), Spatio-temporal prediction modulates the perception of self-produced stimuli, Journal of Cognitive Neuroscience 11(5):551-559 (tickliness rose with delays up to 200-300 ms)",
         "url": "https://wolpertlab.neuroscience.columbia.edu/sites/default/files/content/papers/BlaWolFri99.pdf"
+      },
+      {
+        "claim": "Someone else can tickle you but you can't: externally produced touch is perceived as more ticklish than self-produced.",
+        "source": "Blakemore, Wolpert & Frith (1998), Nature Neuroscience 1:635-640",
+        "url": "https://link.springer.com/article/10.1038/2870"
       }
     ]
   },
   "storyboard": [
     {
       "n": 1,
-      "seconds": 3.5,
+      "seconds": 3,
       "narration": "Try tickling yourself. Right now...",
-      "visual": "Photorealistic cinematic close-up, vertical 9:16: an adult's own hand, fingers curled and wiggling, about to tickle their own ribs through a dark t-shirt. Deep navy background, single cool rim light, subtle cyan edge glow, shallow depth of field, documentary realism, no text.",
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: an adult's own hand, fingers curled and wiggling, about to tickle the side of their own ribs through a dark t-shirt. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "THE INVISIBLE EXPLAINED",
+      "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
       "motion": "The fingers wiggle and press gently into the side of the ribs; slow push-in. No cuts."
     },
     {
       "n": 2,
-      "seconds": 2.5,
+      "seconds": 1.6,
       "narration": "Nothing, right?",
-      "visual": "Photorealistic cinematic portrait, vertical 9:16: a man in his 30s looking into camera with a flat, unimpressed expression, half his face in shadow, deep navy background, cool rim light, documentary realism, no text.",
+      "visual": "Mascot pokes its own side with one finger, flat unimpressed face, one eyebrow raised.",
       "label": "SELF-TOUCH",
-      "animate": false,
-      "overlay": "slow push-in drawn in code"
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 3,
-      "seconds": 5.5,
-      "narration": "Every time you move, your brain makes a copy of the command.",
-      "visual": "Photorealistic scientific visualization, vertical 9:16: a semi-transparent human head and upper body in profile against deep navy, the brain visible inside; a glowing cyan signal leaves the top of the brain (motor cortex) and splits in two: one branch travels down the spinal cord toward the arm, the other curves back to the cerebellum at the base of the brain. Cinematic, anatomically plausible, no text.",
+      "seconds": 3.6,
+      "narration": "Every time you move, your brain sends a copy of the command.",
+      "visual": "Mascot raises an arm; a cartoon brain above its head sends a yellow signal that splits into two arrows: one to the arm (COMMAND), one curving back into the brain (COPY).",
       "label": "EFFERENCE COPY · ILLUSTRATIVE",
+      "style": "cartoon",
+      "voice": "Dylan",
       "animate": false,
-      "overlay": "code-drawn animated arrows tracing both branches, labels COMMAND and COPY"
+      "overlay": "arrows draw on in sync with the words"
     },
     {
       "n": 4,
-      "seconds": 5.0,
+      "seconds": 5.2,
       "narration": "And scientists think your cerebellum uses that copy to predict exactly what the touch will feel like.",
-      "visual": "Photorealistic macro of the human cerebellum, its fine folded layers lit from within by soft cyan points of light, deep navy darkness around it, cinematic medical visualization, no text.",
+      "visual": "Photorealistic cinematic macro, vertical 9:16: the human cerebellum, its fine folded layers lit from within by soft cyan points of light, deep darkness around it, medical visualization. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "CEREBELLUM · ILLUSTRATIVE",
+      "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
       "motion": "Slow orbit around the cerebellum while points of cyan light ripple across its folds."
     },
     {
       "n": 5,
-      "seconds": 5.5,
-      "narration": "Predicted touch gets turned DOWN. A stranger's fingers? No prediction... full sensation.",
-      "visual": "Photorealistic split composition, vertical 9:16: top half, a person's own hand resting on their forearm, cool desaturated tones; bottom half, another person's fingertips lightly touching the same forearm, the skin glowing with warm light. Deep navy background, cinematic, no text.",
-      "label": "SOMATOSENSORY RESPONSE · ILLUSTRATIVE",
+      "seconds": 2.2,
+      "narration": "Predicted touch? It gets turned DOWN.",
+      "visual": "Mascot next to a big cartoon volume dial labelled TOUCH; the needle swings from high to low; mascot shrugs.",
+      "label": "PREDICTION",
+      "style": "cartoon",
+      "voice": "Dylan",
       "animate": false,
-      "overlay": "code-drawn SENSATION meter on each half: low (own hand) vs high (stranger)"
+      "overlay": "dial needle drops on 'DOWN'"
     },
     {
       "n": 6,
-      "seconds": 7.0,
-      "narration": "In one experiment, a robot delayed people's own touch by a fraction of a second... and it started to feel more ticklish.",
-      "visual": "Photorealistic lab scene, vertical 9:16: a small precise robotic arm with a soft foam tip touching the open palm of a person's hand resting on a dark lab bench, dim lab, cyan rim light on the metal, cinematic documentary, no text.",
-      "label": "EXPERIMENT · BLAKEMORE ET AL. 1999",
+      "seconds": 3.6,
+      "narration": "But a stranger's fingers? No prediction... full sensation.",
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: another person's fingertips lightly touching the inside of a forearm, the skin catching a warm glow where they touch, goosebumps visible. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "label": "SOMATOSENSORY RESPONSE",
+      "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "motion": "The robot arm slowly strokes the foam tip across the palm; the fingers twitch slightly.",
-      "overlay": "code-drawn readout: DELAY 0 ms counting up to 300 ms, TICKLINESS bar rising"
+      "motion": "The fingertips trail slowly along the forearm; tiny goosebumps rise. Slow, gentle."
     },
     {
       "n": 7,
-      "seconds": 5.0,
-      "narration": "Your brain isn't just feeling the world. It's constantly PREDICTING it.",
-      "visual": "Photorealistic wide shot, vertical 9:16: silhouette of a person standing in darkness, the brain inside the head glowing with a network of fine cyan light, faint lines radiating outward into the dark, cinematic, no text.",
-      "label": "THE PREDICTING BRAIN",
+      "seconds": 2.8,
+      "narration": "That's why someone else can tickle you... and you can't.",
+      "visual": "Two mascots: one tickles the other, who laughs helplessly; then the laughing mascot tries to tickle itself and goes blank.",
+      "label": "SAME TOUCH, DIFFERENT BRAIN",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false
+    },
+    {
+      "n": 8,
+      "seconds": 4.2,
+      "narration": "In one experiment, a robot delayed people's own touch by a fraction of a second...",
+      "visual": "Photorealistic cinematic lab scene, vertical 9:16: a small precise robotic arm with a soft foam tip touching the open palm of a person's hand resting on a dark lab bench, cyan rim light on the metal. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "label": "EXPERIMENT · BLAKEMORE ET AL. 1999",
+      "style": "photoreal",
+      "voice": "Alistair",
+      "animate": true,
+      "motion": "The robot arm slowly strokes the foam tip across the palm; the fingers twitch slightly."
+    },
+    {
+      "n": 9,
+      "seconds": 2,
+      "narration": "and it started to feel more ticklish!",
+      "visual": "Mascot giggling, squirming; a counter DELAY 0 → 300 ms and a TICKLE meter rising beside it.",
+      "label": "DELAY = SURPRISE",
+      "style": "cartoon",
+      "voice": "Dylan",
       "animate": false,
-      "overlay": "slow pull-back in code, then 1.5 s end card"
+      "overlay": "counter and meter animate"
+    },
+    {
+      "n": 10,
+      "seconds": 4.2,
+      "narration": "Your brain isn't just feeling the world. It's PREDICTING it.",
+      "visual": "Mascot looks up at a glowing cartoon brain that projects a little dotted 'forecast' of a hand touching; mascot smiles knowingly. Then end card.",
+      "label": "THE PREDICTING BRAIN",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
+      "overlay": "end card 1.5 s"
     }
   ],
-  "assets": { "scenes": {} },
+  "assets": {
+    "voice": {
+      "jobId": "20962c66-19ab-41c3-9a4a-8305eeaa780c",
+      "model": "elevenlabs_v4",
+      "credits": 2.99,
+      "attempts": 1,
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211241_20962c66-19ab-41c3-9a4a-8305eeaa780c.mp3"
+    },
+    "scenes": {
+      "1": {
+        "image": {
+          "jobId": "cb239d35-99d7-4167-804b-af5ae4dad785",
+          "model": "nano_banana_2",
+          "credits": 1.5,
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211247_cb239d35-99d7-4167-804b-af5ae4dad785.png"
+        }
+      },
+      "4": {
+        "image": {
+          "jobId": "6d3886af-244c-4526-9d05-ae7a3babf8fc",
+          "model": "nano_banana_2",
+          "credits": 1.5,
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211250_6d3886af-244c-4526-9d05-ae7a3babf8fc.png"
+        }
+      },
+      "6": {
+        "image": {
+          "jobId": "9c1b23a6-8341-448e-82d5-86d839dfa66f",
+          "model": "nano_banana_2",
+          "credits": 1.5,
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211251_9c1b23a6-8341-448e-82d5-86d839dfa66f.png"
+        }
+      },
+      "8": {
+        "image": {
+          "jobId": "9d138ded-3d35-4a6b-a6b1-d7f39d400101",
+          "model": "nano_banana_2",
+          "credits": 1.5,
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211249_9d138ded-3d35-4a6b-a6b1-d7f39d400101.png"
+        }
+      }
+    }
+  },
   "metadata": {
     "title": "Why Can't You Tickle Yourself? Your Brain Predicts It #shorts",
     "description": "Try tickling yourself. Nothing happens, because your brain predicts your own touch and turns it down before you feel it.\n\nSources:\n- Blakemore, Wolpert & Frith (1998), Nature Neuroscience 1:635-640, \"Central cancellation of self-produced tickle sensation\"\n- Blakemore, Frith & Wolpert (1999), Journal of Cognitive Neuroscience 11:551-559, \"Spatio-temporal prediction modulates the perception of self-produced stimuli\"\n\nVisuals are AI-generated illustrations.\n\n#science #brain #psychology #neuroscience #shorts",
-    "tags": ["why can't you tickle yourself", "tickle", "cerebellum", "brain prediction", "neuroscience", "psychology", "efference copy"]
+    "tags": [
+      "why can't you tickle yourself",
+      "tickle",
+      "cerebellum",
+      "brain prediction",
+      "neuroscience",
+      "psychology",
+      "efference copy"
+    ]
   },
-  "credits": { "estimated": 32.05, "spent": 0 },
+  "credits": {
+    "estimated": 33.99,
+    "spent": 8.99
+  },
   "log": [
     "2026-11-04T21:00Z topic chosen (not in ledger); 3 claims sourced, verdict pass",
-    "2026-11-04T21:00Z waiting for owner: visual mode, voice, credit approval for first test"
+    "2026-11-04T21:00Z waiting for owner: visual mode, voice, credit approval for first test",
+    "2026-11-04T21:15Z owner: hybrid 4 photoreal (Alistair) + 6 code-drawn cartoon (Dylan, ice-cream style); spend approved up to 45 cr",
+    "2026-11-04T21:13Z spent 2.99 cr voice (elevenlabs_v4) job 20962c66-19ab-41c3-9a4a-8305eeaa780c",
+    "2026-11-04T21:13Z spent 1.5 cr still-1 (nano_banana_2) job cb239d35-99d7-4167-804b-af5ae4dad785",
+    "2026-11-04T21:13Z spent 1.5 cr still-4 (nano_banana_2) job 6d3886af-244c-4526-9d05-ae7a3babf8fc",
+    "2026-11-04T21:13Z spent 1.5 cr still-6 (nano_banana_2) job 9c1b23a6-8341-448e-82d5-86d839dfa66f",
+    "2026-11-04T21:13Z spent 1.5 cr still-8 (nano_banana_2) job 9d138ded-3d35-4a6b-a6b1-d7f39d400101",
+    "2026-11-04T21:20Z voice take 38.2 s, transcript matches script; 4 stills accepted (no regeneration)"
   ]
 }
