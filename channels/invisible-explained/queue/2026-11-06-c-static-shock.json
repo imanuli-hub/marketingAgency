@@ -81,108 +81,108 @@
       "n": 1,
       "seconds": 3.5,
       "narration": "You reach for the doorknob... SNAP.",
+      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: a fingertip a few millimetres from a brass doorknob, a tiny bright blue-white spark jumping the gap, dark hallway. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "THE INVISIBLE EXPLAINED",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: a fingertip a few millimetres from a brass doorknob, a tiny bright blue-white spark jumping the gap, dark hallway. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "The finger slowly approaches the doorknob and a tiny spark flickers across the gap. No cuts."
     },
     {
       "n": 2,
       "seconds": 3.5,
       "narration": "Ouch! Why is it worse in winter?",
+      "visual": "Mascot jumps back shaking its hand, a small zigzag spark near the doorknob.",
       "label": "STATIC DISCHARGE",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Mascot jumps back shaking its hand, a small zigzag spark near the doorknob."
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 3,
       "seconds": 3.5,
       "narration": "As you walk, charge moves between your shoes and the carpet.",
-      "label": "TRIBOELECTRIC CHARGING · ILLUSTRATIVE",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "Cartoon shoe stepping on carpet; tiny plus and minus signs hop from carpet to the shoe.",
+      "label": "TRIBOELECTRIC CHARGING · ILLUSTRATIVE",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "charges hop with each step"
     },
     {
       "n": 4,
       "seconds": 3.5,
       "narration": "In humid air, a film of moisture lets that charge leak away.",
+      "visual": "Photorealistic cinematic macro, vertical 9:16: carpet fibres covered in microscopic water droplets glistening in cool light. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "HUMID AIR",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic macro, vertical 9:16: carpet fibres covered in microscopic water droplets glistening in cool light. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "Microscopic droplets shimmer on the fibres; slow push-in. No cuts."
     },
     {
       "n": 5,
       "seconds": 3.5,
       "narration": "But winter air is dry, and heating dries it more.",
-      "label": "HUMIDITY ↓",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "Cartoon humidity gauge needle dropping from 50 percent to 15 percent; a radiator beside it.",
+      "label": "HUMIDITY ↓",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "gauge needle drops"
     },
     {
       "n": 6,
       "seconds": 3.5,
       "narration": "So the charge builds, up to tens of thousands of volts.",
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: feet in wool socks walking across a dark carpet, a faint illustrative blue glow outlining the person's foot. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "BODY VOLTAGE · ILLUSTRATIVE",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic close-up, vertical 9:16: feet in wool socks walking across a dark carpet, a faint illustrative blue glow outlining the person's foot. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "The foot steps slowly across the carpet as the faint blue glow brightens. No cuts."
     },
     {
       "n": 7,
       "seconds": 3.5,
       "narration": "Tens of THOUSANDS? Isn't that deadly?",
-      "label": "UP TO ~35,000 V IN DRY AIR",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "Mascot with wide eyes, a big counter climbing 1,500 → 35,000 V.",
+      "label": "UP TO ~35,000 V IN DRY AIR",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "counter climbs"
     },
     {
       "n": 8,
       "seconds": 3.5,
       "narration": "No. The current is tiny, and it's over in millionths of a second.",
+      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: slow-motion tiny spark between a fingertip and a metal key, dark background. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "ELECTROSTATIC DISCHARGE",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: slow-motion tiny spark between a fingertip and a metal key, dark background. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "Ultra slow-motion spark flickers once between fingertip and metal. No cuts."
     },
     {
       "n": 9,
       "seconds": 3.5,
       "narration": "That's why a humidifier helps: wetter air drains the charge.",
+      "visual": "Cartoon humidifier puffing mist; plus and minus signs float away; mascot relaxed.",
       "label": "MOIST AIR = FEWER SHOCKS",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Cartoon humidifier puffing mist; plus and minus signs float away; mascot relaxed."
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 10,
       "seconds": 3.5,
       "narration": "That spark is a tiny lightning bolt... and YOU made it.",
+      "visual": "Mascot holding up a finger with a tiny zigzag lightning bolt, proud grin. Then end card.",
       "label": "POCKET LIGHTNING",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Mascot holding up a finger with a tiny zigzag lightning bolt, proud grin. Then end card."
+      "voice": "Dylan",
+      "animate": false
     }
   ],
   "captionKeywords": [
@@ -201,7 +201,46 @@
     "built"
   ],
   "assets": {
-    "scenes": {}
+    "voice": {
+      "jobId": "82c9cadc-9a2c-43ed-96ff-53ad88dd46e3",
+      "model": "elevenlabs_v4",
+      "credits": 2.99,
+      "attempts": 1
+    },
+    "scenes": {
+      "1": {
+        "image": {
+          "jobId": "9684ccb8-bf2d-4eab-8b0b-9c46898e658e",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "4": {
+        "image": {
+          "jobId": "cc39fb3f-f7c2-416d-9ace-bb10529ec7de",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "6": {
+        "image": {
+          "jobId": "048ef716-3ade-4d87-8c4b-027adce78225",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "8": {
+        "image": {
+          "jobId": "5fa419e7-abdd-44d5-8452-d0f5a67edda4",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      }
+    }
   },
   "metadata": {
     "title": "Why Static Shocks Are Worse in Winter #shorts",
@@ -217,11 +256,16 @@
     ]
   },
   "credits": {
-    "estimated": 33.99,
-    "spent": 0
+    "estimated": 8.99,
+    "spent": 8.99
   },
   "log": [
     "2026-11-04T23:00Z scripted + fact-checked (no credits); waiting for an approved production budget",
-    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s"
+    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s",
+    "2026-11-04T22:51Z spent 2.99 cr voice (elevenlabs_v4) job 82c9cadc-9a2c-43ed-96ff-53ad88dd46e3",
+    "2026-11-04T22:51Z spent 1.5 cr still-1 (nano_banana_2_1k) job 9684ccb8-bf2d-4eab-8b0b-9c46898e658e",
+    "2026-11-04T22:51Z spent 1.5 cr still-4 (nano_banana_2_1k) job cc39fb3f-f7c2-416d-9ace-bb10529ec7de",
+    "2026-11-04T22:51Z spent 1.5 cr still-6 (nano_banana_2_1k) job 048ef716-3ade-4d87-8c4b-027adce78225",
+    "2026-11-04T22:51Z spent 1.5 cr still-8 (nano_banana_2_1k) job 5fa419e7-abdd-44d5-8452-d0f5a67edda4"
   ]
 }

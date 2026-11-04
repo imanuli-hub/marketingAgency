@@ -76,108 +76,108 @@
       "n": 1,
       "seconds": 3.5,
       "narration": "Put these on... and the roar of the engines fades away.",
+      "visual": "Photorealistic cinematic medium close-up, vertical 9:16: a traveller in a dim airplane cabin wearing over-ear headphones, eyes closed, calm; window with night sky behind. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "THE INVISIBLE EXPLAINED",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic medium close-up, vertical 9:16: a traveller in a dim airplane cabin wearing over-ear headphones, eyes closed, calm; window with night sky behind. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "The traveller exhales and relaxes; cabin lights flicker faintly; slow push-in. No cuts."
     },
     {
       "n": 2,
       "seconds": 3.5,
       "narration": "How? They fight sound... with MORE sound.",
+      "visual": "Mascot wearing big headphones, eyebrows raised, a speech burst.",
       "label": "ACTIVE NOISE CONTROL",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Mascot wearing big headphones, eyebrows raised, a speech burst."
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 3,
       "seconds": 3.5,
       "narration": "Sound is a pressure wave: squeeze, stretch, squeeze, stretch.",
-      "label": "SOUND WAVE · ILLUSTRATIVE",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "A cartoon sine wave scrolls across; dots bunch together (squeeze) and spread apart (stretch).",
+      "label": "SOUND WAVE · ILLUSTRATIVE",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "wave scrolls in time with the words"
     },
     {
       "n": 4,
       "seconds": 3.5,
       "narration": "Tiny microphones on the ear cups listen to the noise outside.",
+      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: the outer shell of a matte black headphone ear cup with a tiny microphone port, a faint cyan sound ripple approaching it. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "MICROPHONE",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: the outer shell of a matte black headphone ear cup with a tiny microphone port, a faint cyan sound ripple approaching it. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "Faint cyan ripples flow into the microphone port; slow orbit. No cuts."
     },
     {
       "n": 5,
       "seconds": 3.5,
       "narration": "A chip builds the exact opposite wave.",
-      "label": "ANTI-NOISE · ILLUSTRATIVE",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "Two cartoon waves, one yellow and one cyan, perfectly mirror-image.",
+      "label": "ANTI-NOISE · ILLUSTRATIVE",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "second wave draws as a mirror of the first"
     },
     {
       "n": 6,
       "seconds": 3.5,
       "narration": "The speaker plays it. Where a peak meets a trough... they cancel.",
+      "visual": "Photorealistic cinematic macro, vertical 9:16: inside a headphone ear cup, the speaker driver membrane with two glowing cyan and amber waves meeting and flattening. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "DESTRUCTIVE INTERFERENCE · ILLUSTRATIVE",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic macro, vertical 9:16: inside a headphone ear cup, the speaker driver membrane with two glowing cyan and amber waves meeting and flattening. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "The speaker membrane vibrates subtly as two glowing waves meet and flatten into a calm line. Slow."
     },
     {
       "n": 7,
       "seconds": 3.5,
       "narration": "Wave plus anti-wave equals... almost silence!",
-      "label": "ALMOST",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "Cartoon equation: wave + mirrored wave = flat line; mascot gives a thumbs-up.",
+      "label": "ALMOST",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "flat line appears"
     },
     {
       "n": 8,
       "seconds": 3.5,
       "narration": "It works best on low, steady hums. The cushions block higher sounds.",
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: a jet engine on an airplane wing at dusk seen through a cabin window, heat shimmer. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "LOW FREQUENCIES",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic close-up, vertical 9:16: a jet engine on an airplane wing at dusk seen through a cabin window, heat shimmer. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "Slow drift along the engine nacelle; heat shimmer ripples. No cuts."
     },
     {
       "n": 9,
       "seconds": 3.5,
       "narration": "And engineers built an electronic sound absorber back in nineteen fifty-three!",
+      "visual": "Cartoon retro 1950s microphone and loudspeaker on a lab bench with a sign 1953.",
       "label": "OLSON & MAY · 1953",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Cartoon retro 1950s microphone and loudspeaker on a lab bench with a sign 1953."
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 10,
       "seconds": 3.5,
       "narration": "Your quiet is made of noise... turned upside down.",
+      "visual": "Mascot relaxing with headphones, a little wave flipping upside down above it. Then end card.",
       "label": "QUIET FROM NOISE",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Mascot relaxing with headphones, a little wave flipping upside down above it. Then end card."
+      "voice": "Dylan",
+      "animate": false
     }
   ],
   "captionKeywords": [
@@ -196,7 +196,46 @@
     "upside"
   ],
   "assets": {
-    "scenes": {}
+    "voice": {
+      "jobId": "4405a591-6d93-4f49-b619-c4a6c35be32c",
+      "model": "elevenlabs_v4",
+      "credits": 3.22,
+      "attempts": 1
+    },
+    "scenes": {
+      "1": {
+        "image": {
+          "jobId": "c0dcac42-acef-4211-8c5c-8e02bc09e57a",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "4": {
+        "image": {
+          "jobId": "efcad51b-113e-4f09-b70c-201bdfd9f2c9",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "6": {
+        "image": {
+          "jobId": "92a78832-12c8-4514-99f5-0c8313ffcf7d",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "8": {
+        "image": {
+          "jobId": "f4cc39d0-4e19-48dd-8961-2b89ffe1db4c",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      }
+    }
   },
   "metadata": {
     "title": "How Noise-Cancelling Headphones Erase Sound #shorts",
@@ -212,11 +251,16 @@
     ]
   },
   "credits": {
-    "estimated": 33.99,
-    "spent": 0
+    "estimated": 9.22,
+    "spent": 9.22
   },
   "log": [
     "2026-11-04T23:00Z scripted + fact-checked (no credits); waiting for an approved production budget",
-    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s"
+    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s",
+    "2026-11-04T22:51Z spent 3.22 cr voice (elevenlabs_v4) job 4405a591-6d93-4f49-b619-c4a6c35be32c",
+    "2026-11-04T22:51Z spent 1.5 cr still-1 (nano_banana_2_1k) job c0dcac42-acef-4211-8c5c-8e02bc09e57a",
+    "2026-11-04T22:51Z spent 1.5 cr still-4 (nano_banana_2_1k) job efcad51b-113e-4f09-b70c-201bdfd9f2c9",
+    "2026-11-04T22:51Z spent 1.5 cr still-6 (nano_banana_2_1k) job 92a78832-12c8-4514-99f5-0c8313ffcf7d",
+    "2026-11-04T22:51Z spent 1.5 cr still-8 (nano_banana_2_1k) job f4cc39d0-4e19-48dd-8961-2b89ffe1db4c"
   ]
 }

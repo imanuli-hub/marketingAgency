@@ -81,107 +81,107 @@
       "n": 1,
       "seconds": 3.5,
       "narration": "Cold air hits your skin... and tiny bumps rise in seconds.",
+      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: human forearm skin as goosebumps rise, fine hairs lifting upright, cold breath of air visible as faint mist. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "THE INVISIBLE EXPLAINED",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: human forearm skin as goosebumps rise, fine hairs lifting upright, cold breath of air visible as faint mist. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "Goosebumps rise across the skin and the fine hairs lift upright; slow push-in. No cuts."
     },
     {
       "n": 2,
       "seconds": 3.5,
       "narration": "Goosebumps! But why?",
+      "visual": "Mascot shivering, little bumps drawn on its arm, teeth chattering.",
       "label": "PILOERECTION",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Mascot shivering, little bumps drawn on its arm, teeth chattering."
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 3,
       "seconds": 3.5,
       "narration": "Every hair has a tiny muscle. A nerve tells it to squeeze.",
-      "label": "ARRECTOR PILI · ILLUSTRATIVE",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "Cartoon cutaway of skin: a hair in its follicle with a small muscle attached; a yellow nerve signal arrives and the muscle tightens.",
+      "label": "ARRECTOR PILI · ILLUSTRATIVE",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "nerve signal travels, muscle squeezes"
     },
     {
       "n": 4,
       "seconds": 3.5,
       "narration": "It pulls the hair upright... and the skin bunches into a bump.",
+      "visual": "Photorealistic cinematic medical visualization, vertical 9:16: cross-section of human skin showing a hair follicle with its tiny arrector pili muscle contracting and the hair standing upright. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "HAIR FOLLICLE · ILLUSTRATIVE",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic medical visualization, vertical 9:16: cross-section of human skin showing a hair follicle with its tiny arrector pili muscle contracting and the hair standing upright. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "The small muscle contracts and the hair slowly tilts upright; the skin surface lifts into a bump. Slow."
     },
     {
       "n": 5,
       "seconds": 3.5,
       "narration": "For furry animals, that matters.",
+      "visual": "Cartoon cat goes from sleek to fully puffed-up, round and fluffy.",
       "label": "FUR UP",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Cartoon cat goes from sleek to fully puffed-up, round and fluffy."
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 6,
       "seconds": 3.5,
       "narration": "Raised fur traps warm air, and makes animals look bigger.",
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: a cat with its fur fully raised along its back, arched, lit by a cold rim light. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "INSULATION AND DISPLAY",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic close-up, vertical 9:16: a cat with its fur fully raised along its back, arched, lit by a cold rim light. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "The cat's fur bristles further and its back arches slowly. No cuts."
     },
     {
       "n": 7,
       "seconds": 3.5,
       "narration": "We lost the fur, but kept the reflex.",
+      "visual": "Mascot looks at its bare arm with bumps, shrugs.",
       "label": "AN OLD REFLEX",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Mascot looks at its bare arm with bumps, shrugs."
+      "voice": "Dylan",
+      "animate": false
     },
     {
       "n": 8,
       "seconds": 3.5,
       "narration": "In twenty twenty, scientists found that in mice, the same nerve wakes up hair stem cells.",
+      "visual": "Photorealistic cinematic laboratory macro, vertical 9:16: a microscope lens over a glowing tissue sample with cyan-lit cells, dark lab. Composition: main subject in the upper two thirds of the frame, darker, calmer lower third. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "label": "SHWARTZ ET AL. · CELL 2020",
-      "voice": "Alistair",
       "style": "photoreal",
+      "voice": "Alistair",
       "animate": true,
-      "visual": "Photorealistic cinematic laboratory macro, vertical 9:16: a microscope lens over a glowing tissue sample with cyan-lit cells, dark lab. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
       "motion": "Slow push toward the glowing sample under the microscope; cells pulse softly."
     },
     {
       "n": 9,
       "seconds": 3.5,
       "narration": "In long cold spells, the mice grew fur faster!",
-      "label": "IN MICE",
-      "voice": "Dylan",
-      "style": "cartoon",
-      "animate": false,
       "visual": "Cartoon mouse shivering, then growing a thick fluffy coat; a calendar flips.",
+      "label": "IN MICE",
+      "style": "cartoon",
+      "voice": "Dylan",
+      "animate": false,
       "overlay": "fur grows in steps"
     },
     {
       "n": 10,
       "seconds": 3.5,
       "narration": "Goosebumps aren't useless. They're an ancient signal, still wired in.",
+      "visual": "Mascot with a glowing wire-like nerve along its arm, smiling knowingly. Then end card.",
       "label": "STILL WIRED IN",
-      "voice": "Dylan",
       "style": "cartoon",
-      "animate": false,
-      "visual": "Mascot with a glowing wire-like nerve along its arm, smiling knowingly. Then end card."
+      "voice": "Dylan",
+      "animate": false
     }
   ],
   "captionKeywords": [
@@ -199,7 +199,46 @@
     "ancient"
   ],
   "assets": {
-    "scenes": {}
+    "voice": {
+      "jobId": "fc6f5b25-e225-4cc6-9d3a-fa4c75db8320",
+      "model": "elevenlabs_v4",
+      "credits": 2.99,
+      "attempts": 1
+    },
+    "scenes": {
+      "1": {
+        "image": {
+          "jobId": "1d81727a-21eb-4365-a535-b614dcdc84ec",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "4": {
+        "image": {
+          "jobId": "44236e5b-11ae-46ad-84e6-ace95daa8db4",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "6": {
+        "image": {
+          "jobId": "260e96e0-7419-4bcf-9955-83ef6aeb93f7",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      },
+      "8": {
+        "image": {
+          "jobId": "324cf7a6-7589-4b9d-a33e-2aa8023c62e6",
+          "model": "nano_banana_2 1k",
+          "credits": 1.5,
+          "attempts": 1
+        }
+      }
+    }
   },
   "metadata": {
     "title": "Why Do We Get Goosebumps? An Ancient Reflex #shorts",
@@ -215,11 +254,16 @@
     ]
   },
   "credits": {
-    "estimated": 33.99,
-    "spent": 0
+    "estimated": 8.99,
+    "spent": 8.99
   },
   "log": [
     "2026-11-04T23:00Z scripted + fact-checked (no credits); waiting for an approved production budget",
-    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s"
+    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s",
+    "2026-11-04T22:51Z spent 2.99 cr voice (elevenlabs_v4) job fc6f5b25-e225-4cc6-9d3a-fa4c75db8320",
+    "2026-11-04T22:51Z spent 1.5 cr still-1 (nano_banana_2_1k) job 1d81727a-21eb-4365-a535-b614dcdc84ec",
+    "2026-11-04T22:51Z spent 1.5 cr still-4 (nano_banana_2_1k) job 44236e5b-11ae-46ad-84e6-ace95daa8db4",
+    "2026-11-04T22:51Z spent 1.5 cr still-6 (nano_banana_2_1k) job 260e96e0-7419-4bcf-9955-83ef6aeb93f7",
+    "2026-11-04T22:51Z spent 1.5 cr still-8 (nano_banana_2_1k) job 324cf7a6-7589-4b9d-a33e-2aa8023c62e6"
   ]
 }
