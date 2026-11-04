@@ -1,0 +1,76 @@
+{
+  "name": "The Invisible Explained",
+  "phase": "testing",
+  "autoPublish": false,
+  "videosPerDay": 3,
+
+  "format": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "targetSeconds": [25, 45],
+    "wordsPerSecond": 2.5,
+    "language": "en"
+  },
+
+  "voice": {
+    "status": "proposed - confirm with owner",
+    "model": "elevenlabs_v4",
+    "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+    "voiceName": "Alistair",
+    "voiceType": "preset",
+    "stability": 0.45,
+    "alternatives": {
+      "Gideon": "1ad38ba4-9cc4-4f2f-9fde-b0fefdf67ae5",
+      "Desmond": "563f728c-e249-5a85-97ab-8461e8c09da6",
+      "Caspian": "ef70cc83-3015-4bad-9359-0ea968c43ec0"
+    },
+    "approxCreditsPerTake": 2.8
+  },
+
+  "visualMode": {
+    "status": "proposed - confirm with owner",
+    "selected": "hybrid",
+    "modes": {
+      "signature": "Every frame drawn in code (Higgsedit/content-factory), the look of the Oct 26-28 finals. Only the voiceover is paid.",
+      "hybrid": "Photoreal AI stills for every scene (nano_banana_2), 3 of them animated with kling3_0 std (hook, middle, payoff); brand overlays, labels and captions drawn in code.",
+      "photoreal": "Photoreal AI still + kling3_0 clip for every scene."
+    }
+  },
+
+  "models": {
+    "image": { "id": "nano_banana_2", "aspect_ratio": "9:16", "credits": 1.5 },
+    "imageEdit": { "id": "gpt_image_2_5", "note": "targeted fixes to an existing still (edit, not regenerate)", "creditsObserved": [2.75, 4.25] },
+    "video": { "id": "kling3_0", "mode": "std", "sound": "off", "duration": 5, "aspect_ratio": "9:16", "credits": 6.25 },
+    "videoPremium": { "id": "kling3_0", "mode": "pro", "sound": "off", "duration": 5, "credits": 7.5 },
+    "rejectedAsTooExpensive": { "seedance_2_5_5s_720p": 35, "grok_video_v15_5s_720p": 22.5 }
+  },
+
+  "costEstimatePerVideo": {
+    "signature": 2.8,
+    "hybrid": 32.05,
+    "photoreal": 57.05,
+    "basis": "7 scenes. hybrid = 7 stills x1.5 + 3 clips x6.25 + VO 2.8. photoreal = 7 stills + 7 clips + VO. SFX are synthesized in the sandbox (free). Quoted 2026-11-04 with get_cost; excludes retries."
+  },
+
+  "budget": {
+    "status": "testing caps - owner to set production caps",
+    "dailyCredits": 40,
+    "monthlyCredits": 600,
+    "perVideoCredits": 45,
+    "maxRetriesPerAsset": 1,
+    "maxVoiceTakesPerVideo": 2,
+    "stopIfBalanceBelow": 100
+  },
+
+  "publishing": {
+    "status": "placeholder slots - replace with analytics-derived times once data exists",
+    "timezone": "UTC",
+    "slots": ["13:00", "17:00", "21:00"],
+    "privacyUntilPublish": "private",
+    "categoryId": "28",
+    "madeForKids": false,
+    "containsSyntheticMedia": true,
+    "defaultTags": ["science", "shorts", "the invisible explained", "how it works"]
+  }
+}

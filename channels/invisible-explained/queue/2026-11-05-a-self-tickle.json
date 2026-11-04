@@ -1,0 +1,112 @@
+{
+  "id": "2026-11-05-a-self-tickle",
+  "channel": "invisible-explained",
+  "slug": "self-tickle",
+  "topic": "Why you can't tickle yourself",
+  "pillar": "mind",
+  "createdAt": "2026-11-04T21:00:00Z",
+  "status": "fact_checked",
+  "approval": { "state": "pending" },
+  "script": {
+    "voiceText": "[curious, confident documentary narrator, crisp pace] Try tickling yourself. Right now... Nothing, right? [leaning in] Every time you move, your brain makes a copy of the command. And scientists think your cerebellum uses that copy to predict exactly what the touch will feel like. Predicted touch gets turned DOWN. A stranger's fingers? No prediction... full sensation. [building] In one experiment, a robot delayed people's own touch by a fraction of a second... and it started to feel more ticklish. [pause] Your brain isn't just feeling the world. It's constantly PREDICTING it.",
+    "words": 81,
+    "estSeconds": 34
+  },
+  "factCheck": {
+    "verdict": "pass",
+    "claims": [
+      {
+        "claim": "Self-produced touch feels less ticklish than the same touch applied externally; the brain's response is reduced.",
+        "source": "Blakemore, Wolpert & Frith (1998), Central cancellation of self-produced tickle sensation, Nature Neuroscience 1(7):635-640 (fMRI: less somatosensory activity for self-produced touch)",
+        "url": "https://link.springer.com/article/10.1038/2870"
+      },
+      {
+        "claim": "The brain uses a copy of the motor command to predict the sensory result; the cerebellum is thought to make this prediction (hedged: 'scientists think').",
+        "source": "Blakemore, Wolpert & Frith (1998), as above, which proposes the cerebellum predicts sensory consequences of movement; Kilteni & Ehrsson review frames the cerebellum as the likely source of forward-model predictions",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6975290"
+      },
+      {
+        "claim": "A robot that delayed people's own touch by a fraction of a second made it feel more ticklish.",
+        "source": "Blakemore, Frith & Wolpert (1999), Spatio-temporal prediction modulates the perception of self-produced stimuli, Journal of Cognitive Neuroscience 11(5):551-559 (tickliness rose with delays up to 200-300 ms)",
+        "url": "https://wolpertlab.neuroscience.columbia.edu/sites/default/files/content/papers/BlaWolFri99.pdf"
+      }
+    ]
+  },
+  "storyboard": [
+    {
+      "n": 1,
+      "seconds": 3.5,
+      "narration": "Try tickling yourself. Right now...",
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: an adult's own hand, fingers curled and wiggling, about to tickle their own ribs through a dark t-shirt. Deep navy background, single cool rim light, subtle cyan edge glow, shallow depth of field, documentary realism, no text.",
+      "label": "THE INVISIBLE EXPLAINED",
+      "animate": true,
+      "motion": "The fingers wiggle and press gently into the side of the ribs; slow push-in. No cuts."
+    },
+    {
+      "n": 2,
+      "seconds": 2.5,
+      "narration": "Nothing, right?",
+      "visual": "Photorealistic cinematic portrait, vertical 9:16: a man in his 30s looking into camera with a flat, unimpressed expression, half his face in shadow, deep navy background, cool rim light, documentary realism, no text.",
+      "label": "SELF-TOUCH",
+      "animate": false,
+      "overlay": "slow push-in drawn in code"
+    },
+    {
+      "n": 3,
+      "seconds": 5.5,
+      "narration": "Every time you move, your brain makes a copy of the command.",
+      "visual": "Photorealistic scientific visualization, vertical 9:16: a semi-transparent human head and upper body in profile against deep navy, the brain visible inside; a glowing cyan signal leaves the top of the brain (motor cortex) and splits in two: one branch travels down the spinal cord toward the arm, the other curves back to the cerebellum at the base of the brain. Cinematic, anatomically plausible, no text.",
+      "label": "EFFERENCE COPY · ILLUSTRATIVE",
+      "animate": false,
+      "overlay": "code-drawn animated arrows tracing both branches, labels COMMAND and COPY"
+    },
+    {
+      "n": 4,
+      "seconds": 5.0,
+      "narration": "And scientists think your cerebellum uses that copy to predict exactly what the touch will feel like.",
+      "visual": "Photorealistic macro of the human cerebellum, its fine folded layers lit from within by soft cyan points of light, deep navy darkness around it, cinematic medical visualization, no text.",
+      "label": "CEREBELLUM · ILLUSTRATIVE",
+      "animate": true,
+      "motion": "Slow orbit around the cerebellum while points of cyan light ripple across its folds."
+    },
+    {
+      "n": 5,
+      "seconds": 5.5,
+      "narration": "Predicted touch gets turned DOWN. A stranger's fingers? No prediction... full sensation.",
+      "visual": "Photorealistic split composition, vertical 9:16: top half, a person's own hand resting on their forearm, cool desaturated tones; bottom half, another person's fingertips lightly touching the same forearm, the skin glowing with warm light. Deep navy background, cinematic, no text.",
+      "label": "SOMATOSENSORY RESPONSE · ILLUSTRATIVE",
+      "animate": false,
+      "overlay": "code-drawn SENSATION meter on each half: low (own hand) vs high (stranger)"
+    },
+    {
+      "n": 6,
+      "seconds": 7.0,
+      "narration": "In one experiment, a robot delayed people's own touch by a fraction of a second... and it started to feel more ticklish.",
+      "visual": "Photorealistic lab scene, vertical 9:16: a small precise robotic arm with a soft foam tip touching the open palm of a person's hand resting on a dark lab bench, dim lab, cyan rim light on the metal, cinematic documentary, no text.",
+      "label": "EXPERIMENT · BLAKEMORE ET AL. 1999",
+      "animate": true,
+      "motion": "The robot arm slowly strokes the foam tip across the palm; the fingers twitch slightly.",
+      "overlay": "code-drawn readout: DELAY 0 ms counting up to 300 ms, TICKLINESS bar rising"
+    },
+    {
+      "n": 7,
+      "seconds": 5.0,
+      "narration": "Your brain isn't just feeling the world. It's constantly PREDICTING it.",
+      "visual": "Photorealistic wide shot, vertical 9:16: silhouette of a person standing in darkness, the brain inside the head glowing with a network of fine cyan light, faint lines radiating outward into the dark, cinematic, no text.",
+      "label": "THE PREDICTING BRAIN",
+      "animate": false,
+      "overlay": "slow pull-back in code, then 1.5 s end card"
+    }
+  ],
+  "assets": { "scenes": {} },
+  "metadata": {
+    "title": "Why Can't You Tickle Yourself? Your Brain Predicts It #shorts",
+    "description": "Try tickling yourself. Nothing happens, because your brain predicts your own touch and turns it down before you feel it.\n\nSources:\n- Blakemore, Wolpert & Frith (1998), Nature Neuroscience 1:635-640, \"Central cancellation of self-produced tickle sensation\"\n- Blakemore, Frith & Wolpert (1999), Journal of Cognitive Neuroscience 11:551-559, \"Spatio-temporal prediction modulates the perception of self-produced stimuli\"\n\nVisuals are AI-generated illustrations.\n\n#science #brain #psychology #neuroscience #shorts",
+    "tags": ["why can't you tickle yourself", "tickle", "cerebellum", "brain prediction", "neuroscience", "psychology", "efference copy"]
+  },
+  "credits": { "estimated": 32.05, "spent": 0 },
+  "log": [
+    "2026-11-04T21:00Z topic chosen (not in ledger); 3 claims sourced, verdict pass",
+    "2026-11-04T21:00Z waiting for owner: visual mode, voice, credit approval for first test"
+  ]
+}

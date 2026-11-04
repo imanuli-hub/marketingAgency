@@ -1,0 +1,38 @@
+name: YouTube analytics
+
+# Daily pull of per-video performance into channels/<channel>/analytics/.
+# The repository is public: switch it to private before enabling the schedule,
+# or these numbers become public.
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "41 5 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: channel-state # episode state lives here; main holds code only
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Fetch analytics
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: npm run -s yt:analytics
+      - name: Save
+        run: |
+          git config user.name "tie-analytics"
+          git config user.email "actions@users.noreply.github.com"
+          git add channels/*/analytics
+          git diff --cached --quiet || (git commit -m "analytics: daily snapshot" && git push origin HEAD:channel-state)
