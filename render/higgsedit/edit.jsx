@@ -11,7 +11,18 @@ export default async ({ project }) => {
   const p = await project({ dir: ".", size: "1080x1920", fps: 30, background: "#0B1220" });
   const mix = await p.add("../mix.wav");
   const clips = {};
-  for (const s of T.scenes) if (s.clip) clips[s.n] = await p.add(s.clip);
+  for (const s of T.scenes) if (s.clip || s.still) clips[s.n] = await p.add(s.clip ?? s.still);
+  let stillCount = 0;
+  // Camera move for a still: alternate push-in / pull-out, with a slow drift.
+  const stillMove = (dur) => {
+    const k = stillCount++ % 2;
+    const [s0, s1] = k === 0 ? [1.0, 1.14] : [1.14, 1.02];
+    const dx = k === 0 ? -28 : 28;
+    return [
+      { property: "scale", from: s0, to: s1, at: 0, duration: dur, easing: "ease-in-out" },
+      { property: "offsetX", from: 0, to: dx, at: 0, duration: dur, easing: "ease-in-out" },
+    ];
+  };
 
   const sceneFrames = T.scenes.map((s, i) => {
     // cue(text) = seconds from scene start when that word is spoken
@@ -22,7 +33,7 @@ export default async ({ project }) => {
     const body =
       s.style === "photoreal" ? (
         <frame x={0} y={0} width={W} height={H} origin="center" layout="none"
-          animate={[{ property: "scale", from: 1.0, to: 1.06, at: 0, duration: s.dur, easing: "linear" }]}>
+          animate={s.still ? stillMove(s.dur) : [{ property: "scale", from: 1.0, to: 1.06, at: 0, duration: s.dur, easing: "linear" }]}>
           <media file={clips[s.n]} x={0} y={0} width={W} height={H} fit="cover" />
         </frame>
       ) : (

@@ -107,6 +107,17 @@ for si, sc in enumerate(m["storyboard"]):
             sh(f"ffmpeg -v error -y -i '{raw}' -an -vf \"setpts={f:.4f}*PTS,fps=30,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,tpad=stop_mode=clone:stop_duration=3\" "
                f"-t {d + 0.1:.2f} -c:v libx264 -crf 18 -pix_fmt yuv420p '{out}'")
         entry["clip"] = out
+    elif entry["style"] == "photoreal":
+        # Economy mode: a still with a camera move drawn in the edit. Upscale
+        # (lanczos) and lightly sharpen to 1.2x the frame so the move stays crisp.
+        img = m["assets"]["scenes"].get(str(sc["n"]), {}).get("image", {}).get("url")
+        if not img:
+            raise SystemExit(f"scene {sc['n']}: photoreal scene has neither a clip nor a still")
+        raw = fetch(img, P(f"raw-{sc['n']}.png"))
+        out = P(f"still-{sc['n']}.png")
+        if not os.path.exists(out):
+            sh(f"ffmpeg -v error -y -i '{raw}' -vf \"scale=1296:2304:force_original_aspect_ratio=increase:flags=lanczos,crop=1296:2304,unsharp=5:5:0.6\" '{out}'")
+        entry["still"] = out
     scenes.append(entry)
 
 # 6. SFX + ambient bed (sox; free), then the mix under the voice
