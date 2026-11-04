@@ -194,46 +194,70 @@
   "assets": {
     "voice": {
       "jobId": "20962c66-19ab-41c3-9a4a-8305eeaa780c",
+      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211241_20962c66-19ab-41c3-9a4a-8305eeaa780c.mp3",
       "model": "elevenlabs_v4",
       "credits": 2.99,
-      "attempts": 1,
-      "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211241_20962c66-19ab-41c3-9a4a-8305eeaa780c.mp3"
+      "attempts": 1
     },
     "scenes": {
       "1": {
         "image": {
           "jobId": "cb239d35-99d7-4167-804b-af5ae4dad785",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211247_cb239d35-99d7-4167-804b-af5ae4dad785.png",
           "model": "nano_banana_2",
           "credits": 1.5,
-          "attempts": 1,
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211247_cb239d35-99d7-4167-804b-af5ae4dad785.png"
+          "attempts": 1
+        },
+        "clip": {
+          "jobId": "feb015c2-ef24-4370-a323-76eeaf7cd3d1",
+          "model": "kling3_0 std",
+          "credits": 6.25,
+          "attempts": 1
         }
       },
       "4": {
         "image": {
           "jobId": "6d3886af-244c-4526-9d05-ae7a3babf8fc",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211250_6d3886af-244c-4526-9d05-ae7a3babf8fc.png",
           "model": "nano_banana_2",
           "credits": 1.5,
-          "attempts": 1,
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211250_6d3886af-244c-4526-9d05-ae7a3babf8fc.png"
+          "attempts": 1
+        },
+        "clip": {
+          "jobId": "3643fdd5-3d73-4da5-98e3-5827378fad8d",
+          "model": "kling3_0 std",
+          "credits": 6.25,
+          "attempts": 1
         }
       },
       "6": {
         "image": {
           "jobId": "9c1b23a6-8341-448e-82d5-86d839dfa66f",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211251_9c1b23a6-8341-448e-82d5-86d839dfa66f.png",
           "model": "nano_banana_2",
           "credits": 1.5,
-          "attempts": 1,
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211251_9c1b23a6-8341-448e-82d5-86d839dfa66f.png"
+          "attempts": 1
+        },
+        "clip": {
+          "jobId": "54664465-ad4f-4837-951d-7e9c67ff9280",
+          "model": "kling3_0 std",
+          "credits": 6.25,
+          "attempts": 1
         }
       },
       "8": {
         "image": {
           "jobId": "9d138ded-3d35-4a6b-a6b1-d7f39d400101",
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211249_9d138ded-3d35-4a6b-a6b1-d7f39d400101.png",
           "model": "nano_banana_2",
           "credits": 1.5,
-          "attempts": 1,
-          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_211249_9d138ded-3d35-4a6b-a6b1-d7f39d400101.png"
+          "attempts": 1
+        },
+        "clip": {
+          "jobId": "bbcb86b5-0de3-453a-9556-db198a6d3086",
+          "model": "kling3_0 std",
+          "credits": 6.25,
+          "attempts": 1
         }
       }
     }
@@ -253,7 +277,7 @@
   },
   "credits": {
     "estimated": 33.99,
-    "spent": 8.99
+    "spent": 33.99
   },
   "log": [
     "2026-11-04T21:00Z topic chosen (not in ledger); 3 claims sourced, verdict pass",
@@ -264,6 +288,10 @@
     "2026-11-04T21:13Z spent 1.5 cr still-4 (nano_banana_2) job 6d3886af-244c-4526-9d05-ae7a3babf8fc",
     "2026-11-04T21:13Z spent 1.5 cr still-6 (nano_banana_2) job 9c1b23a6-8341-448e-82d5-86d839dfa66f",
     "2026-11-04T21:13Z spent 1.5 cr still-8 (nano_banana_2) job 9d138ded-3d35-4a6b-a6b1-d7f39d400101",
-    "2026-11-04T21:20Z voice take 38.2 s, transcript matches script; 4 stills accepted (no regeneration)"
+    "2026-11-04T21:20Z voice take 38.2 s, transcript matches script; 4 stills accepted (no regeneration)",
+    "2026-11-04T21:20Z spent 6.25 cr clip-1 (kling3_0_std) job feb015c2-ef24-4370-a323-76eeaf7cd3d1",
+    "2026-11-04T21:20Z spent 6.25 cr clip-4 (kling3_0_std) job 3643fdd5-3d73-4da5-98e3-5827378fad8d",
+    "2026-11-04T21:20Z spent 6.25 cr clip-6 (kling3_0_std) job 54664465-ad4f-4837-951d-7e9c67ff9280",
+    "2026-11-04T21:20Z spent 6.25 cr clip-8 (kling3_0_std) job bbcb86b5-0de3-453a-9556-db198a6d3086"
   ]
 }
