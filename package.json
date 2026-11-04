@@ -9,7 +9,8 @@
     "yt:publish": "tsx --env-file-if-exists=.env src/youtube/publish.ts",
     "yt:analytics": "tsx --env-file-if-exists=.env src/youtube/analytics.ts",
     "yt:auth": "tsx --env-file-if-exists=.env src/youtube/authorize.ts",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "hooks": "git config core.hooksPath scripts/git-hooks"
   },
   "repository": {
     "type": "git",

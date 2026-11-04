@@ -11,7 +11,7 @@ Pipeline foundation built; first end-to-end test Short produced and QC-passed; *
 - Episode manifests (resumable state machine), credit ledger + caps, queue CLI, daily report.
 - YouTube publisher (private + scheduled publishAt, duplicate guard, publish verification), analytics pull, OAuth helper, 2 GitHub workflows; dry-run tested only.
 - Resumable Higgsedit render project (`render/higgsedit/`), code-drawn mascot.
-- Test episode `2026-11-05-a-self-tickle`: 40 s, 4 photoreal + 6 cartoon scenes, two narrators, QC pass. Final: https://d2ol7oe51mr4n9.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/351fd9dc-9c58-4cce-b587-5174466a8252.mp4
+- Test episode `2026-11-05-a-self-tickle`: 40 s, 4 photoreal + 6 cartoon scenes, two narrators, QC pass. Final: Higgsfield media `351fd9dc-9c58-4cce-b587-5174466a8252` (link in its manifest).
 
 ## Owner decisions
 - Visual mix per video: 4 photoreal (nano_banana_2 still + kling3_0 std 5 s) + 6 code-drawn cartoon scenes (ice-cream mascot style).

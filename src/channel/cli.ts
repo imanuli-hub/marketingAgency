@@ -124,7 +124,7 @@ async function main() {
         ...today.map(({ m }) => `| ${m.id} | ${m.status} | ${m.approval.state} | ${m.credits.spent} | ${m.schedule?.publishAt ?? "-"} | ${m.youtube?.videoId ?? "-"} |`),
         "",
         "## Needs the owner",
-        ...queue.filter((q) => q.m.status === "qc_passed" && q.m.approval.state === "pending").map((q) => `- Review and approve or reject: ${q.m.id} ${q.m.render?.url ?? ""}`),
+        ...queue.filter((q) => q.m.status === "qc_passed" && q.m.approval.state === "pending").map((q) => `- Review and approve or reject: ${q.m.id} (Higgsfield media ${q.m.render?.mediaId ?? "-"})`),
         ...queue.filter((q) => q.m.status === "failed").map((q) => `- Failed: ${q.m.id}: ${q.m.log.at(-1) ?? ""}`),
         "",
       ].join("\n");
