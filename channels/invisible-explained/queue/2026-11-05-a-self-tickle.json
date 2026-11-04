@@ -5,7 +5,7 @@
   "topic": "Why you can't tickle yourself",
   "pillar": "mind",
   "createdAt": "2026-11-04T21:00:00Z",
-  "status": "fact_checked",
+  "status": "assets_ready",
   "approval": {
     "state": "pending"
   },
@@ -212,7 +212,8 @@
           "jobId": "feb015c2-ef24-4370-a323-76eeaf7cd3d1",
           "model": "kling3_0 std",
           "credits": 6.25,
-          "attempts": 1
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_212047_feb015c2-ef24-4370-a323-76eeaf7cd3d1.mp4"
         }
       },
       "4": {
@@ -227,7 +228,8 @@
           "jobId": "3643fdd5-3d73-4da5-98e3-5827378fad8d",
           "model": "kling3_0 std",
           "credits": 6.25,
-          "attempts": 1
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_212047_3643fdd5-3d73-4da5-98e3-5827378fad8d.mp4"
         }
       },
       "6": {
@@ -242,7 +244,8 @@
           "jobId": "54664465-ad4f-4837-951d-7e9c67ff9280",
           "model": "kling3_0 std",
           "credits": 6.25,
-          "attempts": 1
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_212049_54664465-ad4f-4837-951d-7e9c67ff9280.mp4"
         }
       },
       "8": {
@@ -257,7 +260,8 @@
           "jobId": "bbcb86b5-0de3-453a-9556-db198a6d3086",
           "model": "kling3_0 std",
           "credits": 6.25,
-          "attempts": 1
+          "attempts": 1,
+          "url": "https://d8j0ntlcm91z4.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/hf_20261104_212047_bbcb86b5-0de3-453a-9556-db198a6d3086.mp4"
         }
       }
     }
@@ -292,6 +296,23 @@
     "2026-11-04T21:20Z spent 6.25 cr clip-1 (kling3_0_std) job feb015c2-ef24-4370-a323-76eeaf7cd3d1",
     "2026-11-04T21:20Z spent 6.25 cr clip-4 (kling3_0_std) job 3643fdd5-3d73-4da5-98e3-5827378fad8d",
     "2026-11-04T21:20Z spent 6.25 cr clip-6 (kling3_0_std) job 54664465-ad4f-4837-951d-7e9c67ff9280",
-    "2026-11-04T21:20Z spent 6.25 cr clip-8 (kling3_0_std) job bbcb86b5-0de3-453a-9556-db198a6d3086"
+    "2026-11-04T21:20Z spent 6.25 cr clip-8 (kling3_0_std) job bbcb86b5-0de3-453a-9556-db198a6d3086",
+    "2026-11-04T21:25Z 4 kling clips done; assets_ready; total spend 33.99 cr"
+  ],
+  "captionKeywords": [
+    "tickling",
+    "nothing",
+    "copy",
+    "command",
+    "cerebellum",
+    "predict",
+    "stranger's",
+    "sensation",
+    "tickle",
+    "can't",
+    "robot",
+    "delayed",
+    "ticklish",
+    "predicting"
   ]
 }

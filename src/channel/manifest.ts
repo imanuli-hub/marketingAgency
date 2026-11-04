@@ -75,6 +75,7 @@ export const ManifestSchema = z.object({
     .optional(),
   factCheck: z.object({ verdict: z.enum(["pending", "pass", "fail"]), claims: z.array(Claim) }).optional(),
   storyboard: z.array(Scene).default([]),
+  captionKeywords: z.array(z.string()).default([]).describe("Words highlighted cyan in captions"),
   assets: z
     .object({
       voice: Asset.optional(),
