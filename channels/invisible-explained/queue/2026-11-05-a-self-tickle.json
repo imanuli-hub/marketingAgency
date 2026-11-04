@@ -5,7 +5,7 @@
   "topic": "Why you can't tickle yourself",
   "pillar": "mind",
   "createdAt": "2026-11-04T21:00:00Z",
-  "status": "assets_ready",
+  "status": "qc_passed",
   "approval": {
     "state": "pending"
   },
@@ -297,7 +297,8 @@
     "2026-11-04T21:20Z spent 6.25 cr clip-4 (kling3_0_std) job 3643fdd5-3d73-4da5-98e3-5827378fad8d",
     "2026-11-04T21:20Z spent 6.25 cr clip-6 (kling3_0_std) job 54664465-ad4f-4837-951d-7e9c67ff9280",
     "2026-11-04T21:20Z spent 6.25 cr clip-8 (kling3_0_std) job bbcb86b5-0de3-453a-9556-db198a6d3086",
-    "2026-11-04T21:25Z 4 kling clips done; assets_ready; total spend 33.99 cr"
+    "2026-11-04T21:25Z 4 kling clips done; assets_ready; total spend 33.99 cr",
+    "2026-11-04T22:07Z rendered 40.0 s in 35 s (XL sandbox); QC pass; awaiting owner approval"
   ],
   "captionKeywords": [
     "tickling",
@@ -314,5 +315,45 @@
     "delayed",
     "ticklish",
     "predicting"
-  ]
+  ],
+  "render": {
+    "mediaId": "351fd9dc-9c58-4cce-b587-5174466a8252",
+    "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_39JGmw6wEGtbCV9BkSpeMCHa84G/351fd9dc-9c58-4cce-b587-5174466a8252.mp4",
+    "seconds": 40.02
+  },
+  "qc": {
+    "verdict": "pass",
+    "checks": [
+      {
+        "name": "format",
+        "pass": true,
+        "note": "1080x1920, 30 fps H.264, AAC 48 kHz stereo"
+      },
+      {
+        "name": "duration",
+        "pass": true,
+        "note": "40.0 s (target 25-45)"
+      },
+      {
+        "name": "loudness",
+        "pass": true,
+        "note": "-14.2 LUFS integrated, true peak -1.3 dBFS (first master peaked +0.8; re-mastered with a -1.5 dB limiter)"
+      },
+      {
+        "name": "transcript",
+        "pass": true,
+        "note": "Whisper on the final matches the script; \"Predicted touch\" heard as \"Predict a touch\" (homophone), captions use script text"
+      },
+      {
+        "name": "visual",
+        "pass": true,
+        "note": "10-frame contact sheet + 10 preview frames: captions readable, labels present, nothing cut off, no AI text artefacts; cerebellum clip is stylized (labelled ILLUSTRATIVE)"
+      },
+      {
+        "name": "two narrators",
+        "pass": true,
+        "note": "Alistair on photoreal scenes 1,4,6,8; Dylan on cartoon scenes 2,3,5,7,9,10"
+      }
+    ]
+  }
 }
