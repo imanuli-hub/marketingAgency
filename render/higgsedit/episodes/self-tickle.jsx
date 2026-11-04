@@ -103,12 +103,12 @@ const SCENES = {
   10: ({ dur, cue }) => {
     const tPred = cue("predicting", dur * 0.7);
     return full([
-      <Brain x={390} y={240} glow={true} animate={[{ property: "scale", keyframes: [{ at: 0, value: 0.95 }, { at: Math.max(0.05, tPred), value: 1.05 }, { at: Math.min(dur - 0.05, tPred + 0.3), value: 1.25, easing: "ease-out" }, { at: dur - 0.02, value: 1.2 }] }]} />,
-      <frame x={290} y={110} width={500} height={500} origin="center" layout="none"
+      <Brain x={390} y={310} glow={true} animate={[{ property: "scale", keyframes: [{ at: 0, value: 0.95 }, { at: Math.max(0.05, tPred), value: 1.05 }, { at: Math.min(dur - 0.05, tPred + 0.3), value: 1.25, easing: "ease-out" }, { at: dur - 0.02, value: 1.2 }] }]} />,
+      <frame x={290} y={170} width={500} height={500} origin="center" layout="none"
         animate={[{ property: "scale", keyframes: [{ at: 0, value: 0.9 }, { at: 0.8, value: 1.08 }, { at: 1.6, value: 0.9 }], repeat: Math.max(2, Math.floor(dur / 1.6)) }]}>
-        <path d={circle(250, 250, 230)} x={0} y={0} width={500} height={500} stroke={{ width: 8, color: CYAN }} dash={[14, 22]} />
+        <path d={circle(250, 250, 195)} x={0} y={0} width={500} height={500} stroke={{ width: 8, color: CYAN }} dash={[14, 22]} />
       </frame>,
-      <Mascot x={240} y={480} scale={0.85} arms={["downL", "downR"]} expr={{ eyes: "up", brows: "up", mouth: "smile" }} animate={bob(dur, 8)} />,
+      <Mascot x={240} y={510} scale={0.85} arms={["downL", "downR"]} expr={{ eyes: "up", brows: "up", mouth: "smile" }} animate={bob(dur, 8)} />,
     ]);
   },
 };
