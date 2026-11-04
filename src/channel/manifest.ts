@@ -154,7 +154,10 @@ export interface ChannelConfig {
   autoPublish: boolean;
   videosPerDay: number;
   budget: {
-    dailyCredits: number;
+    /** null = no daily cap (a budget window governs instead). */
+    dailyCredits: number | null;
+    /** Owner-approved total budgets: spend between `from` and `to` may not exceed `cap`. */
+    windows?: { name: string; from: string; to?: string; cap: number; approvedBy?: string }[];
     monthlyCredits: number;
     perVideoCredits: number;
     maxRetriesPerAsset: number;

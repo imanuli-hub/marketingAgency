@@ -55,7 +55,7 @@ async function main() {
       const ledger = await readLedger();
       const t = spendTotals(ledger);
       console.log(`${cfg.name} · phase ${cfg.phase} · autoPublish ${cfg.autoPublish}`);
-      console.log(`credits today ${t.day.toFixed(2)}/${cfg.budget.dailyCredits} · month ${t.month.toFixed(2)}/${cfg.budget.monthlyCredits}`);
+      console.log(`credits today ${t.day.toFixed(2)}/${cfg.budget.dailyCredits ?? "no daily cap"} · month ${t.month.toFixed(2)}/${cfg.budget.monthlyCredits}` + (cfg.budget.windows?.length ? ` · windows: ${cfg.budget.windows.map((w) => `${w.name} cap ${w.cap} from ${w.from}`).join("; ")}` : ""));
       for (const { m } of await loadQueue(CHANNEL)) console.log(line(m));
       return;
     }

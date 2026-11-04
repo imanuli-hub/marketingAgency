@@ -40,7 +40,14 @@ export function budgetVerdict(
 ): { ok: boolean; reasons: string[] } {
   const t = spendTotals(ledger, now);
   const reasons: string[] = [];
-  if (t.day + credits > cfg.budget.dailyCredits) reasons.push(`daily cap ${cfg.budget.dailyCredits} (spent ${t.day.toFixed(2)})`);
+  for (const w of cfg.budget.windows ?? []) {
+    const from = Date.parse(w.from);
+    const to = w.to ? Date.parse(w.to) : Infinity;
+    if (now.getTime() < from || now.getTime() >= to) continue;
+    const used = ledger.filter((s) => Date.parse(s.at) >= from && Date.parse(s.at) < to).reduce((a, s) => a + s.credits, 0);
+    if (used + credits > w.cap + 1e-9) reasons.push(`${w.name} budget ${w.cap} (spent ${used.toFixed(2)})`);
+  }
+  if (cfg.budget.dailyCredits !== null && t.day + credits > cfg.budget.dailyCredits) reasons.push(`daily cap ${cfg.budget.dailyCredits} (spent ${t.day.toFixed(2)})`);
   if (t.month + credits > cfg.budget.monthlyCredits) reasons.push(`monthly cap ${cfg.budget.monthlyCredits} (spent ${t.month.toFixed(2)})`);
   if (episodeSpent + credits > cfg.budget.perVideoCredits) reasons.push(`per-video cap ${cfg.budget.perVideoCredits} (spent ${episodeSpent.toFixed(2)})`);
   return { ok: reasons.length === 0, reasons };

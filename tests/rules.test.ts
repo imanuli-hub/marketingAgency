@@ -30,6 +30,18 @@ test("budget blocks when a cap would be exceeded, allows exactly at the cap", ()
   assert.match(budgetVerdict(cfg, [spend("2026-11-02T01:00:00Z", 595)], 6, 0, now).reasons.join(), /monthly cap/);
 });
 
+test("a budget window caps total spend from its start, ignoring earlier spend", () => {
+  const pilot = { ...cfg, budget: { ...cfg.budget, dailyCredits: null, windows: [{ name: "pilot", from: "2026-11-05T09:00:00Z", cap: 30 }] } };
+  const ledger = [spend("2026-11-05T08:00:00Z", 33.99), spend("2026-11-05T09:30:00Z", 26.97)];
+  assert.equal(budgetVerdict(pilot, ledger, 3.03, 0, now).ok, true); // exactly at 30
+  const v = budgetVerdict(pilot, ledger, 3.04, 0, now);
+  assert.equal(v.ok, false);
+  assert.match(v.reasons[0], /pilot budget 30 \(spent 26\.97\)/);
+  assert.equal(budgetVerdict(pilot, [], 31, 0, now).ok, false);
+  // outside the window (before it starts) the window does not apply
+  assert.equal(budgetVerdict(pilot, [], 31, 0, new Date("2026-11-05T08:00:00Z")).ok, true);
+});
+
 test("nextSlots skips taken slots and anything within 2 h", () => {
   const slots = nextSlots(cfg, new Set(["2026-11-05T13:00:00Z"]), 3, new Date("2026-11-05T12:00:00Z"));
   assert.deepEqual(slots, ["2026-11-05T17:00:00Z", "2026-11-05T21:00:00Z", "2026-11-06T13:00:00Z"]);

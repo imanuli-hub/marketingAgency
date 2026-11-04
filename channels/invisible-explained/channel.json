@@ -81,13 +81,21 @@
     "basis": "VO dialogue 2.99 + 4 stills x1.5 + 4 clips x6.25 (measured on the first test episode, 2026-11-04)"
   },
   "budget": {
-    "status": "testing caps - owner to set production caps",
-    "dailyCredits": 40,
+    "status": "owner-approved pilot: 30 credits TOTAL for the next 3 videos (economy option); not recurring",
+    "dailyCredits": null,
     "monthlyCredits": 600,
-    "perVideoCredits": 45,
+    "perVideoCredits": 10,
     "maxRetriesPerAsset": 1,
     "maxVoiceTakesPerVideo": 2,
-    "stopIfBalanceBelow": 100
+    "stopIfBalanceBelow": 100,
+    "windows": [
+      {
+        "name": "pilot-3-economy",
+        "from": "2026-11-04T22:44:00Z",
+        "cap": 30,
+        "approvedBy": "owner message, 2026-11-04"
+      }
+    ]
   },
   "publishing": {
     "status": "placeholder slots - replace with analytics-derived times once data exists",
