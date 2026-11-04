@@ -3,6 +3,8 @@ export const NAVY = "#0B1220";
 export const CYAN = "#3FD0D4";
 export const W = 1080;
 export const H = 1920;
+// Gradient angle that runs transparent (top) -> dark (bottom); verified on a preview frame.
+const SCRIM_ANGLE = 180;
 
 /** Small mono scene label, top centre, under a short cyan rule. */
 export function Label({ text }) {
@@ -42,7 +44,7 @@ export function Backdrop() {
 
 /** Bottom scrim so captions stay readable over bright footage. */
 export function Scrim() {
-  return <rect x={0} y={1180} width={W} height={740} fill={{ kind: "linear", angle: 90, stops: [{ offset: 0, color: "#000000", opacity: 0 }, { offset: 1, color: "#000000", opacity: 0.75 }] }} />;
+  return <rect x={0} y={1080} width={W} height={840} fill={{ kind: "linear", angle: SCRIM_ANGLE, stops: [{ offset: 0, color: "#000000", opacity: 0 }, { offset: 1, color: "#000000", opacity: 0.75 }] }} />;
 }
 
 export function EndCard() {

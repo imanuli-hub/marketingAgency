@@ -15,8 +15,12 @@ cp "$SRC/brand.jsx" "$SRC/mascot.jsx" "$SRC/edit.jsx" "$WORK/edit/"
 cp "$SRC/episodes/$SLUG.jsx" "$WORK/edit/episode.jsx"
 python3 "$SRC/prepare.py" "$REPO/channels/invisible-explained/queue/$EP.json" "$WORK"
 cd "$WORK/edit"
+# The first build creates project.json but fails until the fonts are vendored.
+if [ ! -f .fonts-ok ]; then
+  higgsedit build edit.jsx >/dev/null 2>&1 || true
+  higgsedit fonts add . "Montserrat:800" "JetBrains Mono:400" >/dev/null && touch .fonts-ok
+fi
 higgsedit build edit.jsx
-[ -f .fonts-ok ] || { higgsedit fonts add . "Montserrat:800" "JetBrains Mono:400" >/dev/null && touch .fonts-ok && higgsedit build edit.jsx; }
 if [ "$STEP" = "frames" ]; then
   mkdir -p ../prev
   for t in ${4//,/ }; do

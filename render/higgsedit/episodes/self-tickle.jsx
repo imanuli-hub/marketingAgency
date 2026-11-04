@@ -28,7 +28,7 @@ const SCENES = {
     const tCopy = cue("copy", 1.6);
     return full([
       <Brain x={390} y={250} animate={[{ property: "scale", from: 0.9, to: 1.05, at: 0, duration: dur, easing: "ease-out" }]} />,
-      <Mascot x={240} y={600} scale={0.9} arms={["downL", "upR"]} expr={{ eyes: "up", brows: "up", mouth: "smile" }} />,
+      <Mascot x={240} y={440} scale={0.85} arms={["downL", "upR"]} expr={{ eyes: "up", brows: "up", mouth: "smile" }} />,
       <frame x={0} y={0} width={W} height={H} layout="none" animate={show(tCmd, dur)}>
         <path d="M640,420 C760,470 790,580 740,700" x={0} y={0} width={W} height={H} stroke={{ width: 16, color: YELLOW, cap: "round" }} />
         <path d="M712,676 L740,712 L770,670" x={0} y={0} width={W} height={H} stroke={{ width: 16, color: YELLOW, cap: "round" }} />
@@ -95,7 +95,7 @@ const SCENES = {
       <rect x={248} y={538} width={584} height={40} radius={20} fill={YELLOW}
         mask={{ x: 0, y: 0, width: 60, height: 40 }}
         animate={[{ property: "maskWidth", from: 60, to: 584, at: 0, duration: dur - 0.1, easing: "ease-out" }]} />,
-      <Mascot x={240} y={650} scale={0.8} arms={["wiggleL", "shrugR"]} expr={{ eyes: "happy", mouth: "laugh" }} animate={wiggle} />,
+      <Mascot x={240} y={520} scale={0.75} arms={["wiggleL", "shrugR"]} expr={{ eyes: "happy", mouth: "laugh" }} animate={wiggle} />,
     ]);
   },
 
@@ -108,7 +108,7 @@ const SCENES = {
         animate={[{ property: "scale", keyframes: [{ at: 0, value: 0.9 }, { at: 0.8, value: 1.08 }, { at: 1.6, value: 0.9 }], repeat: Math.max(2, Math.floor(dur / 1.6)) }]}>
         <path d={circle(250, 250, 230)} x={0} y={0} width={500} height={500} stroke={{ width: 8, color: CYAN }} dash={[14, 22]} />
       </frame>,
-      <Mascot x={240} y={600} scale={0.9} arms={["downL", "downR"]} expr={{ eyes: "up", brows: "up", mouth: "smile" }} animate={bob(dur, 8)} />,
+      <Mascot x={240} y={480} scale={0.85} arms={["downL", "downR"]} expr={{ eyes: "up", brows: "up", mouth: "smile" }} animate={bob(dur, 8)} />,
     ]);
   },
 };
