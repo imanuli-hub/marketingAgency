@@ -46,6 +46,47 @@ export function budgetVerdict(
   return { ok: reasons.length === 0, reasons };
 }
 
+export interface LintRules {
+  maxWords: number;
+  narrators: Record<string, { name: string }>; // style -> narrator
+}
+
+const PAID_DONE = new Set(["assets_ready", "rendered", "qc_passed", "uploaded", "published", "rejected", "failed"]);
+
+/**
+ * Problems that must be fixed before an episode may spend credits. Only
+ * episodes that have not generated assets yet are checked strictly.
+ */
+export function lintEpisode(m: Manifest, rules: LintRules): string[] {
+  if (PAID_DONE.has(m.status)) return [];
+  const errs: string[] = [];
+  const words = m.storyboard.reduce((a, s) => a + s.narration.split(/\s+/).filter(Boolean).length, 0);
+  if (!m.script) errs.push("no script");
+  if (words > rules.maxWords) errs.push(`${words} words > max ${rules.maxWords} (too long for 45 s)`);
+  if (m.factCheck?.verdict !== "pass") errs.push(`fact-check ${m.factCheck?.verdict ?? "missing"}`);
+  if (!m.factCheck?.claims.length) errs.push("no sourced claims");
+  for (const c of m.factCheck?.claims ?? []) if (!c.source.trim()) errs.push(`claim without source: ${c.claim.slice(0, 40)}`);
+  const t = m.metadata?.title ?? "";
+  if (!t) errs.push("no title");
+  else if (t.length > 70 || !/#shorts$/i.test(t)) errs.push("title must be ≤ 70 chars and end with #shorts");
+  if (m.script?.dialogue) {
+    const spoken = m.script.dialogue.map((d) => d.text.replace(/\[[^\]]*\]\s*/g, "")).join(" ").replace(/\s+/g, " ").trim();
+    const board = m.storyboard.map((s) => s.narration).join(" ").replace(/\s+/g, " ").trim();
+    if (spoken !== board) errs.push("dialogue text does not match storyboard narration");
+    for (const s of m.storyboard) {
+      const want = s.style ? rules.narrators[s.style]?.name : undefined;
+      if (want && s.voice !== want) errs.push(`scene ${s.n}: ${s.style} scene must be voiced by ${want}`);
+    }
+    const seen = new Set<string>();
+    for (const d of m.script.dialogue) {
+      const tagged = d.text.trimStart().startsWith("[");
+      if (!seen.has(d.voice) && !tagged) errs.push(`${d.voice}'s first turn needs its delivery direction`);
+      seen.add(d.voice);
+    }
+  }
+  return errs;
+}
+
 export interface CostRow {
   episode: string;
   status: string;

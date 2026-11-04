@@ -8,7 +8,7 @@ import {
   saveManifest,
   type Manifest,
 } from "./manifest.js";
-import { budgetVerdict, costRows, nextSlots, reportEpisodes, spendTotals, type Spend } from "./rules.js";
+import { budgetVerdict, costRows, lintEpisode, nextSlots, reportEpisodes, spendTotals, type Spend } from "./rules.js";
 
 const USAGE = `Usage: npm run channel -- <command> [args]   (channel: CHANNEL env, default invisible-explained)
 
@@ -20,7 +20,8 @@ const USAGE = `Usage: npm run channel -- <command> [args]   (channel: CHANNEL en
   reject <id> [notes]            owner rejection: never uploaded
   assign-slots [YYYY-MM-DD]      give approved episodes without a publishAt the next free slots
   report [YYYY-MM-DD]            write reports/<date>.md (compact daily report)
-  costs                          production cost log per video (credits, paid calls, by model, status)`;
+  costs                          production cost log per video (credits, paid calls, by model, status)
+  lint [id]                      pre-spend checks (length, dialogue vs storyboard, narrators, sources, title); exit 2 on failure`;
 
 const CHANNEL = process.env.CHANNEL ?? "invisible-explained";
 const ledgerFile = () => path.join(channelDir(CHANNEL), "ledger", "credits.jsonl");
@@ -131,6 +132,18 @@ async function main() {
       await fs.mkdir(path.dirname(out), { recursive: true });
       await fs.writeFile(out, body);
       console.log(body);
+      return;
+    }
+    case "lint": {
+      const c = cfg as typeof cfg & { format: { maxWords: number }; voice: { narrators: Record<string, { name: string }> } };
+      let bad = 0;
+      for (const { m } of await loadQueue(CHANNEL)) {
+        if (rest[0] && m.id !== rest[0] && m.slug !== rest[0]) continue;
+        const errs = lintEpisode(m, { maxWords: c.format.maxWords, narrators: c.voice.narrators });
+        console.log(errs.length ? `FAIL ${m.id}\n  - ${errs.join("\n  - ")}` : `ok   ${m.id}`);
+        bad += errs.length ? 1 : 0;
+      }
+      process.exitCode = bad ? 2 : 0;
       return;
     }
     case "costs": {

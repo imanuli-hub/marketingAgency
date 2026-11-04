@@ -1,0 +1,222 @@
+{
+  "id": "2026-11-06-b-noise-cancelling",
+  "channel": "invisible-explained",
+  "slug": "noise-cancelling",
+  "topic": "How noise-cancelling headphones erase sound",
+  "pillar": "tech",
+  "createdAt": "2026-11-04T23:00:00Z",
+  "status": "fact_checked",
+  "approval": {
+    "state": "pending"
+  },
+  "script": {
+    "voiceText": "[deep, cinematic documentary narrator, calm authority, crisp pace] Put these on... and the roar of the engines fades away. [playful, curious, quick] How? They fight sound... with MORE sound. Sound is a pressure wave: squeeze, stretch, squeeze, stretch. Tiny microphones on the ear cups listen to the noise outside. A chip builds the exact opposite wave. The speaker plays it. Where a peak meets a trough... they cancel. Wave plus anti-wave equals... almost silence! It works best on low, steady hums. The cushions block higher sounds. And engineers built an electronic sound absorber back in nineteen fifty-three! Your quiet is made of noise... turned upside down.",
+    "dialogue": [
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "[deep, cinematic documentary narrator, calm authority, crisp pace] Put these on... and the roar of the engines fades away."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "[playful, curious, quick] How? They fight sound... with MORE sound. Sound is a pressure wave: squeeze, stretch, squeeze, stretch."
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "Tiny microphones on the ear cups listen to the noise outside."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "A chip builds the exact opposite wave."
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "The speaker plays it. Where a peak meets a trough... they cancel."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "Wave plus anti-wave equals... almost silence!"
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "It works best on low, steady hums. The cushions block higher sounds."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "And engineers built an electronic sound absorber back in nineteen fifty-three! Your quiet is made of noise... turned upside down."
+      }
+    ],
+    "words": 95,
+    "estSeconds": 44.7
+  },
+  "factCheck": {
+    "verdict": "pass",
+    "claims": [
+      {
+        "claim": "Active noise control: a microphone senses the noise and a loudspeaker produces a cancelling signal; the first electronic sound absorber was built in 1953.",
+        "source": "Olson & May (1953), Electronic sound absorber, J. Acoust. Soc. Am. 25:1130-1136; Leventhall, Active attenuators: a historical review (Institute of Acoustics)",
+        "url": "https://www.ioa.org.uk/system/files/publications/HG%20LEVENTHALL%20ACTIVE%20ATTENUATORS%20A%20HISTORICAL%20REVIEW%20AND%20SOME%20RECENT%20DEVELOPMENTS.pdf"
+      },
+      {
+        "claim": "Cancellation works by destructive interference of an inverted (anti-phase) wave and is most effective at low frequencies; passive isolation handles higher frequencies.",
+        "source": "Shi, Lam & Gan (2023), Active Noise Control in the New Century: The Role and Prospect of Signal Processing (review)",
+        "url": "https://arxiv.org/pdf/2306.01425v2.pdf"
+      }
+    ]
+  },
+  "storyboard": [
+    {
+      "n": 1,
+      "seconds": 3.5,
+      "narration": "Put these on... and the roar of the engines fades away.",
+      "label": "THE INVISIBLE EXPLAINED",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic medium close-up, vertical 9:16: a traveller in a dim airplane cabin wearing over-ear headphones, eyes closed, calm; window with night sky behind. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "The traveller exhales and relaxes; cabin lights flicker faintly; slow push-in. No cuts."
+    },
+    {
+      "n": 2,
+      "seconds": 3.5,
+      "narration": "How? They fight sound... with MORE sound.",
+      "label": "ACTIVE NOISE CONTROL",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Mascot wearing big headphones, eyebrows raised, a speech burst."
+    },
+    {
+      "n": 3,
+      "seconds": 3.5,
+      "narration": "Sound is a pressure wave: squeeze, stretch, squeeze, stretch.",
+      "label": "SOUND WAVE · ILLUSTRATIVE",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "A cartoon sine wave scrolls across; dots bunch together (squeeze) and spread apart (stretch).",
+      "overlay": "wave scrolls in time with the words"
+    },
+    {
+      "n": 4,
+      "seconds": 3.5,
+      "narration": "Tiny microphones on the ear cups listen to the noise outside.",
+      "label": "MICROPHONE",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: the outer shell of a matte black headphone ear cup with a tiny microphone port, a faint cyan sound ripple approaching it. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "Faint cyan ripples flow into the microphone port; slow orbit. No cuts."
+    },
+    {
+      "n": 5,
+      "seconds": 3.5,
+      "narration": "A chip builds the exact opposite wave.",
+      "label": "ANTI-NOISE · ILLUSTRATIVE",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Two cartoon waves, one yellow and one cyan, perfectly mirror-image.",
+      "overlay": "second wave draws as a mirror of the first"
+    },
+    {
+      "n": 6,
+      "seconds": 3.5,
+      "narration": "The speaker plays it. Where a peak meets a trough... they cancel.",
+      "label": "DESTRUCTIVE INTERFERENCE · ILLUSTRATIVE",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic macro, vertical 9:16: inside a headphone ear cup, the speaker driver membrane with two glowing cyan and amber waves meeting and flattening. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "The speaker membrane vibrates subtly as two glowing waves meet and flatten into a calm line. Slow."
+    },
+    {
+      "n": 7,
+      "seconds": 3.5,
+      "narration": "Wave plus anti-wave equals... almost silence!",
+      "label": "ALMOST",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Cartoon equation: wave + mirrored wave = flat line; mascot gives a thumbs-up.",
+      "overlay": "flat line appears"
+    },
+    {
+      "n": 8,
+      "seconds": 3.5,
+      "narration": "It works best on low, steady hums. The cushions block higher sounds.",
+      "label": "LOW FREQUENCIES",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: a jet engine on an airplane wing at dusk seen through a cabin window, heat shimmer. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "Slow drift along the engine nacelle; heat shimmer ripples. No cuts."
+    },
+    {
+      "n": 9,
+      "seconds": 3.5,
+      "narration": "And engineers built an electronic sound absorber back in nineteen fifty-three!",
+      "label": "OLSON & MAY · 1953",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Cartoon retro 1950s microphone and loudspeaker on a lab bench with a sign 1953."
+    },
+    {
+      "n": 10,
+      "seconds": 3.5,
+      "narration": "Your quiet is made of noise... turned upside down.",
+      "label": "QUIET FROM NOISE",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Mascot relaxing with headphones, a little wave flipping upside down above it. Then end card."
+    }
+  ],
+  "captionKeywords": [
+    "more",
+    "sound",
+    "squeeze",
+    "stretch",
+    "microphones",
+    "opposite",
+    "cancel",
+    "silence",
+    "engines",
+    "cushions",
+    "1953",
+    "noise",
+    "upside"
+  ],
+  "assets": {
+    "scenes": {}
+  },
+  "metadata": {
+    "title": "How Noise-Cancelling Headphones Erase Sound #shorts",
+    "description": "Noise-cancelling headphones fight sound with sound: they play the exact opposite wave so the two cancel out.\n\nSources:\n- Olson & May (1953), J. Acoust. Soc. Am. 25:1130, \"Electronic sound absorber\"\n- Shi, Lam & Gan (2023), \"Active Noise Control in the New Century\" (review)\n\nVisuals are AI-generated illustrations.\n\n#science #technology #physics #shorts",
+    "tags": [
+      "noise cancelling headphones",
+      "how noise cancelling works",
+      "active noise cancellation",
+      "anc",
+      "sound waves",
+      "destructive interference",
+      "physics"
+    ]
+  },
+  "credits": {
+    "estimated": 33.99,
+    "spent": 0
+  },
+  "log": [
+    "2026-11-04T23:00Z scripted + fact-checked (no credits); waiting for an approved production budget",
+    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s"
+  ]
+}

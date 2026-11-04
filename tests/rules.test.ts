@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import type { ChannelConfig, Manifest } from "../src/channel/manifest.js";
-import { budgetVerdict, costRows, nextSlots, reportEpisodes, spendTotals, uploadBlocker, type Spend } from "../src/channel/rules.js";
+import { budgetVerdict, costRows, lintEpisode, nextSlots, reportEpisodes, spendTotals, uploadBlocker, type Spend } from "../src/channel/rules.js";
 
 const cfg = {
   name: "t",
@@ -68,6 +68,28 @@ test("costRows totals credits and paid calls per video and model", () => {
   assert.equal(rows[0].attempts, 3);
   assert.deepEqual(rows[0].byModel.kling, { credits: 12.5, calls: 2 });
   assert.equal(rows[1].credits, 0);
+});
+
+test("lintEpisode catches long scripts, mismatched dialogue, wrong narrator, bad titles", () => {
+  const rules = { maxWords: 10, narrators: { photoreal: { name: "A" }, cartoon: { name: "D" } } };
+  const good = {
+    status: "fact_checked",
+    storyboard: [{ n: 1, narration: "Try this now.", style: "photoreal", voice: "A" }, { n: 2, narration: "Nothing, right?", style: "cartoon", voice: "D" }],
+    script: { voiceText: "", words: 5, estSeconds: 3, dialogue: [{ voice: "A", voiceId: "a", text: "[deep] Try this now." }, { voice: "D", voiceId: "d", text: "[playful] Nothing, right?" }] },
+    factCheck: { verdict: "pass", claims: [{ claim: "c", source: "s" }] },
+    metadata: { title: "Why? #shorts", description: "", tags: [] },
+  } as unknown as Manifest;
+  assert.deepEqual(lintEpisode(good, rules), []);
+  const errs = lintEpisode({
+    ...good,
+    storyboard: [{ ...good.storyboard[0], voice: "D", narration: "one two three four five six seven eight nine ten eleven" }, good.storyboard[1]],
+    metadata: { title: "No hashtag", description: "", tags: [] },
+  } as Manifest, rules).join("\n");
+  assert.match(errs, /words > max/);
+  assert.match(errs, /does not match storyboard/);
+  assert.match(errs, /must be voiced by A/);
+  assert.match(errs, /#shorts/);
+  assert.deepEqual(lintEpisode({ ...good, status: "qc_passed", metadata: undefined } as Manifest, rules), []);
 });
 
 test("reportEpisodes keeps unfinished work and the day's episodes", () => {

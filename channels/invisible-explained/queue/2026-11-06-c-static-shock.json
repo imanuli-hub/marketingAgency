@@ -1,0 +1,227 @@
+{
+  "id": "2026-11-06-c-static-shock",
+  "channel": "invisible-explained",
+  "slug": "static-shock",
+  "topic": "Why static shocks are worse in winter",
+  "pillar": "everyday",
+  "createdAt": "2026-11-04T23:00:00Z",
+  "status": "fact_checked",
+  "approval": {
+    "state": "pending"
+  },
+  "script": {
+    "voiceText": "[deep, cinematic documentary narrator, calm authority, crisp pace] You reach for the doorknob... SNAP. [playful, curious, quick] Ouch! Why is it worse in winter? As you walk, charge moves between your shoes and the carpet. In humid air, a film of moisture lets that charge leak away. But winter air is dry, and heating dries it more. So the charge builds, up to tens of thousands of volts. Tens of THOUSANDS? Isn't that deadly? No. The current is tiny, and it's over in millionths of a second. That's why a humidifier helps: wetter air drains the charge. That spark is a tiny lightning bolt... and YOU made it.",
+    "dialogue": [
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "[deep, cinematic documentary narrator, calm authority, crisp pace] You reach for the doorknob... SNAP."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "[playful, curious, quick] Ouch! Why is it worse in winter? As you walk, charge moves between your shoes and the carpet."
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "In humid air, a film of moisture lets that charge leak away."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "But winter air is dry, and heating dries it more."
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "So the charge builds, up to tens of thousands of volts."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "Tens of THOUSANDS? Isn't that deadly?"
+      },
+      {
+        "voice": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "text": "No. The current is tiny, and it's over in millionths of a second."
+      },
+      {
+        "voice": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "text": "That's why a humidifier helps: wetter air drains the charge. That spark is a tiny lightning bolt... and YOU made it."
+      }
+    ],
+    "words": 97,
+    "estSeconds": 45.6
+  },
+  "factCheck": {
+    "verdict": "pass",
+    "claims": [
+      {
+        "claim": "Contact and separation of materials (shoes, carpet) transfers charge (triboelectric charging); moisture in the air normally lets charge dissipate, so dry winter air (worsened by indoor heating) lets it build.",
+        "source": "McGill Office for Science and Society, on static electricity in winter",
+        "url": "https://www.mcgill.ca/oss/node/8132"
+      },
+      {
+        "claim": "Walking across carpet can generate about 35,000 V at 10-20% relative humidity versus about 1,500 V at 65-90%.",
+        "source": "Typical measured static charges table (US Navy electricity/electronics training series, reproduced by tpub)",
+        "url": "https://electriciantraining.tpub.com/14193/css/Table-2-1-Typical-Measured-Static-Charges-In-Volts-53.htm"
+      },
+      {
+        "claim": "The discharge carries a very small current and lasts microseconds.",
+        "source": "ESD human-body-model references (rfwireless-world ESD basics; tpub table notes)",
+        "url": "https://www.rfwireless-world.com/articles/understanding-esd-models-classes-protection"
+      }
+    ]
+  },
+  "storyboard": [
+    {
+      "n": 1,
+      "seconds": 3.5,
+      "narration": "You reach for the doorknob... SNAP.",
+      "label": "THE INVISIBLE EXPLAINED",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: a fingertip a few millimetres from a brass doorknob, a tiny bright blue-white spark jumping the gap, dark hallway. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "The finger slowly approaches the doorknob and a tiny spark flickers across the gap. No cuts."
+    },
+    {
+      "n": 2,
+      "seconds": 3.5,
+      "narration": "Ouch! Why is it worse in winter?",
+      "label": "STATIC DISCHARGE",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Mascot jumps back shaking its hand, a small zigzag spark near the doorknob."
+    },
+    {
+      "n": 3,
+      "seconds": 3.5,
+      "narration": "As you walk, charge moves between your shoes and the carpet.",
+      "label": "TRIBOELECTRIC CHARGING · ILLUSTRATIVE",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Cartoon shoe stepping on carpet; tiny plus and minus signs hop from carpet to the shoe.",
+      "overlay": "charges hop with each step"
+    },
+    {
+      "n": 4,
+      "seconds": 3.5,
+      "narration": "In humid air, a film of moisture lets that charge leak away.",
+      "label": "HUMID AIR",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic macro, vertical 9:16: carpet fibres covered in microscopic water droplets glistening in cool light. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "Microscopic droplets shimmer on the fibres; slow push-in. No cuts."
+    },
+    {
+      "n": 5,
+      "seconds": 3.5,
+      "narration": "But winter air is dry, and heating dries it more.",
+      "label": "HUMIDITY ↓",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Cartoon humidity gauge needle dropping from 50 percent to 15 percent; a radiator beside it.",
+      "overlay": "gauge needle drops"
+    },
+    {
+      "n": 6,
+      "seconds": 3.5,
+      "narration": "So the charge builds, up to tens of thousands of volts.",
+      "label": "BODY VOLTAGE · ILLUSTRATIVE",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic close-up, vertical 9:16: feet in wool socks walking across a dark carpet, a faint illustrative blue glow outlining the person's foot. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "The foot steps slowly across the carpet as the faint blue glow brightens. No cuts."
+    },
+    {
+      "n": 7,
+      "seconds": 3.5,
+      "narration": "Tens of THOUSANDS? Isn't that deadly?",
+      "label": "UP TO ~35,000 V IN DRY AIR",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Mascot with wide eyes, a big counter climbing 1,500 → 35,000 V.",
+      "overlay": "counter climbs"
+    },
+    {
+      "n": 8,
+      "seconds": 3.5,
+      "narration": "No. The current is tiny, and it's over in millionths of a second.",
+      "label": "ELECTROSTATIC DISCHARGE",
+      "voice": "Alistair",
+      "style": "photoreal",
+      "animate": true,
+      "visual": "Photorealistic cinematic extreme macro, vertical 9:16: slow-motion tiny spark between a fingertip and a metal key, dark background. Deep navy background, cool rim light, subtle cyan accents, cinematic documentary realism, shallow depth of field, no text, no letters, no watermark.",
+      "motion": "Ultra slow-motion spark flickers once between fingertip and metal. No cuts."
+    },
+    {
+      "n": 9,
+      "seconds": 3.5,
+      "narration": "That's why a humidifier helps: wetter air drains the charge.",
+      "label": "MOIST AIR = FEWER SHOCKS",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Cartoon humidifier puffing mist; plus and minus signs float away; mascot relaxed."
+    },
+    {
+      "n": 10,
+      "seconds": 3.5,
+      "narration": "That spark is a tiny lightning bolt... and YOU made it.",
+      "label": "POCKET LIGHTNING",
+      "voice": "Dylan",
+      "style": "cartoon",
+      "animate": false,
+      "visual": "Mascot holding up a finger with a tiny zigzag lightning bolt, proud grin. Then end card."
+    }
+  ],
+  "captionKeywords": [
+    "snap",
+    "winter",
+    "charge",
+    "moisture",
+    "dry",
+    "heating",
+    "thousands",
+    "volts",
+    "deadly",
+    "tiny",
+    "humidifier",
+    "lightning",
+    "built"
+  ],
+  "assets": {
+    "scenes": {}
+  },
+  "metadata": {
+    "title": "Why Static Shocks Are Worse in Winter #shorts",
+    "description": "Dry winter air lets your body charge up to thousands of volts, until the doorknob sets it free.\n\nSources:\n- McGill Office for Science and Society, static electricity in winter\n- Typical measured static charges (US Navy electricity and electronics training series)\n\nVisuals are AI-generated illustrations.\n\n#science #physics #everydayscience #shorts",
+    "tags": [
+      "static shock",
+      "why static shock in winter",
+      "static electricity",
+      "triboelectric effect",
+      "humidity",
+      "physics",
+      "everyday science"
+    ]
+  },
+  "credits": {
+    "estimated": 33.99,
+    "spent": 0
+  },
+  "log": [
+    "2026-11-04T23:00Z scripted + fact-checked (no credits); waiting for an approved production budget",
+    "2026-11-04T23:10Z trimmed to fit 45 s at the measured 2.2 words/s"
+  ]
+}

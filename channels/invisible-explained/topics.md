@@ -22,7 +22,10 @@ Performance columns stay `UNKNOWN` until YouTube Analytics is connected (see doc
 | 2026-10-29 | finger-wrinkles | Why fingers wrinkle in water | body | cartoon test | UNKNOWN | UNKNOWN |
 | 2026-10-29 | plane-window-hole | The tiny hole in plane windows | tech | cartoon test | UNKNOWN | UNKNOWN |
 | 2026-10-29 | stomach-acid | Why your stomach doesn't digest itself | body | cartoon test | UNKNOWN | UNKNOWN |
-| 2026-11-04 | self-tickle | Why you can't tickle yourself | mind | drafted (first pipeline test) | - | - |
+| 2026-11-04 | self-tickle | Why you can't tickle yourself | mind | final, QC passed, awaiting approval | - | - |
+| 2026-11-04 | goosebumps | Why we get goosebumps | body | scripted + fact-checked | - | - |
+| 2026-11-04 | noise-cancelling | How noise-cancelling headphones erase sound | tech | scripted + fact-checked | - | - |
+| 2026-11-04 | static-shock | Why static shocks are worse in winter | everyday | scripted + fact-checked | - | - |
 
 Which of these were actually uploaded to YouTube is UNKNOWN: there is no YouTube access yet.
 
@@ -37,15 +40,12 @@ Which of these were actually uploaded to YouTube is UNKNOWN: there is no YouTube
 | Slug | Hook question | Pillar |
 |---|---|---|
 | hiccups | Why do you hiccup? | body |
-| goosebumps | Why do you get goosebumps? | body |
 | yawn-contagious | Why are yawns contagious? | mind |
 | deja-vu | What is déjà vu? | mind |
 | phantom-vibration | Why do you feel your phone buzz when it didn't? | mind |
 | microwave-heating | How does a microwave actually heat food? | tech |
-| noise-cancelling | How do headphones erase sound? | tech |
 | gps-relativity | Why GPS needs Einstein | tech |
 | wifi-walls | How Wi-Fi passes through walls | tech |
-| static-shock | Why doorknobs shock you in winter | everyday |
 | bread-toast | What actually happens when bread toasts | everyday |
 | ice-floats | Why ice floats (and why it matters) | everyday |
 | sky-blue | Why the sky is blue but sunsets are red | earth |

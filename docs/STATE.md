@@ -1,6 +1,6 @@
 # Project state: The Invisible Explained
 
-Last checkpoint: 2026-11-04 · branch `invisible-explained-pipeline` (pushed; not merged; no PR)
+Last checkpoint: 2026-11-04 (late) · tests: `npm test` 12/12 pass · branch `invisible-explained-pipeline` (pushed; not merged; no PR)
 
 ## Status
 Pipeline foundation built; first end-to-end test Short produced and QC-passed; **awaiting owner review**. Nothing uploaded to YouTube. No unattended scheduler exists yet: nothing runs between sessions.
@@ -49,5 +49,6 @@ Measured cost per video: 33.99 cr (VO 2.99, 4 stills 6.00, 4 clips 25.00). 3/day
 
 ## Next steps
 1. ~~(agent) Tests + cost-log command + report date fix~~ done: `npm test` (10 tests), `npm run channel -- costs`, CI workflow `test.yml`.
-2. (agent) Script and fact-check the next 3 episodes so production can start the moment a budget is approved (no credits).
-3. (owner) Items in Blockers. Then: produce the 3 episodes, configure the daily scheduled run, YouTube dry-run → first private scheduled upload.
+2. ~~(agent) Script and fact-check the next 3 episodes~~ done: `2026-11-06-a-goosebumps`, `-b-noise-cancelling`, `-c-static-shock` (status fact_checked, lint ok, ~45 s each, est. 33.99 cr each = 101.97 cr total). Added `channel lint` pre-spend gate; word rate corrected to the measured 2.2 words/s (maxWords 97).
+3. (agent, when a budget exists) Produce those 3: voice + stills + clips (one batch each), write `render/higgsedit/episodes/<slug>.jsx` for the cartoon scenes, preview, render, QC.
+4. (owner) Items in Blockers. Then: produce the 3 episodes, configure the daily scheduled run, YouTube dry-run → first private scheduled upload.

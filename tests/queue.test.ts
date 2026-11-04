@@ -15,6 +15,11 @@ test("every real episode manifest matches the schema", async () => {
   for (const { m } of q) assert.ok(m.credits.spent <= m.credits.estimated + 15, `${m.id} far over estimate`);
 });
 
+test("every episode waiting to be produced passes lint", () => {
+  const out = execFileSync("npx", ["tsx", "src/channel/cli.ts", "lint"], { cwd: ROOT, encoding: "utf8" });
+  assert.doesNotMatch(out, /FAIL/);
+});
+
 // End-to-end CLI flow on a throwaway copy: approval gate → slots → publish dry-run.
 test("approve → assign-slots → publish dry-run (no network, no credentials)", () => {
   fs.rmSync(tmpDir, { recursive: true, force: true });

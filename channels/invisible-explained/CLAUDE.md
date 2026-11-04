@@ -18,7 +18,7 @@ A manifest's `status` says what is done. Pick up each unfinished episode at its 
 ## Steps per episode (status after each step in brackets)
 1. **Topic** [planned]: choose from `topics.md` backlog or a new idea that repeats no ledger row; rotate pillars; prefer pillars/topics that analytics show retain best. Create `queue/<YYYY-MM-DD>-<a|b|c>-<slug>.json` and add a ledger row.
 2. **Script + storyboard** [scripted]: follow `templates/script.md` and `templates/storyboard.md`. 25–45 s at ~2.5 words/s.
-3. **Fact-check** [fact_checked]: per `fact-check.md`, with web search. Fail → rewrite the claim or cut it.
+3. **Fact-check** [fact_checked]: per `fact-check.md`, with web search. Fail → rewrite the claim or cut it. Then `npm run -s channel -- lint <id>` must print `ok` (length ≤ `format.maxWords`, dialogue = storyboard, narrator per style, sources, title). No paid step before lint passes.
 4. **Assets** [assets_ready]: all in one batch where possible.
    - Voice: ONE `generate_audio` call, model `elevenlabs_v4`, `stability` from `channel.json`, `dialogue` = one turn per scene group in order: photoreal scenes → `voice.narrators.photoreal` (Alistair), cartoon scenes → `voice.narrators.cartoon` (Dylan); each narrator's first turn opens with its `direction`. `prompt` = all turns joined. Record turns in `script.dialogue`.
    - Stills: `generate_image_batch` with `models.image` for the 4 photoreal scenes at once, 9:16.

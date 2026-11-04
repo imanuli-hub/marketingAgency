@@ -11,8 +11,10 @@
       25,
       45
     ],
-    "wordsPerSecond": 2.5,
-    "language": "en"
+    "wordsPerSecond": 2.2,
+    "language": "en",
+    "wordsPerSecondNote": "measured on the first test episode (85 words incl. pauses -> 38.2 s); estimate = words/2.2 + 1.5 s end card",
+    "maxWords": 97
   },
   "voice": {
     "status": "decided by owner 2026-11-04",
