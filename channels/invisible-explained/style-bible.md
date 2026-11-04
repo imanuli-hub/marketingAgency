@@ -6,6 +6,9 @@ Recovered on 2026-11-04 from the channel's finished Shorts in Higgsfield (Oct 26
 - 9:16, 1080x1920, 30 fps, H.264 + AAC. Finals so far ran 29.6–31.0 s; target 25–45 s.
 - One idea per video. Hook in the first 2 s, payoff line at the end, then the end card.
 
+## Scene mix
+- 10 scenes per video: 4 photoreal (hook, the key mechanism, the contrast, the evidence) and 6 cartoon scenes drawn in code with the white mascot from the Oct 29 ice-cream tests (thick black outline, dot eyes, arched brows, noodle arms), on the navy backdrop.
+
 ## Look
 - Palette: deep navy / near-black backgrounds (#05070D to #0B1220), cyan-teal accent (#3FD0D4 range), white type. Warm accents (amber/orange) only when the subject is hot (lightning, fire) or a "gate/state" readout.
 - Subjects: one clear subject per scene, centred, high contrast against a dark field. Cinematic, documentary-grade lighting.
@@ -19,7 +22,7 @@ Recovered on 2026-11-04 from the channel's finished Shorts in Higgsfield (Oct 26
 - **Opening frame** carries a small `THE INVISIBLE EXPLAINED` label; the **end card** is `THE INVISIBLE` (cyan) / `EXPLAINED` (white) on black, about 1.5 s.
 
 ## Voice
-- One professional male documentary narrator for every video (see `channel.json` → `voice`; past videos used four different voices, which ends now).
+- Two fixed male narrators in one take (owner decision 2026-11-04, see `channel.json` → `voice`): **Alistair** (deep documentary) speaks over photoreal scenes, **Dylan** (young, playful) over cartoon scenes. No other voices.
 - ElevenLabs v4, stability 0.40–0.45. One delivery tag at the start, at most 3 more inside: e.g. `[deep, cinematic documentary narrator, calm authority, steady pace]`, `[leaning in]`, `[building tension]`, `[pause]`.
 - CAPITALS on one or two words for stress (`NEVER`, `BLOCKS`). Ellipses for beats.
 - Numbers written as words in the voice script ("thirty thousand degrees"), as numerals on screen.

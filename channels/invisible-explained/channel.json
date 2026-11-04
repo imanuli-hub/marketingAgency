@@ -3,56 +3,81 @@
   "phase": "testing",
   "autoPublish": false,
   "videosPerDay": 3,
-
   "format": {
     "width": 1080,
     "height": 1920,
     "fps": 30,
-    "targetSeconds": [25, 45],
+    "targetSeconds": [
+      25,
+      45
+    ],
     "wordsPerSecond": 2.5,
     "language": "en"
   },
-
   "voice": {
-    "status": "proposed - confirm with owner",
+    "status": "decided by owner 2026-11-04",
     "model": "elevenlabs_v4",
-    "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
-    "voiceName": "Alistair",
-    "voiceType": "preset",
+    "mode": "dialogue: one take, narrator switches per scene",
     "stability": 0.45,
-    "alternatives": {
-      "Gideon": "1ad38ba4-9cc4-4f2f-9fde-b0fefdf67ae5",
-      "Desmond": "563f728c-e249-5a85-97ab-8461e8c09da6",
-      "Caspian": "ef70cc83-3015-4bad-9359-0ea968c43ec0"
+    "narrators": {
+      "photoreal": {
+        "name": "Alistair",
+        "voiceId": "d9d5c263-f84e-4752-97b5-3750fcc6fd2f",
+        "voiceType": "preset",
+        "direction": "[deep, cinematic documentary narrator, calm authority, crisp pace]"
+      },
+      "cartoon": {
+        "name": "Dylan",
+        "voiceId": "b847bc29-f184-583a-8ad9-d1f1e16d1a60",
+        "voiceType": "preset",
+        "direction": "[playful, curious, quick]"
+      }
     },
-    "approxCreditsPerTake": 2.8
+    "creditsPerTake": 2.99
   },
-
   "visualMode": {
-    "status": "proposed - confirm with owner",
-    "selected": "hybrid",
-    "modes": {
-      "signature": "Every frame drawn in code (Higgsedit/content-factory), the look of the Oct 26-28 finals. Only the voiceover is paid.",
-      "hybrid": "Photoreal AI stills for every scene (nano_banana_2), 3 of them animated with kling3_0 std (hook, middle, payoff); brand overlays, labels and captions drawn in code.",
-      "photoreal": "Photoreal AI still + kling3_0 clip for every scene."
+    "status": "decided by owner 2026-11-04",
+    "selected": "hybrid-4-6",
+    "description": "10 scenes: 4 photoreal (nano_banana_2 still + kling3_0 std 5 s clip, narrated by Alistair) and 6 code-drawn cartoon scenes in the ice-cream mascot style (render/higgsedit/mascot.jsx, narrated by Dylan). Labels, captions and end card drawn in code."
+  },
+  "models": {
+    "image": {
+      "id": "nano_banana_2",
+      "aspect_ratio": "9:16",
+      "credits": 1.5
+    },
+    "imageEdit": {
+      "id": "gpt_image_2_5",
+      "note": "targeted fixes to an existing still (edit, not regenerate)",
+      "creditsObserved": [
+        2.75,
+        4.25
+      ]
+    },
+    "video": {
+      "id": "kling3_0",
+      "mode": "std",
+      "sound": "off",
+      "duration": 5,
+      "aspect_ratio": "9:16",
+      "credits": 6.25
+    },
+    "videoPremium": {
+      "id": "kling3_0",
+      "mode": "pro",
+      "sound": "off",
+      "duration": 5,
+      "credits": 7.5
+    },
+    "rejectedAsTooExpensive": {
+      "seedance_2_5_5s_720p": 35,
+      "grok_video_v15_5s_720p": 22.5
     }
   },
-
-  "models": {
-    "image": { "id": "nano_banana_2", "aspect_ratio": "9:16", "credits": 1.5 },
-    "imageEdit": { "id": "gpt_image_2_5", "note": "targeted fixes to an existing still (edit, not regenerate)", "creditsObserved": [2.75, 4.25] },
-    "video": { "id": "kling3_0", "mode": "std", "sound": "off", "duration": 5, "aspect_ratio": "9:16", "credits": 6.25 },
-    "videoPremium": { "id": "kling3_0", "mode": "pro", "sound": "off", "duration": 5, "credits": 7.5 },
-    "rejectedAsTooExpensive": { "seedance_2_5_5s_720p": 35, "grok_video_v15_5s_720p": 22.5 }
-  },
-
   "costEstimatePerVideo": {
-    "signature": 2.8,
-    "hybrid": 32.05,
-    "photoreal": 57.05,
-    "basis": "7 scenes. hybrid = 7 stills x1.5 + 3 clips x6.25 + VO 2.8. photoreal = 7 stills + 7 clips + VO. SFX are synthesized in the sandbox (free). Quoted 2026-11-04 with get_cost; excludes retries."
+    "hybrid-4-6": 33.99,
+    "basis": "VO dialogue 2.99 + 4 stills x1.5 + 4 clips x6.25 (measured on the first test episode, 2026-11-04)"
   },
-
   "budget": {
     "status": "testing caps - owner to set production caps",
     "dailyCredits": 40,
@@ -62,15 +87,23 @@
     "maxVoiceTakesPerVideo": 2,
     "stopIfBalanceBelow": 100
   },
-
   "publishing": {
     "status": "placeholder slots - replace with analytics-derived times once data exists",
     "timezone": "UTC",
-    "slots": ["13:00", "17:00", "21:00"],
+    "slots": [
+      "13:00",
+      "17:00",
+      "21:00"
+    ],
     "privacyUntilPublish": "private",
     "categoryId": "28",
     "madeForKids": false,
     "containsSyntheticMedia": true,
-    "defaultTags": ["science", "shorts", "the invisible explained", "how it works"]
+    "defaultTags": [
+      "science",
+      "shorts",
+      "the invisible explained",
+      "how it works"
+    ]
   }
 }
