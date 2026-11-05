@@ -47,7 +47,7 @@ const SCENES = {
     const tDry = cue("dries", dur * 0.6);
     return full([
       ...Gauge({ cx: 540, cy: 760, r: 260, label: "HUMIDITY", fromDeg: 0, toDeg: -62, at: Math.max(0.2, tDry - 0.3), dur, lowColor: "#FF9F43", highColor: CYAN }),
-      ...Steps({ values: ["50%", "30%", "15%"], y: 820, t0: 0.3, t1: Math.min(dur - 0.2, tDry + 0.5), dur, color: "#FFFFFF", size: 64 }),
+      ...Steps({ values: ["50%", "30%", "15%"], y: 880, t0: 0.3, t1: Math.min(dur - 0.2, tDry + 0.5), dur, color: "#FFFFFF", size: 64 }),
       <rect x={140} y={1020} width={340} height={260} radius={20} fill="#C9CED8" strokeColor={INK} strokeWidth={10} />,
       P("M200,1040 L200,1260 M260,1040 L260,1260 M320,1040 L320,1260 M380,1040 L380,1260 M440,1040 L440,1260", { stroke: { width: 10, color: "#8E95A3" } }),
       <frame x={0} y={0} width={W} height={H} layout="none" animate={pulse(dur, 0.98, 1.02, 0.8)}>
@@ -73,7 +73,7 @@ const SCENES = {
       <rect x={470} y={980} width={140} height={60} radius={30} fill={CYAN} />,
       ...[0, 1, 2, 3].map((i) => (
         <frame key={`p${i}`} x={0} y={0} width={W} height={H} layout="none" animate={puff(i)}>
-          {P(circle(540 + (i % 2 ? 40 : -40), 860, 56 + i * 8), { fill: "#FFFFFFB0" })}
+          {P(circle(540 + (i % 2 ? 50 : -50), 860, 70 + i * 10), { fill: "#FFFFFF", stroke: { width: 6, color: "#B8D8EE" } })}
         </frame>
       )),
       ...[0, 1, 2, 3].map((i) => (
@@ -88,8 +88,8 @@ const SCENES = {
   10: ({ dur, cue }) => full([
     <Mascot x={240} y={500} scale={0.85} arms={["downL", "upR"]} expr={{ eyes: "happy", mouth: "smile" }} animate={bob(dur, 6)} />,
     <frame x={0} y={0} width={W} height={H} layout="none" animate={pulse(dur, 0.92, 1.08, 0.6)}>
-      {P(circle(700, 690, 90), { fill: "#FFD84D40" })}
-      {P(sparkPath(700, 690, 1.1), { fill: YELLOW, stroke: { width: 7, color: INK } })}
+      {P(circle(720, 560, 150), { fill: "#FFD84D30" })}
+      {P(sparkPath(720, 560, 1.9), { fill: YELLOW, stroke: { width: 9, color: INK } })}
     </frame>,
     <frame x={0} y={0} width={W} height={H} layout="none" animate={show(cue("you", dur * 0.6), dur)}>
       {big("POCKET LIGHTNING", 300, YELLOW, 64)}
