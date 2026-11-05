@@ -14,11 +14,24 @@ if [ "${TIE_SYNC:-git}" = "bundle" ]; then
 elif [ -d "$REPO/.git" ]; then git -C "$REPO" fetch -q origin "$BRANCH" && git -C "$REPO" reset -q --hard "origin/$BRANCH";
 else git clone -q --depth 1 -b "$BRANCH" https://github.com/imanuli-hub/marketingAgency.git "$REPO" \
   || { echo "clone failed (repo private?): use TIE_SYNC=bundle with bundle.sh" >&2; exit 1; }; fi
+MAN="$REPO/channels/invisible-explained/queue/$EP.json"
+# Asset links that are not in the (public) repo: /home/user/tie/links.json maps
+# episode id -> manifest "assets" object; merged into the manifest copy here.
+if [ -f /home/user/tie/links.json ]; then
+  python3 - "$MAN" "$EP" <<'PY'
+import json, sys
+man, ep = sys.argv[1], sys.argv[2]
+links = json.load(open("/home/user/tie/links.json"))
+if ep in links:
+    m = json.load(open(man)); m["assets"] = links[ep]; json.dump(m, open(man, "w"))
+    print(f"links merged for {ep}")
+PY
+fi
 mkdir -p "$WORK/edit"
 SRC=$REPO/render/higgsedit
 cp "$SRC"/*.jsx "$WORK/edit/"
 cp "$SRC/episodes/$SLUG.jsx" "$WORK/edit/episode.jsx"
-python3 "$SRC/prepare.py" "$REPO/channels/invisible-explained/queue/$EP.json" "$WORK"
+python3 "$SRC/prepare.py" "$MAN" "$WORK"
 cd "$WORK/edit"
 # The first build creates project.json but fails until the fonts are vendored.
 if [ ! -f .fonts-ok ]; then
