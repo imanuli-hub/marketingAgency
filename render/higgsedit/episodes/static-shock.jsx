@@ -66,7 +66,7 @@ const SCENES = {
   9: ({ dur }) => {
     const puff = (i) => [
       { property: "offsetY", from: 0, to: -320, at: 0.1 + i * 0.35, duration: Math.max(0.3, dur - 0.15 - i * 0.35), easing: "ease-out" },
-      { property: "opacity", keyframes: keys(dur, [{ at: 0, value: 0, easing: "hold" }, { at: 0.1 + i * 0.35, value: 0.9 }, { at: dur, value: 0 }]) },
+      { property: "opacity", keyframes: keys(dur, [{ at: 0, value: 0, easing: "hold" }, { at: 0.1 + i * 0.35, value: 1 }, { at: dur, value: 0.55 }]) },
     ];
     return full([
       <rect x={400} y={900} width={280} height={360} radius={60} fill="#DDEBF5" strokeColor={INK} strokeWidth={10} />,
@@ -88,8 +88,8 @@ const SCENES = {
   10: ({ dur, cue }) => full([
     <Mascot x={240} y={500} scale={0.85} arms={["downL", "upR"]} expr={{ eyes: "happy", mouth: "smile" }} animate={bob(dur, 6)} />,
     <frame x={0} y={0} width={W} height={H} layout="none" animate={pulse(dur, 0.92, 1.08, 0.6)}>
-      {P(circle(720, 560, 150), { fill: "#FFD84D30" })}
-      {P(sparkPath(720, 560, 1.9), { fill: YELLOW, stroke: { width: 9, color: INK } })}
+      {P(circle(720, 560, 170), { fill: "#FFD84D55" })}
+      {P(sparkPath(720, 560, 2.2), { fill: YELLOW, stroke: { width: 4, color: "#B07800" } })}
     </frame>,
     <frame x={0} y={0} width={W} height={H} layout="none" animate={show(cue("you", dur * 0.6), dur)}>
       {big("POCKET LIGHTNING", 300, YELLOW, 64)}
