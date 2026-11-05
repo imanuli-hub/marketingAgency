@@ -13,6 +13,7 @@ This repo runs the AI production and publishing system for the YouTube Shorts ch
    - `render/higgsedit/`: resumable edit/render project (`run.sh`, `prepare.py`, components, `episodes/<slug>.jsx`)
    - `src/channel/` (budget guard, queue CLI), `src/youtube/` (publisher, analytics, OAuth helper), `.github/workflows/`
    - `docs/invisible-explained-plan.md`: architecture, capability matrix, YouTube setup steps
+   - `docs/SECURITY.md` (exposure + controls), `docs/DAILY-RUN.md` (scheduler definition)
 4. Update `docs/STATE.md` after every meaningful milestone (done, pending, blockers, costs, next step).
 
 ## Autonomy
@@ -24,7 +25,7 @@ The owner has given standing authorization for routine, non-destructive developm
 - Never bypass platform confirmations or security controls.
 
 ## Credits (Higgsfield)
-- Approved budgets live in `docs/STATE.md` → "Budgets"; enforced by `npm run channel -- budget-check <credits> <episode>` before every paid call and `budget-record` after it (ledger: `channels/invisible-explained/ledger/credits.jsonl`).
+- Approved budgets are windows in `channel.json → budget.windows` (summarised in `docs/STATE.md` → "Budgets"). A `cap: 0` window means no paid generation is approved. Never add or widen a window without the owner's explicit approval. Enforced by `npm run channel -- budget-check <credits> <episode>` before every paid call and `budget-record` after it (ledger: `channels/invisible-explained/ledger/credits.jsonl`).
 - Before generating: define the output, pick the cheapest model that meets it, preflight with `get_cost`, reuse existing assets, batch, no extra variants, targeted fixes instead of regeneration. An "unlimited" plan is not free.
 - If the budget is insufficient: pause only the paid step, record the blocker, continue other work.
 - Cost log per video: `npm run channel -- costs`.
@@ -36,7 +37,7 @@ Concise docs; targeted reads and searches; batch independent calls; reuse script
 Accuracy over views: every claim sourced per `fact-check.md`; no misleading titles; AI visuals disclosed. Quality over hitting 3/day.
 
 ## Git and security
-- Work on `invisible-explained-pipeline` (approved dev branch). Before every push: inspect the staged diff, scan for secrets (keys, OAuth/refresh tokens, `.env`, personal data), confirm `.gitignore` covers `.env*`. The repo is **public**. A previous clean scan does not make a new push safe.
+- Work on `invisible-explained-pipeline` (approved dev branch). Run `npm run hooks` once per clone: the pre-push guard blocks credentials, `.env` files and Higgsfield asset links. Asset links may be pushed only after the owner makes the repo private (`git config tie.repoPrivate true`); until then they stay on the local branch `local/pilot-assets`. Before every push: inspect the staged diff, scan for secrets (keys, OAuth/refresh tokens, `.env`, personal data), confirm `.gitignore` covers `.env*`. The repo is **public**. A previous clean scan does not make a new push safe.
 - No force-push, branch deletion or merge into `main` without authorization.
 - Credentials only in GitHub Actions secrets or local `.env` (git-ignored); never in files, logs or chat.
 
@@ -44,4 +45,4 @@ Accuracy over views: every claim sourced per `fact-check.md`; no misleading titl
 At a milestone: completed work, tests run, system status, blockers, credits used, next steps. Never present unfinished work as done. Do not claim anything runs after the session ends unless a real scheduler is configured (see STATE).
 
 ## Commands
-`npm run typecheck` · `npm test` · `npm run channel -- status|costs|report|approve <id>|reject <id>|assign-slots` · `npm run yt:publish -- --dry-run` · `bash render/higgsedit/run.sh <episode-id> <slug> frames <t,..>` (inside the Higgsfield sandbox)
+`npm run typecheck` · `npm test` · `npm run hooks` · `npm run channel -- plan|status|lint|costs|report|approve <id>|reject <id>|assign-slots` · `npm run yt:publish -- --dry-run` · `bash render/higgsedit/run.sh <episode-id> <slug> frames <t,..>` and `python3 render/higgsedit/finalize.py <manifest> <workdir>` (inside the Higgsfield sandbox)

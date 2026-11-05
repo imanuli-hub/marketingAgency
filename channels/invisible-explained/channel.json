@@ -77,11 +77,12 @@
     }
   },
   "costEstimatePerVideo": {
+    "economy": 9.07,
     "hybrid-4-6": 33.99,
-    "basis": "VO dialogue 2.99 + 4 stills x1.5 + 4 clips x6.25 (measured on the first test episode, 2026-11-04)"
+    "basis": "economy measured on the pilot: VO 2.99-3.22 + 4 stills (1K) 6.00; hybrid measured on the test episode"
   },
   "budget": {
-    "status": "owner-approved pilot: 30 credits TOTAL for the next 3 videos (economy option); not recurring",
+    "status": "pilot complete (27.20/30). No paid generation allowed until the owner approves a new budget window.",
     "dailyCredits": null,
     "monthlyCredits": 600,
     "perVideoCredits": 10,
@@ -93,7 +94,15 @@
         "name": "pilot-3-economy",
         "from": "2026-11-04T22:44:00Z",
         "cap": 30,
-        "approvedBy": "owner message, 2026-11-04"
+        "approvedBy": "owner message, 2026-11-04",
+        "to": "2026-11-05T08:19:04Z",
+        "result": "completed: 27.20 of 30 cr for 3 videos"
+      },
+      {
+        "name": "no-approved-budget",
+        "from": "2026-11-05T08:19:04Z",
+        "cap": 0,
+        "approvedBy": "none: paid generation blocked until the owner approves a new budget"
       }
     ]
   },
