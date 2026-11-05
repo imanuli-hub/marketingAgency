@@ -68,8 +68,9 @@ starts = []
 for si in range(n_sc):
     idx = next(i for i, (s, _) in enumerate(script) if s == si)
     starts.append(0.0 if si == 0 else round(times[idx][0] - 0.12, 2))
-END_CARD = 1.5
 voice_end = round(vdur + 0.35, 2)
+# End card is 1.5 s, shortened (min 1.0 s) so the Short stays within 45 s.
+END_CARD = round(max(1.0, min(1.5, 44.9 - voice_end)), 2)
 ends = starts[1:] + [voice_end]
 
 # 4. Caption chunks: <= 3 words, break after punctuation
