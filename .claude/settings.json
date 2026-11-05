@@ -1,0 +1,67 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Higgsfield__sandbox_exec",
+      "mcp__Higgsfield__jobs_wait",
+      "mcp__Higgsfield__balance",
+      "mcp__Higgsfield__transactions",
+      "mcp__Higgsfield__models_explore",
+      "mcp__Higgsfield__get_preset_instructions",
+      "mcp__Higgsfield__get_workflow_instructions",
+      "mcp__claude_ai_Higgsfield__sandbox_exec",
+      "mcp__claude_ai_Higgsfield__jobs_wait",
+      "mcp__claude_ai_Higgsfield__balance",
+      "mcp__claude_ai_Higgsfield__transactions",
+      "mcp__claude_ai_Higgsfield__models_explore",
+      "mcp__claude_ai_Higgsfield__get_preset_instructions",
+      "mcp__claude_ai_Higgsfield__get_workflow_instructions",
+      "Bash(npm test)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run -s channel -- *)",
+      "Bash(npm run channel -- *)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(ffmpeg *)",
+      "Bash(ffprobe *)",
+      "Edit(/render/**)",
+      "Edit(/channels/**)",
+      "Edit(/src/**)",
+      "Edit(/tests/**)",
+      "Edit(/docs/**)"
+    ],
+    "ask": [
+      "mcp__Higgsfield__generate_*",
+      "mcp__Higgsfield__upscale_*",
+      "mcp__Higgsfield__execute_preset",
+      "mcp__Higgsfield__media_upload",
+      "mcp__Higgsfield__media_import_url",
+      "mcp__Higgsfield__publish_*",
+      "mcp__Higgsfield__tiktok_*",
+      "mcp__Higgsfield__delete_*",
+      "mcp__claude_ai_Higgsfield__generate_*",
+      "mcp__claude_ai_Higgsfield__upscale_*",
+      "mcp__claude_ai_Higgsfield__execute_preset",
+      "mcp__claude_ai_Higgsfield__media_upload",
+      "mcp__claude_ai_Higgsfield__media_import_url",
+      "mcp__claude_ai_Higgsfield__publish_*",
+      "mcp__claude_ai_Higgsfield__tiktok_*",
+      "mcp__claude_ai_Higgsfield__delete_*",
+      "Bash(npm run yt:publish*)",
+      "Bash(npm run yt:auth*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(git branch -D*)",
+      "Bash(gh repo edit*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*Higgsfield__.*",
+        "hooks": [
+          { "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/higgsfield-guard.mjs\"" }
+        ]
+      }
+    ]
+  }
+}
