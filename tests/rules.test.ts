@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import type { ChannelConfig, Manifest } from "../src/channel/manifest.js";
-import { budgetVerdict, costRows, lintEpisode, nextSlots, reportEpisodes, spendTotals, uploadBlocker, type Spend } from "../src/channel/rules.js";
+import { budgetVerdict, costRows, lintEpisode, nextSlots, planEpisodes, reportEpisodes, spendTotals, uploadBlocker, type Spend } from "../src/channel/rules.js";
 
 const cfg = {
   name: "t",
@@ -102,6 +102,22 @@ test("lintEpisode catches long scripts, mismatched dialogue, wrong narrator, bad
   assert.match(errs, /must be voiced by A/);
   assert.match(errs, /#shorts/);
   assert.deepEqual(lintEpisode({ ...good, status: "qc_passed", metadata: undefined } as Manifest, rules), []);
+});
+
+test("planEpisodes: next steps, blockers, and never re-buying assets that have job ids", () => {
+  const ep = (over: object) => ({ id: "e", slug: "s", status: "fact_checked", approval: { state: "pending" }, assets: { scenes: {} }, credits: { estimated: 9, spent: 0 }, log: [], ...over }) as unknown as Manifest;
+  const ctx = { lint: () => [], budget: (c: number) => ({ ok: c <= 10, reasons: c <= 10 ? [] : ["cap"] }), estimate: (m: Manifest) => m.credits.estimated, autoPublish: false };
+  const [fresh] = planEpisodes([ep({})], ctx);
+  assert.equal(fresh.paid, true);
+  assert.equal(fresh.blocked, undefined);
+  assert.match(planEpisodes([ep({ credits: { estimated: 11, spent: 0 } })], ctx)[0].blocked ?? "", /budget/);
+  const bought = planEpisodes([ep({ assets: { voice: { jobId: "j1", credits: 3, attempts: 1 }, scenes: {} } })], ctx)[0];
+  assert.equal(bought.paid, false);
+  assert.match(bought.next, /do NOT regenerate/);
+  assert.match(planEpisodes([ep({ status: "qc_passed" })], ctx)[0].blocked ?? "", /owner approval/);
+  assert.match(planEpisodes([ep({ status: "qc_passed", approval: { state: "approved" } })], ctx)[0].next, /upload/);
+  assert.equal(planEpisodes([ep({ status: "published" })], ctx).length, 0);
+  assert.match(planEpisodes([ep({})], { ...ctx, lint: () => ["too long"] })[0].blocked ?? "", /too long/);
 });
 
 test("reportEpisodes keeps unfinished work and the day's episodes", () => {

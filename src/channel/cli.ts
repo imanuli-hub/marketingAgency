@@ -8,7 +8,7 @@ import {
   saveManifest,
   type Manifest,
 } from "./manifest.js";
-import { budgetVerdict, costRows, lintEpisode, nextSlots, reportEpisodes, spendTotals, type Spend } from "./rules.js";
+import { budgetVerdict, costRows, lintEpisode, nextSlots, planEpisodes, reportEpisodes, spendTotals, type Spend } from "./rules.js";
 
 const USAGE = `Usage: npm run channel -- <command> [args]   (channel: CHANNEL env, default invisible-explained)
 
@@ -21,6 +21,7 @@ const USAGE = `Usage: npm run channel -- <command> [args]   (channel: CHANNEL en
   assign-slots [YYYY-MM-DD]      give approved episodes without a publishAt the next free slots
   report [YYYY-MM-DD]            write reports/<date>.md (compact daily report)
   costs                          production cost log per video (credits, paid calls, by model, status)
+  plan [--json]                  next step per unfinished episode, with budget/lint/approval blockers
   lint [id]                      pre-spend checks (length, dialogue vs storyboard, narrators, sources, title); exit 2 on failure`;
 
 const CHANNEL = process.env.CHANNEL ?? "invisible-explained";
@@ -132,6 +133,24 @@ async function main() {
       await fs.mkdir(path.dirname(out), { recursive: true });
       await fs.writeFile(out, body);
       console.log(body);
+      return;
+    }
+    case "plan": {
+      const c = cfg as typeof cfg & { format: { maxWords: number }; voice: { narrators: Record<string, { name: string }> }; costEstimatePerVideo?: Record<string, number> };
+      const ledger = await readLedger();
+      const perVideo = Math.min(...Object.values(c.costEstimatePerVideo ?? { x: 9.22 }).filter((v) => typeof v === "number"));
+      const steps = planEpisodes(
+        (await loadQueue(CHANNEL)).map((q) => q.m),
+        {
+          lint: (m) => lintEpisode(m, { maxWords: c.format.maxWords, narrators: c.voice.narrators }),
+          budget: (credits, m) => budgetVerdict(cfg, ledger, credits, m.credits.spent),
+          estimate: (m) => (m.credits.estimated > 0 ? m.credits.estimated : perVideo),
+          autoPublish: cfg.autoPublish && cfg.phase === "production",
+        },
+      );
+      if (rest[0] === "--json") console.log(JSON.stringify(steps, null, 1));
+      else for (const s of steps) console.log(`${s.blocked ? "BLOCKED" : s.paid ? "PAID   " : "next   "} ${s.episode.padEnd(32)} ${s.next}${s.blocked ? `  [${s.blocked}]` : ""}`);
+      if (!steps.length) console.log("nothing to do");
       return;
     }
     case "lint": {

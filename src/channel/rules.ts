@@ -94,6 +94,70 @@ export function lintEpisode(m: Manifest, rules: LintRules): string[] {
   return errs;
 }
 
+export interface PlanStep {
+  episode: string;
+  next: string; // what to do next
+  paid: boolean; // does that step spend credits?
+  blocked?: string; // why it cannot run now
+}
+
+/**
+ * The next action for each unfinished episode, in production order. Pure and
+ * deterministic: the daily producer follows this instead of re-deriving state.
+ * `estimate(m)` is the credits the next paid step would cost.
+ */
+export function planEpisodes(
+  eps: Manifest[],
+  ctx: { lint: (m: Manifest) => string[]; budget: (credits: number, m: Manifest) => { ok: boolean; reasons: string[] }; estimate: (m: Manifest) => number; autoPublish: boolean },
+): PlanStep[] {
+  const out: PlanStep[] = [];
+  for (const m of eps) {
+    const step = (next: string, paid = false, blocked?: string) => out.push({ episode: m.id, next, paid, ...(blocked ? { blocked } : {}) });
+    switch (m.status) {
+      case "planned":
+        step("write script + storyboard (templates/script.md, storyboard.md)");
+        break;
+      case "scripted":
+        step("fact-check every claim (fact-check.md), then lint");
+        break;
+      case "fact_checked": {
+        const jobs = [m.assets.voice?.jobId, ...Object.values(m.assets.scenes).map((s) => s.image?.jobId)].filter(Boolean);
+        if (jobs.length) {
+          // Paid jobs already exist (e.g. links kept off a public repo): never pay twice.
+          const missing = [m.assets.voice?.url, ...Object.values(m.assets.scenes).map((s) => s.image?.url)].some((u) => !u);
+          step(missing ? `assets already generated (${jobs.length} job ids): recover links with jobs_wait/job_display, do NOT regenerate` : "set status assets_ready (all assets recorded)");
+          break;
+        }
+        const errs = ctx.lint(m);
+        if (errs.length) { step("fix lint errors", false, errs.join("; ")); break; }
+        const cost = ctx.estimate(m);
+        const b = ctx.budget(cost, m);
+        step(`generate assets (~${cost} cr): voice take + photoreal stills in one batch`, true, b.ok ? undefined : `budget: ${b.reasons.join("; ")}`);
+        break;
+      }
+      case "assets_ready":
+        step(`write render/higgsedit/episodes/${m.slug}.jsx if missing, preview frames, render`);
+        break;
+      case "rendered":
+        step("run finalize.py (master + QC), upload, record render + qc");
+        break;
+      case "qc_passed":
+        if (m.approval.state === "approved" || ctx.autoPublish) step("upload via GitHub 'YouTube publish' workflow (private + scheduled)");
+        else step("owner review", false, "awaiting owner approval");
+        break;
+      case "uploaded":
+        step("verify public after publishAt (publish workflow)");
+        break;
+      case "failed":
+        step("inspect log and decide: fix or reject", false, m.log.at(-1) ?? "failed");
+        break;
+      default:
+        break; // published, rejected: done
+    }
+  }
+  return out;
+}
+
 export interface CostRow {
   episode: string;
   status: string;
