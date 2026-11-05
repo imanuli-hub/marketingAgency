@@ -1,6 +1,6 @@
 // Cartoon scenes for "How noise-cancelling headphones erase sound" (2, 3, 5, 7, 9, 10).
 import { Mascot } from "./mascot.jsx";
-import { P, full, keys, show, bob, pulse, big, headPos, wavePath, circle, ellipse, INK, CYAN, YELLOW, W, H } from "./kit.jsx";
+import { P, full, keys, show, hideAt, bob, pulse, big, headPos, wavePath, circle, ellipse, INK, CYAN, YELLOW, W, H } from "./kit.jsx";
 
 const GREY = "#2A2F3A";
 
@@ -90,10 +90,9 @@ const SCENES = {
   10: ({ dur, cue }) => {
     const tFlip = cue("upside", dur * 0.6);
     return full([
-      <frame x={0} y={130} width={W} height={400} origin="center" layout="none"
-        animate={[{ property: "rotation", keyframes: keys(dur, [{ at: 0, value: 0 }, { at: tFlip, value: 0 }, { at: tFlip + 0.5, value: 180, easing: "ease-in-out" }, { at: dur, value: 180 }]) }]}>
-        <path d={wavePath(140, 940, 200, 70, 270)} x={0} y={0} width={W} height={400} stroke={{ width: 14, color: CYAN, cap: "round" }} />
-      </frame>,
+      // the wave turns into its mirror image (crossfade; a rotation would sweep over the label)
+      full([P(wavePath(140, 940, 330, 70, 270), { stroke: { width: 14, color: YELLOW, cap: "round" } })], hideAt(tFlip, dur)),
+      full([P(wavePath(140, 940, 330, 70, 270, true), { stroke: { width: 14, color: CYAN, cap: "round" } })], show(tFlip, dur)),
       <Mascot x={240} y={520} scale={0.85} arms={["downL", "downR"]} expr={{ eyes: "happy", mouth: "smile" }} animate={pulse(dur, 0.84, 0.86, 1.6)} />,
       ...Headphones({ x: 240, y: 520, s: 0.85 }),
     ]);
