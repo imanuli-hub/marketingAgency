@@ -62,10 +62,10 @@ const SCENES = {
       </frame>,
       <frame x={0} y={0} width={W} height={H} layout="none" animate={show(tNerve, dur)}>
         {P("M1010,1260 C900,1240 820,1150 735,975", { stroke: { width: 10, color: YELLOW, cap: "round" }, dash: [22, 14] })}
-        <text x={820} y={1180} width={220} fontFamily="Montserrat" fontWeight={800} fontSize={40} color={YELLOW}>NERVE</text>
+        <text x={780} y={1340} width={260} fontFamily="Montserrat" fontWeight={800} fontSize={40} color={YELLOW}>NERVE</text>
       </frame>,
       <text x={720} y={880} width={300} fontFamily="Montserrat" fontWeight={800} fontSize={40} color={MUSCLE}>MUSCLE</text>,
-      <text x={300} y={600} width={240} fontFamily="Montserrat" fontWeight={800} fontSize={40} color="#FFFFFF">HAIR</text>,
+      <text x={590} y={640} width={240} fontFamily="Montserrat" fontWeight={800} fontSize={40} color="#FFFFFF">HAIR</text>,
     ]);
   },
 

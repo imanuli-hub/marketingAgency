@@ -5,6 +5,8 @@
 #   TIE_SYNC=bundle  use sources already unpacked by bundle.sh (works with a private repo)
 #   TIE_SYNC=git     (default) anonymous clone/fetch of the branch (public repo only)
 set -euo pipefail
+# Body in a function: bash parses it fully before the git reset below rewrites this file.
+main() {
 EP="$1"; SLUG="$2"; STEP="${3:-build}"
 BRANCH="${BRANCH:-invisible-explained-pipeline}"
 REPO=/home/user/tie/repo
@@ -47,3 +49,5 @@ if [ "$STEP" = "frames" ]; then
   done
   ls ../prev
 fi
+}
+main "$@"
