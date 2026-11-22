@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #07100c;
+  --surface: #0d1a14;
+  --surface-2: #12241b;
+  --border: #23392e;
+  --foreground: #ece7da;
+  --muted: #9aa89f;
+  --gold: #d6b25e;
+  --gold-strong: #f0cf7a;
+  --felt: #0f5a37;
+  --felt-dark: #0a4128;
+  --pocket-red: #b3202a;
+  --pocket-black: #16181a;
+  --pocket-green: #13804b;
+  --danger: #ef5b5b;
+  --warn: #e8b04a;
+  --good: #4fc28a;
+  --info: #7fb4e8;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-gold: var(--gold);
+  --color-gold-strong: var(--gold-strong);
+  --color-felt: var(--felt);
+  --color-felt-dark: var(--felt-dark);
+  --color-pocket-red: var(--pocket-red);
+  --color-pocket-black: var(--pocket-black);
+  --color-pocket-green: var(--pocket-green);
+  --color-danger: var(--danger);
+  --color-warn: var(--warn);
+  --color-good: var(--good);
+  --color-info: var(--info);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, "Times New Roman", serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(214, 178, 94, 0.08), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(19, 128, 75, 0.12), transparent 60%),
+    var(--background);
+  color: var(--foreground);
+  min-height: 100dvh;
+}
+
+.font-display { font-family: var(--font-display); }
+
+.gold-text {
+  background: linear-gradient(180deg, var(--gold-strong), var(--gold) 60%, #a8853a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.felt-bg {
+  background:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.06), transparent 70%),
+    linear-gradient(180deg, var(--felt), var(--felt-dark));
+}
+
+.touch-manipulation { touch-action: manipulation; }
+
+.pb-safe { padding-bottom: calc(var(--safe-bottom) + 0.5rem); }
+
+/* Long-form lesson content */
+.prose-casino h3 { font-family: var(--font-display); font-size: 1.15rem; color: var(--gold-strong); margin: 1.25rem 0 0.5rem; }
+.prose-casino p { color: color-mix(in oklab, var(--foreground) 88%, transparent); line-height: 1.65; margin: 0.5rem 0; }
+.prose-casino ul { list-style: disc; padding-left: 1.25rem; margin: 0.5rem 0; }
+.prose-casino ol { list-style: decimal; padding-left: 1.25rem; margin: 0.5rem 0; }
+.prose-casino li { margin: 0.25rem 0; line-height: 1.55; color: color-mix(in oklab, var(--foreground) 88%, transparent); }
+.prose-casino strong { color: var(--foreground); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
