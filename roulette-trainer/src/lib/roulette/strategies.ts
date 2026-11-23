@@ -47,7 +47,7 @@ export interface Strategy {
   /** Return to the starting state (used when a table limit breaks the progression). */
   reset(): void;
   /** Short description of the internal state for the UI. */
-  state(): string;
+  state(locale?: "en" | "he"): string;
 }
 
 const r2 = (x: number) => Math.round(x * 100) / 100;
@@ -56,11 +56,11 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
   const base = params.baseBet;
   switch (id) {
     case "flat":
-      return { id, nextStake: () => base, record: () => {}, reset: () => {}, state: () => "Same stake every spin" };
+      return { id, nextStake: () => base, record: () => {}, reset: () => {}, state: (l) => (l === "he" ? "אותו הימור בכל סיבוב" : "Same stake every spin") };
 
     case "mixed": {
       // 5 units per spin: 3 on an outside bet, 1 on a six line, 1 straight-up.
-      return { id, nextStake: () => base * 5, record: () => {}, reset: () => {}, state: () => "3u outside + 1u six line + 1u straight" };
+      return { id, nextStake: () => base * 5, record: () => {}, reset: () => {}, state: (l) => (l === "he" ? "3 יח׳ בחוץ + 1 יח׳ שורה כפולה + 1 יח׳ מספר" : "3u outside + 1u six line + 1u straight") };
     }
 
     case "martingale": {
@@ -70,7 +70,7 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
         nextStake: () => base * 2 ** losses,
         record: (net) => { if (net > 0) losses = 0; else if (net < 0) losses++; },
         reset: () => { losses = 0; },
-        state: () => `${losses} loss${losses === 1 ? "" : "es"} in a row → next ${2 ** losses}u`,
+        state: (l) => (l === "he" ? `${losses} הפסדים ברצף ← הבא ${2 ** losses} יח׳` : `${losses} loss${losses === 1 ? "" : "es"} in a row → next ${2 ** losses}u`),
       };
     }
 
@@ -84,7 +84,7 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
           if (net > 0) { wins++; if (wins >= steps) wins = 0; } else if (net < 0) wins = 0;
         },
         reset: () => { wins = 0; },
-        state: () => `${wins}/${steps} wins → next ${2 ** wins}u`,
+        state: (l) => (l === "he" ? `${wins}/${steps} זכיות ← הבא ${2 ** wins} יח׳` : `${wins}/${steps} wins → next ${2 ** wins}u`),
       };
     }
 
@@ -95,7 +95,7 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
         nextStake: () => base * units,
         record: (net) => { if (net < 0) units++; else if (net > 0) units = Math.max(1, units - 1); },
         reset: () => { units = 1; },
-        state: () => `next ${units}u`,
+        state: (l) => (l === "he" ? `הבא ${units} יח׳` : `next ${units}u`),
       };
     }
 
@@ -108,7 +108,7 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
         nextStake: () => base * at(i),
         record: (net) => { if (net < 0) i++; else if (net > 0) i = Math.max(0, i - 2); },
         reset: () => { i = 0; },
-        state: () => `step ${i + 1} → next ${at(i)}u`,
+        state: (l) => (l === "he" ? `שלב ${i + 1} ← הבא ${at(i)} יח׳` : `step ${i + 1} → next ${at(i)}u`),
       };
     }
 
@@ -130,7 +130,7 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
           }
         },
         reset: () => { line = [...start]; },
-        state: () => (line.length ? `line [${line.join(", ")}] → next ${units()}u` : "line cleared — cycle won"),
+        state: (l) => (line.length ? (l === "he" ? `שורה [${line.join(", ")}] ← הבא ${units()} יח׳` : `line [${line.join(", ")}] → next ${units()}u`) : l === "he" ? "השורה נמחקה — המחזור הושלם" : "line cleared — cycle won"),
       };
     }
 
@@ -150,7 +150,7 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
           else if (net > 0) unitsBet++;
         },
         reset: () => { unitsBet = 1; cycle = 0; },
-        state: () => `cycle ${cycle >= 0 ? "+" : ""}${r2(cycle)} → next ${unitsBet}u`,
+        state: (l) => (l === "he" ? `מחזור ${cycle >= 0 ? "+" : ""}${r2(cycle)} ← הבא ${unitsBet} יח׳` : `cycle ${cycle >= 0 ? "+" : ""}${r2(cycle)} → next ${unitsBet}u`),
       };
     }
 
@@ -161,7 +161,7 @@ export function createStrategy(id: StrategyId, params: StrategyParams): Strategy
         nextStake: (ctx) => Math.max(ctx.minBet, Math.floor((ctx.bankroll * pct) / ctx.minBet) * ctx.minBet),
         record: () => {},
         reset: () => {},
-        state: () => `${r2(pct * 100)}% of current bankroll`,
+        state: (l) => (l === "he" ? `${r2(pct * 100)}% מהקופה הנוכחית` : `${r2(pct * 100)}% of current bankroll`),
       };
     }
   }
@@ -176,12 +176,13 @@ export function scriptedProgression(
   params: StrategyParams,
   results: ("W" | "L")[],
   startBankroll = 100,
+  locale: "en" | "he" = "en",
 ): { spin: number; stake: number; result: "W" | "L"; net: number; bankroll: number; state: string }[] {
   const s = createStrategy(id, params);
   let bankroll = startBankroll;
   return results.map((result, i) => {
     const ctx = { bankroll, minBet: Math.min(1, params.baseBet), payout: 1 };
-    const state = s.state();
+    const state = s.state(locale);
     const stake = r2(s.nextStake(ctx));
     const net = result === "W" ? stake : -stake;
     bankroll = r2(bankroll + net);

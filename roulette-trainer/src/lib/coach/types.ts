@@ -19,7 +19,9 @@ export interface SpinRecord {
   net: number;
   balanceAfter: number;
   at: number;
-  bets: { key: string; kind: BetKind; amount: number }[];
+  bets: { key: string; kind: BetKind; amount: number; won?: boolean }[];
+  /** Stake the selected practice strategy required for this spin (if any). */
+  strategyRequired?: number;
 }
 
 export interface CoachSession {
@@ -32,6 +34,8 @@ export interface CoachSession {
 
 export interface CoachInput {
   mode: CoachMode;
+  /** Message language (defaults to English). */
+  locale?: import("@/lib/utils/format").Locale;
   rules: TableRules;
   bets: PlacedBet[];
   balance: number;

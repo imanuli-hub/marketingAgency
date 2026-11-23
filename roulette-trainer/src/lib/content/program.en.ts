@@ -1,0 +1,233 @@
+import type { ProgramDay } from "./program-types";
+
+export const PROGRAM_EN: ProgramDay[] = [
+  {
+    day: 1, phase: "Roulette fundamentals", title: "The wheel, the table and a round", minutes: 15,
+    goals: ["Know the European wheel", "Read the betting layout", "Follow a full round"],
+    objective: "Complete the guided steps 1–3 and play 10 free-practice spins.",
+    sections: [
+      { heading: "European roulette", body: ["A European wheel has 37 pockets: 1–36 (alternating red and black) plus one green 0. The ball lands in exactly one pocket, and every pocket is equally likely: 1 in 37.", "American wheels add a 00 pocket (38 in total). Your training uses the European single-zero wheel because it has the lower house edge."] },
+      { heading: "The layout", body: ["The table shows the numbers in a grid of 12 rows of three, with 0 at the head. Bets placed on the numbers themselves are 'inside' bets; the boxes around the grid (dozens, columns, red/black, odd/even, 1–18/19–36) are 'outside' bets."] },
+      { heading: "A round, step by step", bullets: ["The dealer invites bets.", "Players place chips.", "The dealer spins the wheel and the ball, then calls 'No more bets'.", "The ball settles; a marker (the 'dolly') goes on the winning number.", "Losing chips are swept, then winners are paid. Don't touch chips until the dolly is removed."] },
+      { heading: "Independence", body: ["Each spin is a fresh event. The wheel has no memory, so past results never change the next spin's probabilities."] },
+    ],
+    exercise: { id: "d1-guided", title: "Place your first chips", description: "In Guided Practice, complete the first three steps (Red, first dozen, straight 17), then play 10 spins on the practice table.", href: "/guided", cta: "Open guided practice" },
+    quiz: [
+      { q: "How many pockets does a European wheel have?", options: ["36", "37", "38", "40"], answer: 1, explain: "1–36 plus a single zero = 37." },
+      { q: "Which of these is an inside bet?", options: ["Red", "First dozen", "Split 17/20", "19–36"], answer: 2, explain: "Inside bets are placed on the numbers themselves." },
+      { q: "What does 'No more bets' mean?", options: ["The table is closing", "Bets placed after the call are not accepted", "Remove your chips", "Only outside bets now"], answer: 1, explain: "Betting is closed until the spin is settled." },
+      { q: "Red has come up 6 times. On the next spin, black is…", options: ["More likely", "Less likely", "Exactly as likely as always (18/37)", "Guaranteed"], answer: 2, explain: "Spins are independent." },
+    ],
+  },
+  {
+    day: 2, phase: "Roulette fundamentals", title: "Outside bets", minutes: 20,
+    goals: ["Red/Black, Odd/Even, High/Low", "Dozens and columns", "Know what zero does"],
+    objective: "Place each outside bet once in Guided Practice and predict every payout.",
+    sections: [
+      { heading: "Even-money bets (pay 1:1)", bullets: ["Red / Black — 18 numbers each.", "Odd / Even — 18 numbers each.", "1–18 (low) / 19–36 (high) — 18 numbers each.", "A €2 win returns €4: your €2 stake plus €2 winnings."] },
+      { heading: "Dozens and columns (pay 2:1)", bullets: ["Dozens: 1–12, 13–24, 25–36.", "Columns: one of the three vertical lines of 12 numbers, bet in the '2 to 1' boxes.", "A €2 win returns €6: €2 stake plus €4 winnings."] },
+      { heading: "Zero beats every outside bet", body: ["0 is not red or black, odd or even, high or low, and is in no dozen or column. When 0 lands, every outside bet loses (unless the table offers La Partage or En Prison — Day 11). That one pocket is where the casino's edge on outside bets comes from."] },
+    ],
+    exercise: { id: "d2-outside", title: "Outside bets drill", description: "Complete the outside-bet steps in Guided Practice. Enter your payout prediction before each spin.", href: "/guided", cta: "Open guided practice" },
+    quiz: [
+      { q: "A €2 bet on Odd wins. How much is returned in total?", options: ["€2", "€4", "€6", "€72"], answer: 1, explain: "1:1 → €2 winnings + €2 stake = €4." },
+      { q: "What does a column bet pay?", options: ["1:1", "2:1", "5:1", "8:1"], answer: 1, explain: "12 numbers pay 2 to 1." },
+      { q: "You bet €2 on 19–36 and 0 lands (standard rules). Result?", options: ["Win €2", "Push", "Lose €2", "Moves to next spin"], answer: 2, explain: "Zero isn't high, so the bet loses." },
+      { q: "How many numbers does Red cover?", options: ["12", "18", "19", "36"], answer: 1, explain: "18 red numbers; 0 is green." },
+    ],
+  },
+  {
+    day: 3, phase: "Roulette fundamentals", title: "Inside bets and correct payouts", minutes: 20,
+    goals: ["Straight-up, split, street, corner, six line", "The payout formula", "'To 1' vs 'for 1'"],
+    objective: "Place one of each inside bet in Guided Practice; get every payout right before the spin.",
+    sections: [
+      { heading: "Where the chip goes", bullets: ["Straight up — centre of one number. Pays 35:1.", "Split — on the line between two adjacent numbers. Pays 17:1.", "Street — outer edge of a row of three. Pays 11:1.", "Corner — where four numbers meet. Pays 8:1.", "Six line — outer edge where two rows meet. Pays 5:1."] },
+      { heading: "The payout formula", body: ["Payout = 36 ÷ numbers covered − 1. A corner covers 4: 36/4 − 1 = 8. Because the wheel really has 37 pockets, every bet pays slightly less than its true odds — that gap is the house edge (2.70%)."] },
+      { heading: "'35 to 1'", body: ["You receive 35 in winnings and keep your stake. A €2 straight-up win returns €72 (€70 + €2)."] },
+    ],
+    exercise: { id: "d3-inside", title: "Inside bets drill", description: "Complete the inside-bet steps in Guided Practice. Watch the highlight show which numbers each chip covers.", href: "/guided", cta: "Open guided practice" },
+    quiz: [
+      { q: "€2 straight-up wins. Total returned?", options: ["€70", "€72", "€36", "€35"], answer: 1, explain: "35 × €2 = €70 winnings + €2 stake." },
+      { q: "What does a corner pay?", options: ["5:1", "8:1", "11:1", "17:1"], answer: 1, explain: "Four numbers: 36/4 − 1 = 8." },
+      { q: "Where does a split on 14 and 17 go?", options: ["Centre of 14", "On the line between 14 and 17", "Edge of the street", "In the 2nd dozen"], answer: 1, explain: "Splits sit on the shared line." },
+      { q: "Which bet covers six numbers?", options: ["Street", "Corner", "Six line", "Dozen"], answer: 2, explain: "Two adjacent streets, pays 5:1." },
+    ],
+  },
+  {
+    day: 4, phase: "Flat betting practice", title: "Your profile and your first flat session", minutes: 45,
+    goals: ["Understand your training profile", "Play a full flat-betting session", "Respect stop rules"],
+    objective: "Session 1: €2 on Red every spin, stop at +€10, −€20 or 45 minutes.",
+    sections: [
+      { heading: "Your profile", bullets: ["Bankroll €100 (virtual).", "Fixed stake €2 — 2% of the bankroll.", "European wheel.", "Session length 30–45 minutes.", "Profit target +€10, stop-loss −€20."] },
+      { heading: "What stop rules do — and don't do", body: ["Stop rules control how much one session can expose: you'll never lose more than €20 in it, and you lock in a good session at +€10.", "They do NOT remove the casino's advantage. Each €2 bet still loses about 5.4 cents on average. With flat €2 bets on Red you reach +€10 before −€20 roughly 57% of the time — but the losing sessions cost twice as much, so the average session result is still negative."] },
+      { heading: "Rule adherence", body: ["Today's goal isn't to win; it's to follow the plan exactly: same stake every spin, stop the moment a rule is hit. The session review scores discipline, not profit."] },
+    ],
+    exercise: { id: "d4-session", title: "Flat session #1", description: "On the practice table, start a session from your profile. The strategy tracker shows the required €2 stake; the table locks automatically at your stop rules.", href: "/play", cta: "Start practice session" },
+    quiz: [
+      { q: "Your stop-loss is −€20. What does it guarantee?", options: ["You'll be profitable", "This session can't lose more than €20", "The house edge disappears", "You'll win 57% of sessions"], answer: 1, explain: "It caps exposure; it doesn't change the edge." },
+      { q: "€2 is what share of a €100 bankroll?", options: ["0.2%", "2%", "20%", "5%"], answer: 1, explain: "2 / 100 = 2%." },
+      { q: "Flat betting means…", options: ["Doubling after losses", "The same stake every spin", "Betting only on zero", "Raising after wins"], answer: 1, explain: "Same stake, every spin." },
+      { q: "You reach +€10 after 15 minutes. Your plan says…", options: ["Keep going while it's hot", "Stop — target reached", "Double the stake", "Switch to straight-ups"], answer: 1, explain: "The target is a stopping rule." },
+    ],
+  },
+  {
+    day: 5, phase: "Flat betting practice", title: "Expected loss and drawdown", minutes: 45,
+    goals: ["Calculate theoretical loss", "Read a drawdown", "Compare result vs expectation"],
+    objective: "Session 2: same plan. Afterwards compare your result with the expected loss in the review.",
+    sections: [
+      { heading: "Theoretical (expected) loss", body: ["Expected loss = total wagered × house edge. 100 spins × €2 = €200 wagered × 2.70% = €5.40.", "Your actual result will usually be far from €5.40 in a single session — that difference is variance (luck)."] },
+      { heading: "Drawdown", body: ["Maximum drawdown is the biggest drop from your highest balance to a later low. A session can end +€4 with a €14 drawdown along the way. Planning for drawdowns stops them from feeling like emergencies."] },
+      { heading: "Track these each session", bullets: ["Total spins and total wagered.", "Profit/loss and maximum drawdown.", "Expected theoretical loss.", "Whether you followed every rule."] },
+    ],
+    exercise: { id: "d5-session", title: "Flat session #2", description: "Play a second profile session and open the session review at the end. Note 'actual vs expected'.", href: "/play", cta: "Start practice session" },
+    quiz: [
+      { q: "You wager €300 in total on a European table. Expected loss?", options: ["€3", "€8.10", "€15.78", "€0"], answer: 1, explain: "€300 × 2.70% = €8.10." },
+      { q: "A session went 100 → 112 → 96 → 104. Max drawdown?", options: ["€4", "€8", "€16", "€12"], answer: 2, explain: "From the 112 peak to the 96 low." },
+      { q: "You finished +€10. Does that mean you beat the house edge?", options: ["Yes", "No — it's variance; the edge still applied", "Only with flat betting", "Only on European tables"], answer: 1, explain: "Short-term results are dominated by luck." },
+      { q: "Which reduces your expected loss?", options: ["Betting faster", "Smaller total wagering", "Following streaks", "Switching colours"], answer: 1, explain: "Expected loss scales with total wagered." },
+    ],
+  },
+  {
+    day: 6, phase: "Flat betting practice", title: "Why raising after losses doesn't help", minutes: 45,
+    goals: ["Recognise chasing", "Understand independence", "Finish a third disciplined session"],
+    objective: "Session 3: flat €2, no stake changes — even after a losing streak.",
+    sections: [
+      { heading: "The next spin doesn't know you lost", body: ["After five losses on Red, the chance that Red wins next is still 18/37 = 48.6%. A bigger bet doesn't make a win more likely; it only makes the next loss bigger.", "Raising stakes to 'win it back' increases total wagering, which increases expected loss, and pushes you towards your stop-loss faster."] },
+      { heading: "Losing streaks are normal", body: ["In 100 even-money spins, a run of at least 6 losses happens in roughly 6 sessions out of 10 (and 5+ losses in about 85%). Expect streaks; your stop-loss is what protects you from them."] },
+      { heading: "Warning signs", bullets: ["Stake goes up right after a loss.", "Thinking a colour is 'due'.", "Wanting to extend the session because you're behind."] },
+    ],
+    exercise: { id: "d6-session", title: "Flat session #3", description: "Play your third profile session without changing the stake. The coach will flag any increase after a loss.", href: "/play", cta: "Start practice session" },
+    quiz: [
+      { q: "After 5 losses on Red, P(Red next) on a European wheel is…", options: ["Higher", "Lower", "18/37, unchanged", "50%"], answer: 2, explain: "Independence." },
+      { q: "Doubling your stake after a loss…", options: ["Improves the odds", "Increases the amount at risk only", "Lowers the house edge", "Guarantees recovery"], answer: 1, explain: "Odds are unchanged; exposure grows." },
+      { q: "Which is a sign of chasing?", options: ["Taking a break", "Raising stakes to win losses back", "Stopping at the limit", "Betting your unit"], answer: 1, explain: "Chasing = increasing stakes to recover." },
+      { q: "What protects you from a long losing streak?", options: ["A bigger stake", "Your stop-loss", "Switching tables", "Betting on zero"], answer: 1, explain: "It caps the session's loss." },
+    ],
+  },
+  {
+    day: 7, phase: "Strategy comparison", title: "Flat betting vs Martingale", minutes: 25,
+    goals: ["Walk through a Martingale example", "See the table-limit failure", "Compare on identical spins"],
+    objective: "Run the Strategy Lab quick analysis for Martingale and read the worked example.",
+    sections: [
+      { heading: "Martingale", body: ["Double after every loss; return to the base after a win. Every completed cycle wins one base unit (€2).", "Losses grow fast: €2, €4, €8, €16, €32, €64. Six losses in a row cost €126 — more than your whole €100 bankroll."] },
+      { heading: "Distribution, not edge", body: ["Martingale makes small wins very frequent and large losses rare but severe. It also bets much more money in total, so its expected loss in euros is usually larger than flat betting's over the same spins. The edge per euro is unchanged."] },
+    ],
+    exercise: { id: "d7-lab", title: "Martingale analysis", description: "In the Strategy Lab, select Martingale, set base €2, bankroll €100, and run the quick analysis.", href: "/strategies", cta: "Open Strategy Lab" },
+    quiz: [
+      { q: "Base €2. Stake after three straight losses (Martingale)?", options: ["€6", "€8", "€16", "€4"], answer: 2, explain: "2 → 4 → 8 → 16." },
+      { q: "Does Martingale change the house edge?", options: ["Yes, removes it", "Yes, halves it", "No", "Only on Red"], answer: 2, explain: "No staking order changes the edge." },
+      { q: "Why does Martingale usually have a larger expected € loss than flat betting?", options: ["Worse odds", "It wagers more money in total", "Dealers dislike it", "It bets on zero"], answer: 1, explain: "Expected loss = wagered × edge." },
+      { q: "With €100, how many straight losses can Martingale from €2 absorb before it can't place the next bet?", options: ["4", "5", "6", "10"], answer: 1, explain: "2+4+8+16+32 = €62 lost; the next bet (€64) exceeds the €38 left." },
+    ],
+  },
+  {
+    day: 8, phase: "Strategy comparison", title: "D'Alembert and Fibonacci", minutes: 25,
+    goals: ["Linear vs Fibonacci growth", "Worked examples", "Bankroll needs"],
+    objective: "Read both worked examples and compare their losing-streak tables at €2 base.",
+    sections: [
+      { heading: "D'Alembert", body: ["+1 unit after a loss, −1 after a win (never below 1). Growth is linear: after 6 losses the stake is 7 units (€14). Gentler than Martingale but based on the false idea that wins and losses 'even out'."] },
+      { heading: "Fibonacci", body: ["Stakes follow 1, 1, 2, 3, 5, 8, 13… units; one step forward after a loss, two back after a win. Slower at first, still exponential: ten losses cost 143 units (€286 at €2)."] },
+      { heading: "Same conclusion", body: ["Both change when you bet more. Neither changes the probability of any spin or the 2.70% edge on each euro."] },
+    ],
+    exercise: { id: "d8-lab", title: "Compare progressions", description: "In the Strategy Lab, view D'Alembert and Fibonacci with base €2 and bankroll €100. Note where each one exhausts the bankroll.", href: "/strategies", cta: "Open Strategy Lab" },
+    quiz: [
+      { q: "D'Alembert from 1 unit after two losses bets…", options: ["2 units", "3 units", "4 units", "1 unit"], answer: 1, explain: "1 → 2 → 3." },
+      { q: "In Fibonacci, after a win you move…", options: ["Back to the start", "One step back", "Two steps back", "Forward"], answer: 2, explain: "Two steps back." },
+      { q: "Which grows fastest during a long losing run?", options: ["Flat", "D'Alembert", "Fibonacci", "All equal"], answer: 2, explain: "Fibonacci is exponential; D'Alembert linear." },
+      { q: "Which statement is true?", options: ["D'Alembert works because results balance out", "Fibonacci has a lower house edge", "All carry the same edge per euro wagered", "Progressions guarantee profit with time"], answer: 2, explain: "The edge belongs to the bet." },
+    ],
+  },
+  {
+    day: 9, phase: "Strategy comparison", title: "Paroli and the €110-before-€80 experiment", minutes: 30,
+    goals: ["Positive progressions", "Run a Monte Carlo comparison", "Read probability vs expectation"],
+    objective: "Run the 'reach €110 before €80' experiment across five strategies.",
+    sections: [
+      { heading: "Paroli (Reverse Martingale)", body: ["Double after a win, bank after three wins in a row, reset after any loss. Losses per cycle stay small; occasional streaks bring bigger wins. Most cycles still lose one unit."] },
+      { heading: "The experiment", body: ["Starting with €100 and €2 base bets, what is the chance of reaching €110 before falling to €80? Progressions like Martingale raise that probability — but when they fail they tend to fail big, and they wager far more. The average result stays negative for every system."] },
+      { heading: "Five different questions", bullets: ["P(profitable session) — how often you finish ahead.", "Expected profit/loss — the average result, always negative.", "Risk of a large loss — how bad the bad sessions are.", "P(depletion) — how often the bankroll or limit is hit.", "Expected wagering volume — drives the expected loss."] },
+    ],
+    exercise: { id: "sim-target-experiment", title: "Run the experiment", description: "In the Simulator, run 'Reach €110 before €80' and compare the probabilities, average results and wagering.", href: "/simulator", cta: "Open simulator" },
+    quiz: [
+      { q: "Paroli increases stakes after…", options: ["Losses", "Wins", "Zero", "Every spin"], answer: 1, explain: "Positive progression." },
+      { q: "A system reaches the +€10 target 80% of the time. Is it profitable on average?", options: ["Yes", "Not necessarily — check the average result and loss size", "Only flat betting is", "Yes if the table is European"], answer: 1, explain: "Frequent small wins can hide rare big losses." },
+      { q: "Simulation results are…", options: ["Predictions of tonight's spins", "Estimates of the range of possible outcomes", "Guarantees", "Hot-number lists"], answer: 1, explain: "They describe distributions, not the future." },
+      { q: "Which number is negative for every staking system?", options: ["P(ahead)", "Expected profit", "Max drawdown", "Spins played"], answer: 1, explain: "Every euro wagered carries the edge." },
+    ],
+  },
+  {
+    day: 10, phase: "Casino rehearsal", title: "The casino flow and etiquette", minutes: 45,
+    goals: ["Buy-in and chips", "Betting window and 'No more bets'", "Rehearsal #1"],
+    objective: "Rehearsal 1 with your profile plan; no restart after a stop rule.",
+    sections: [
+      { heading: "At a real table", bullets: ["Put cash on the layout between spins and ask for chips; roulette often uses coloured 'wheel chips' unique to you.", "You have a short window to bet; the dealer controls the pace (30–40 spins an hour).", "After 'No more bets' you can't add, move or remove chips.", "Wait for the dealer to pay and remove the dolly before betting again."] },
+      { heading: "Etiquette", bullets: ["Don't touch chips after betting closes.", "Never hand cash directly to the dealer mid-spin.", "Tipping is customary in some places, always optional.", "Colour up (exchange wheel chips) before leaving."] },
+    ],
+    exercise: { id: "d10-rehearsal", title: "Casino rehearsal #1", description: "Start a casino rehearsal with your profile plan. Bet within the countdown; the session ends automatically at a stop rule.", href: "/casino/session", cta: "Start rehearsal" },
+    quiz: [
+      { q: "How do you buy chips at a roulette table?", options: ["Hand cash to the dealer mid-spin", "Place cash on the table between spins", "Throw it on the wheel", "Only at the cage"], answer: 1, explain: "Between spins, on the layout." },
+      { q: "Wheel chips…", options: ["Work at any table", "Only have value at that roulette table", "Are worth double", "Are for high rollers"], answer: 1, explain: "Colour up before leaving." },
+      { q: "After 'No more bets' you may…", options: ["Move a chip", "Add a late bet", "Wait for the result", "Remove a losing bet"], answer: 2, explain: "Touching chips can look like cheating." },
+      { q: "Typical spins per hour at a live table?", options: ["5–10", "30–40", "100+", "300+"], answer: 1, explain: "Roughly 30–40." },
+    ],
+  },
+  {
+    day: 11, phase: "Casino rehearsal", title: "Table limits, wheel types and favourable rules", minutes: 45,
+    goals: ["Read a placard", "Single vs double zero", "La Partage and En Prison", "Rehearsal #2"],
+    objective: "Rehearsal 2; before starting, set the table limits you expect to see.",
+    sections: [
+      { heading: "Table placard", bullets: ["Minimum: inside often a total across your inside bets; outside usually per bet.", "Maximum: per straight-up number and per outside bet.", "Pick a table whose minimum fits your €2 unit — or adjust your unit and stop rules before you sit down."] },
+      { heading: "Single zero vs double zero", body: ["European (0): 2.70% edge. American (0, 00): 5.26% — almost double, at the same payouts. Always prefer single zero."] },
+      { heading: "La Partage & En Prison", body: ["On some single-zero tables, when 0 lands an even-money bet loses only half (La Partage) or is held for one more spin (En Prison). The edge on even-money bets falls to about 1.35–1.39%. They never apply to inside bets, dozens or columns."] },
+    ],
+    exercise: { id: "d11-rehearsal", title: "Casino rehearsal #2", description: "Set the table limits in Settings, then run a second rehearsal with your profile plan.", href: "/casino/session", cta: "Start rehearsal" },
+    quiz: [
+      { q: "House edge on a double-zero wheel?", options: ["1.35%", "2.70%", "5.26%", "7.89%"], answer: 2, explain: "2/38." },
+      { q: "La Partage: €2 on Black, 0 lands. Returned?", options: ["€0", "€1", "€2", "€4"], answer: 1, explain: "Half the stake comes back." },
+      { q: "Does La Partage apply to a dozen bet?", options: ["Yes", "No, only even-money bets", "Only on Fridays", "Only American tables"], answer: 1, explain: "Even-money only." },
+      { q: "How do you spot an American wheel?", options: ["It's bigger", "It has both 0 and 00", "Higher limits", "Red felt"], answer: 1, explain: "The 00 pocket." },
+    ],
+  },
+  {
+    day: 12, phase: "Casino rehearsal", title: "Pressure, chasing and ending on plan", minutes: 45,
+    goals: ["Stay calm in a losing run", "End exactly on plan", "Rehearsal #3"],
+    objective: "Rehearsal 3; review the session report and fix any flagged habit.",
+    sections: [
+      { heading: "When it goes badly", bullets: ["Take a break after a big loss.", "Re-read your written plan.", "Remember the next spin is independent.", "The stop-loss is a success condition, not a failure."] },
+      { heading: "When it goes well", body: ["Reaching +€10 is a planned stop, not a sign you're 'hot'. Results don't run hot; the edge applies to the next spin exactly as before."] },
+      { heading: "Never restart automatically", body: ["After a stop rule, the session is over. If you play again, it's a new session with its own plan — decided calmly, not in the heat of the moment."] },
+    ],
+    exercise: { id: "d12-rehearsal", title: "Casino rehearsal #3", description: "Run your third rehearsal and read the full session review afterwards.", href: "/casino/session", cta: "Start rehearsal" },
+    quiz: [
+      { q: "You're at −€18 with a −€20 limit and feel lucky. You…", options: ["Bet €20 to win it back", "Stop, or bet within the remaining €2", "Switch to Martingale", "Ask for credit"], answer: 1, explain: "Honour the plan." },
+      { q: "You hit +€10 in 10 minutes. You…", options: ["Keep playing while hot", "Stop as planned", "Double stakes", "Move to inside bets"], answer: 1, explain: "Planned stop." },
+      { q: "A good response to a big loss is…", options: ["Bet bigger", "Take a break and check the plan", "Use a credit card", "Move to 00"], answer: 1, explain: "Pause and return to the plan." },
+      { q: "After a stop rule, the next session should start…", options: ["Immediately", "Only as a new, calmly planned session", "With double stakes", "Never"], answer: 1, explain: "No automatic restart." },
+    ],
+  },
+  {
+    day: 13, phase: "Final assessment", title: "Review and payout drills", minutes: 30,
+    goals: ["Fast, accurate payout calculation", "Review strategy risks", "Prepare for the assessment"],
+    objective: "Score at least 75% on the payout drills without a calculator.",
+    sections: [
+      { heading: "Payout cheat sheet", bullets: ["Straight 35:1 · Split 17:1 · Street 11:1 · Corner 8:1 · Six line 5:1", "Dozen/Column 2:1 · Even-money 1:1", "Total returned = stake × (payout + 1)."] },
+      { heading: "The five things that matter", bullets: ["Every European bet has a 2.70% edge.", "No staking system changes the edge.", "Expected loss = total wagered × edge.", "Plan budget, unit, target, stop-loss and time — and follow them.", "Past spins never affect future spins."] },
+    ],
+    exercise: { id: "d13-guided", title: "Guided drills", description: "Repeat any Guided Practice steps you found difficult, predicting each payout before the spin.", href: "/guided", cta: "Open guided practice" },
+    quiz: [
+      { type: "numeric", q: "€2 straight-up wins. Winnings (not including your stake)?", answer: 70, explain: "35 × €2 = €70." },
+      { type: "numeric", q: "€4 split wins. Total returned including the stake?", answer: 72, explain: "17 × €4 = €68 + €4 = €72." },
+      { type: "numeric", q: "€2 corner wins. Winnings?", answer: 16, explain: "8 × €2 = €16." },
+      { type: "numeric", q: "€6 on the first dozen wins. Total returned?", answer: 18, explain: "2 × €6 = €12 + €6 = €18." },
+    ],
+  },
+  {
+    day: 14, phase: "Final assessment", title: "Final readiness assessment", minutes: 45,
+    goals: ["Knowledge, payouts, strategy risk", "Bankroll discipline and etiquette", "Readiness report"],
+    objective: "Complete all five assessment sections and have three planned sessions in your history.",
+    sections: [
+      { heading: "How readiness is scored", body: ["Readiness combines your knowledge (five quiz sections), your discipline in your last three sessions (following stake, stop rules and time limits), and your program completion.", "Whether those sessions happened to win or lose does not count — a lucky session played badly scores lower than an unlucky one played to plan."] },
+    ],
+    exercise: { id: "d14-assessment", title: "Take the final assessment", description: "Open the assessment, complete all five sections and read your readiness report.", href: "/assessment", cta: "Open assessment" },
+    quiz: [],
+  },
+];

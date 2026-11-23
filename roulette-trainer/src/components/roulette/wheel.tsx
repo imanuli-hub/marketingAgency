@@ -28,9 +28,11 @@ export interface WheelProps {
   onSettled?: () => void;
   highlight?: Pocket | null;
   className?: string;
+  /** Accessible description of the wheel. */
+  label?: string;
 }
 
-export function RouletteWheel({ wheel, result, spinId, reduced, onSettled, highlight, className }: WheelProps) {
+export function RouletteWheel({ wheel, result, spinId, reduced, onSettled, highlight, className, label }: WheelProps) {
   const order = wheelOrder(wheel);
   const N = order.length;
   const step = 360 / N;
@@ -108,7 +110,7 @@ export function RouletteWheel({ wheel, result, spinId, reduced, onSettled, highl
 
   return (
     <div className={cn("relative aspect-square w-full", className)}>
-      <svg viewBox="-200 -200 400 400" className="h-full w-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]" role="img" aria-label={`${wheel === "european" ? "European single-zero" : "American double-zero"} roulette wheel${highlight != null ? `, result ${pocketLabel(highlight)}` : ""}`}>
+      <svg viewBox="-200 -200 400 400" className="h-full w-full drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]" role="img" aria-label={label ?? (highlight != null ? pocketLabel(highlight) : "roulette wheel")}>
         <defs>
           <radialGradient id="wood" cx="50%" cy="50%" r="50%">
             <stop offset="80%" stopColor="#3b2112" />

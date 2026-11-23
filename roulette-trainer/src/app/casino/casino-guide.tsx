@@ -5,73 +5,74 @@ import { CheckSquare, ChevronDown, Landmark, PlayCircle, Square } from "lucide-r
 import { PlanForm } from "@/components/casino/plan-form";
 import { PageHeader } from "@/components/layout/page-header";
 import { LessonSections } from "@/app/program/[day]/day-lesson";
+import { StopRulesNote } from "@/components/training/profile-editor";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/form";
 import { CASINO_GUIDE, READINESS_CHECKLIST } from "@/lib/content/casino";
+import { useLocale, useT } from "@/lib/i18n";
 import { HOUSE_EDGE } from "@/lib/roulette/probability";
 import { useAppStore } from "@/store/app-store";
 import { cn } from "@/lib/utils/cn";
 
 export function CasinoGuide() {
+  const t = useT();
+  const locale = useLocale();
   const settings = useAppStore((s) => s.settings);
   const update = useAppStore((s) => s.updateSettings);
   const done = useAppStore((s) => s.exercisesDone);
   const mark = useAppStore((s) => s.markExercise);
   const [open, setOpen] = useState<string | null>("chips");
-  const checked = READINESS_CHECKLIST.filter((c) => done[`check-${c.id}`]).length;
+  const checklist = READINESS_CHECKLIST[locale];
+  const checked = checklist.filter((c) => done[`check-${c.id}`]).length;
 
   return (
     <>
-      <PageHeader eyebrow="Real casino preparation" title="Casino Ready"
-        description="Everything that happens at a real roulette table — from buying chips to leaving on plan — plus a timed casino rehearsal with a fixed budget and stopping rules."
-        actions={<Button asChild><Link href="/casino/session"><PlayCircle /> Start casino rehearsal</Link></Button>} />
-
-      <div className="grid gap-4 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px]">
-        <div className="space-y-2">
-          {CASINO_GUIDE.map((t) => {
-            const isOpen = open === t.id;
+      <PageHeader eyebrow={t("guide.eyebrow")} title={t("guide.title")} description={t("guide.desc")}
+        actions={<Button asChild><Link href="/casino/session"><PlayCircle /> {t("guide.start")}</Link></Button>} />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="min-w-0 space-y-2">
+          {CASINO_GUIDE[locale].map((topic) => {
+            const isOpen = open === topic.id;
             return (
-              <Card key={t.id} className={cn(isOpen && "border-gold/40")}>
-                <button className="flex w-full items-center gap-3 p-4 text-left touch-manipulation" onClick={() => setOpen(isOpen ? null : t.id)} aria-expanded={isOpen}>
-                  <Landmark className="size-5 shrink-0 text-gold" />
+              <Card key={topic.id} className={cn(isOpen && "border-gold/40")}>
+                <button className="flex min-h-16 w-full items-center gap-3 p-4 text-start touch-manipulation" onClick={() => setOpen(isOpen ? null : topic.id)} aria-expanded={isOpen}>
+                  <Landmark className="size-5 shrink-0 text-gold" aria-hidden />
                   <div className="min-w-0 flex-1">
-                    <div className="font-display text-lg">{t.title}</div>
-                    <div className="text-sm text-muted">{t.summary}</div>
+                    <div className="font-display text-lg">{topic.title}</div>
+                    <div className="text-sm text-muted">{topic.summary}</div>
                   </div>
-                  <ChevronDown className={cn("size-5 text-muted transition-transform", isOpen && "rotate-180")} />
+                  <ChevronDown className={cn("size-5 text-muted transition-transform", isOpen && "rotate-180")} aria-hidden />
                 </button>
-                {isOpen && <CardContent className="pt-0"><LessonSections sections={t.sections} /></CardContent>}
+                {isOpen && <CardContent className="pt-0"><LessonSections sections={topic.sections} /></CardContent>}
               </Card>
             );
           })}
         </div>
-
         <aside className="space-y-4">
           <Card>
-            <CardHeader><CardTitle>Your casino plan</CardTitle><CardDescription>Used by the casino rehearsal. Write the same plan on your phone for the real visit.</CardDescription></CardHeader>
-            <CardContent><PlanForm plan={settings.casinoPlan} onChange={(p) => update({ casinoPlan: p })} edge={settings.wheel === "european" ? HOUSE_EDGE.european : HOUSE_EDGE.american} /></CardContent>
+            <CardHeader><CardTitle>{t("guide.planTitle")}</CardTitle><CardDescription>{t("guide.planDesc")}</CardDescription></CardHeader>
+            <CardContent className="space-y-3">
+              <PlanForm plan={settings.casinoPlan} onChange={(p) => update({ casinoPlan: p })} edge={settings.wheel === "european" ? HOUSE_EDGE.european : HOUSE_EDGE.american} />
+              <StopRulesNote />
+            </CardContent>
           </Card>
           <Card>
-            <CardHeader><CardTitle>Readiness checklist</CardTitle><CardDescription>{checked}/{READINESS_CHECKLIST.length} confirmed</CardDescription></CardHeader>
-            <CardContent className="space-y-2">
-              <Progress value={checked / READINESS_CHECKLIST.length} tone="good" />
-              {READINESS_CHECKLIST.map((c) => {
+            <CardHeader><CardTitle>{t("guide.checklist")}</CardTitle><CardDescription>{t("guide.checked", { n: checked, total: checklist.length })}</CardDescription></CardHeader>
+            <CardContent className="space-y-1">
+              <Progress value={checked / checklist.length} tone="good" />
+              {checklist.map((c) => {
                 const on = !!done[`check-${c.id}`];
                 return (
-                  <button key={c.id} onClick={() => !on && mark(`check-${c.id}`)} className="flex w-full items-start gap-2 rounded-lg p-1.5 text-left text-sm hover:bg-white/5">
-                    {on ? <CheckSquare className="mt-0.5 size-4 shrink-0 text-good" /> : <Square className="mt-0.5 size-4 shrink-0 text-muted" />}
+                  <button key={c.id} role="checkbox" aria-checked={on} onClick={() => !on && mark(`check-${c.id}`)} className="flex min-h-11 w-full items-start gap-2 rounded-lg p-1.5 text-start text-sm hover:bg-white/5">
+                    {on ? <CheckSquare className="mt-0.5 size-5 shrink-0 text-good" aria-hidden /> : <Square className="mt-0.5 size-5 shrink-0 text-muted" aria-hidden />}
                     <span className={on ? "text-foreground" : "text-muted"}>{c.label}</span>
                   </button>
                 );
               })}
             </CardContent>
           </Card>
-          <Card>
-            <CardContent className="pt-5 text-sm text-muted">
-              If gambling ever stops feeling like entertainment, talk to someone. Most countries have free, confidential responsible-gambling helplines.
-            </CardContent>
-          </Card>
+          <Card><CardContent className="pt-5 text-sm text-muted">{t("guide.help")}</CardContent></Card>
         </aside>
       </div>
     </>

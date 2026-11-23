@@ -3,12 +3,14 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
+import { useT } from "@/lib/i18n";
 
 export const Dialog = DialogPrimitive.Root;
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClose = DialogPrimitive.Close;
 
 export function DialogContent({ className, children, hideClose, ...p }: React.ComponentProps<typeof DialogPrimitive.Content> & { hideClose?: boolean }) {
+  const t = useT();
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm" />
@@ -18,7 +20,7 @@ export function DialogContent({ className, children, hideClose, ...p }: React.Co
       >
         {children}
         {!hideClose && (
-          <DialogPrimitive.Close className="absolute right-3 top-3 rounded-lg p-1.5 text-muted hover:text-foreground" aria-label="Close">
+          <DialogPrimitive.Close className="absolute end-3 top-3 rounded-lg p-1.5 text-muted hover:text-foreground" aria-label={t("a11y.close")}>
             <X className="size-4" />
           </DialogPrimitive.Close>
         )}
@@ -27,7 +29,7 @@ export function DialogContent({ className, children, hideClose, ...p }: React.Co
   );
 }
 export function DialogTitle({ className, ...p }: React.ComponentProps<typeof DialogPrimitive.Title>) {
-  return <DialogPrimitive.Title className={cn("font-display text-xl text-gold-strong pr-6", className)} {...p} />;
+  return <DialogPrimitive.Title className={cn("font-display text-xl text-gold-strong pe-6", className)} {...p} />;
 }
 export function DialogDescription({ className, ...p }: React.ComponentProps<typeof DialogPrimitive.Description>) {
   return <DialogPrimitive.Description className={cn("mt-2 text-sm text-muted", className)} {...p} />;

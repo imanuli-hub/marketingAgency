@@ -4,6 +4,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import "./globals.css";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+// Hebrew text falls back to the system UI font (SF Hebrew on iPhone), which renders it cleanly.
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} dark antialiased`}>
+    <html lang="he" dir="rtl" className={`${inter.variable} ${playfair.variable} dark antialiased`} suppressHydrationWarning>
       <body className="font-sans">
         <AppShell>{children}</AppShell>
       </body>

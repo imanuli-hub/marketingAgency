@@ -3,7 +3,7 @@ import type { BetSpec, BetKind } from "./bets";
 import { effectiveEvenMoneyRule, maxForBet, type TableRules } from "./engine";
 import { betMath } from "./probability";
 import { seededRng } from "./rng";
-import { histogram, mean, quantile, type Bin } from "./stats";
+import { histogram, mean, meanCI, quantile, wilson, type Bin } from "./stats";
 import { createStrategy, type StrategyId, type StrategyParams } from "./strategies";
 import { allPockets, isZero, type WheelType } from "./wheel";
 
@@ -247,6 +247,12 @@ export interface SimSummary {
   /** Mean of the best 90% / worst 10% of outcomes — shows the hidden tail. */
   meanProfitWhenAhead: number;
   meanLossWhenBehind: number;
+  /** Sessions that hit neither stop rule before the spin cap. */
+  pNeither: number;
+  /** 95% confidence intervals (simulation uncertainty, not a forecast). */
+  ci: { pAhead: [number, number]; pStopWin: [number, number]; pStopLoss: [number, number]; pBust: [number, number]; meanProfit: [number, number] };
+  /** Average loss once a session hits its stop-loss or busts. */
+  meanLossOnStop: number;
 }
 
 export function summarize(config: SimConfig, results: SessionResult[]): SimSummary {
@@ -290,6 +296,15 @@ export function summarize(config: SimConfig, results: SessionResult[]): SimSumma
     paths: results.filter((r) => r.path).map((r) => r.path!),
     meanProfitWhenAhead: mean(ahead.map((r) => r.profit)),
     meanLossWhenBehind: mean(behind.map((r) => r.profit)),
+    pNeither: results.filter((r) => !r.hitStopWin && !r.hitStopLoss && !r.busted).length / n,
+    ci: {
+      pAhead: wilson(ahead.length, results.length),
+      pStopWin: wilson(results.filter((r) => r.hitStopWin).length, results.length),
+      pStopLoss: wilson(results.filter((r) => r.hitStopLoss).length, results.length),
+      pBust: wilson(results.filter((r) => r.busted).length, results.length),
+      meanProfit: meanCI(profits),
+    },
+    meanLossOnStop: mean(results.filter((r) => r.hitStopLoss || r.busted).map((r) => r.profit)),
   };
 }
 

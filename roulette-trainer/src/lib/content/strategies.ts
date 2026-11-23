@@ -50,7 +50,7 @@ export const STRATEGY_INFO: Record<StrategyId, StrategyInfo> = {
     strengths: ["Very high probability of a small session profit", "Simple rules"],
     weaknesses: [
       "Stakes grow exponentially: 10 losses in a row needs a 512-unit bet and 1,023 units total",
-      "Table maximums cap the progression (e.g. $5 base, $500 max = only 7 doublings)",
+      "Table maximums cap the progression (e.g. €2 base, €200 max = only 6 doublings)",
       "Rare but catastrophic losses wipe out many small wins",
       "Bets far more money in total, so the expected loss is larger than flat betting over the same spins",
     ],

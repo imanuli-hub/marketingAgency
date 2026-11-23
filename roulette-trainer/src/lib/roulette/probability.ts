@@ -142,3 +142,14 @@ export const HOUSE_EDGE = {
   europeanLaPartageEvenMoney: 0.5 / 37,
   americanBasket: 1 - (5 * 7) / 38,
 };
+
+/**
+ * Gambler's-ruin probability of gaining `up` units before losing `down` units
+ * with flat 1-unit bets that win with probability p (even money, no push).
+ */
+export function probReachBefore(p: number, up: number, down: number): number {
+  const q = 1 - p;
+  if (Math.abs(p - q) < 1e-12) return down / (up + down);
+  const r = q / p;
+  return (1 - r ** down) / (1 - r ** (up + down));
+}

@@ -46,8 +46,14 @@ export function addBet(bets: readonly PlacedBet[], spec: BetSpec, amount: number
   return bets.map((b, i) => (i === idx ? { ...b, amount: round2(b.amount + amount) } : b));
 }
 
+export type ValidationCode = "stakePositive" | "belowMin" | "aboveMax" | "noDoubleZero" | "notAvailable" | "overBalance";
+
 export interface ValidationIssue {
   key?: string;
+  code: ValidationCode;
+  /** Values for the localized message (label, limit, total, balance). */
+  params: Record<string, string | number>;
+  /** English fallback message. */
   message: string;
 }
 
@@ -59,19 +65,20 @@ export function validateBets(
 ): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   for (const b of bets) {
-    if (!(b.amount > 0)) issues.push({ key: b.key, message: `${b.label}: stake must be positive` });
-    if (b.amount < rules.minBet) issues.push({ key: b.key, message: `${b.label}: below table minimum of ${rules.minBet}` });
+    const label = b.label;
+    if (!(b.amount > 0)) issues.push({ key: b.key, code: "stakePositive", params: { label }, message: `${label}: stake must be positive` });
+    if (b.amount < rules.minBet) issues.push({ key: b.key, code: "belowMin", params: { label, limit: rules.minBet }, message: `${label}: below table minimum of ${rules.minBet}` });
     const max = maxForBet(b, rules);
-    if (b.amount > max) issues.push({ key: b.key, message: `${b.label}: above table maximum of ${max}` });
+    if (b.amount > max) issues.push({ key: b.key, code: "aboveMax", params: { label, limit: max }, message: `${label}: above table maximum of ${max}` });
     if (b.numbers.some((n) => n === 37) && rules.wheel !== "american") {
-      issues.push({ key: b.key, message: `${b.label}: 00 does not exist on a European wheel` });
+      issues.push({ key: b.key, code: "noDoubleZero", params: { label }, message: `${label}: 00 does not exist on a European wheel` });
     }
     if ((b.kind === "basket" && rules.wheel !== "american") || (b.kind === "firstFour" && rules.wheel !== "european")) {
-      issues.push({ key: b.key, message: `${b.label}: not available on this wheel` });
+      issues.push({ key: b.key, code: "notAvailable", params: { label }, message: `${label}: not available on this wheel` });
     }
   }
   const total = totalStake(bets);
-  if (total > balance + 1e-9) issues.push({ message: `Total stake ${total} exceeds balance ${round2(balance)}` });
+  if (total > balance + 1e-9) issues.push({ code: "overBalance", params: { total, balance: round2(balance) }, message: `Total stake ${total} exceeds balance ${round2(balance)}` });
   return issues;
 }
 

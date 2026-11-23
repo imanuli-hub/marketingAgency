@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils/cn";
 
-export const CHIP_DENOMS = [1, 5, 10, 25, 100, 500] as const;
+export const CHIP_DENOMS = [1, 2, 5, 10, 25, 100, 500] as const;
 
 const CHIP_STYLE: Record<number, { base: string; edge: string; text: string }> = {
   1: { base: "#eeeae0", edge: "#2d5fa8", text: "#1b1b1b" },
+  2: { base: "#e0a526", edge: "#3a2a05", text: "#1b1b1b" },
   5: { base: "#c0262f", edge: "#ffffff", text: "#ffffff" },
   10: { base: "#1f5fbf", edge: "#ffffff", text: "#ffffff" },
   25: { base: "#178a4c", edge: "#ffffff", text: "#ffffff" },
@@ -40,14 +41,15 @@ export function ChipGlyph({ amount, r = 14, stack = 1 }: { amount: number; r?: n
 }
 
 /** Stand-alone chip button for the chip rack. */
-export function ChipButton({ value, selected, disabled, onClick, size = 48 }: { value: number; selected?: boolean; disabled?: boolean; onClick?: () => void; size?: number }) {
+export function ChipButton({ value, selected, disabled, onClick, size = 48, label }: { value: number; selected?: boolean; disabled?: boolean; onClick?: () => void; size?: number; label?: string }) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      aria-pressed={selected}
-      aria-label={`Chip value ${value}`}
+      role="radio"
+      aria-checked={!!selected}
+      aria-label={label ?? String(value)}
       className={cn(
         "relative shrink-0 rounded-full transition-transform touch-manipulation disabled:opacity-30",
         selected ? "-translate-y-1.5 scale-110 drop-shadow-[0_0_10px_rgba(240,207,122,0.8)]" : "hover:-translate-y-0.5",
