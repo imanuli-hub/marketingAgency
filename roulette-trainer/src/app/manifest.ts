@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Learn roulette odds, strategies and bankroll management with virtual money.",
     start_url: "/",
     display: "standalone",
-    orientation: "portrait",
+    orientation: "any",
     background_color: "#07100c",
     theme_color: "#07100c",
     categories: ["education", "games"],

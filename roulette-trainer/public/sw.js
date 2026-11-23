@@ -1,9 +1,11 @@
-// Minimal offline support: cache-first for static assets, network-first for pages.
-const CACHE = "roulette-academy-v1";
-const PRECACHE = ["/", "/play", "/learn", "/strategies", "/simulator", "/program", "/casino", "/settings"];
+// Offline support: cache-first for hashed static assets, network-first for pages
+// (so a deployed update is picked up whenever the phone is online).
+const CACHE = "roulette-academy-v2";
+const PRECACHE = ["/", "/play", "/guided", "/program", "/learn", "/strategies", "/simulator", "/casino", "/casino/session", "/assessment", "/history", "/settings"];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).catch(() => {}));
+  // Cache each page independently so one failure can't abort the whole install.
+  e.waitUntil(caches.open(CACHE).then((c) => Promise.allSettled(PRECACHE.map((u) => c.add(u)))));
   self.skipWaiting();
 });
 
@@ -18,16 +20,14 @@ self.addEventListener("fetch", (e) => {
   const isAsset = /\/_next\/static\/|\/icons\//.test(req.url);
   if (isAsset) {
     e.respondWith(caches.match(req).then((hit) => hit || fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((c) => c.put(req, copy));
+      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
       return res;
     })));
     return;
   }
   if (req.mode === "navigate") {
     e.respondWith(fetch(req).then((res) => {
-      const copy = res.clone();
-      caches.open(CACHE).then((c) => c.put(req, copy));
+      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); }
       return res;
     }).catch(() => caches.match(req).then((hit) => hit || caches.match("/"))));
   }
