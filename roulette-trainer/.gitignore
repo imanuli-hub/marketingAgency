@@ -13,8 +13,8 @@
 # testing
 /coverage
 
-# next.js
-/.next/
+# next.js (any nesting level, so stray build output can never be committed)
+.next/
 /out/
 
 # production
